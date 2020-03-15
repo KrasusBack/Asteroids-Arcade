@@ -118,7 +118,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &6498443495341219337
 MonoBehaviour:
@@ -132,6 +132,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af54b42eeb295174dba160ffe2d79961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 30
-  travelDistance: 50
-  gameSettings: {fileID: 11400000, guid: dd0b4000d5b818240b3bcd9cd224a10b, type: 2}
+  bulletSpeed: 60
+  travelDistance: 800

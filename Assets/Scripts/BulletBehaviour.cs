@@ -22,7 +22,9 @@ public class BulletBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Travel();
+        ScreenWrap.CheckAndWrapAround(_rigidbody2D);
+
+        Travel();      
     }
 
     private void Travel ()
@@ -35,7 +37,7 @@ public class BulletBehaviour : MonoBehaviour
             return;
         }
 
-        Vector2 newPos = _rigidbody2D.position + MathfExtentions.DegreeToVector2(_rigidbody2D.rotation)*speed;
+        Vector2 newPos = _rigidbody2D.position + MathfExtentions.DegreeToVector2(_rigidbody2D.rotation) * speed;
         _rigidbody2D.MovePosition(newPos);
     }
 }
