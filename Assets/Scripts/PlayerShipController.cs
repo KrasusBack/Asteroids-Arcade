@@ -30,6 +30,8 @@ public class PlayerShipController : MonoBehaviour
         ShootHandler();
         RotateHandler();
         MoveForwardHandler();
+
+        _rigidBody.position = ScreenWrap.CheckAndWrap(transform.position);
     }
 
     private void RotateHandler()
