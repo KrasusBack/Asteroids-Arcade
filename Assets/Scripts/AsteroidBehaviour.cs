@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AsteroidBehaviour : MonoBehaviour
 {
+
     [SerializeField]
     private float minSpeed = 1f;
     [SerializeField]
