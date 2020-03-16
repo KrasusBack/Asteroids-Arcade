@@ -614,3 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSpeed: 1
   maxSpeed: 3
+  asteroidPrefabs:
+  - {fileID: 8059782310693702096}
+  asteroidScaleMedium: 0.5
+  asteroidScaleSmall: 0.25
