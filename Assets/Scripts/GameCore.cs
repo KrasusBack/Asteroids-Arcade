@@ -4,8 +4,24 @@ using UnityEngine;
 
 public class GameCore : MonoBehaviour
 {
-    //public GameSettings gameSettings;
+    private static GameCore _instance = null;
 
+    //public float gameSettings { get; private set; }
+
+    
+
+    public static GameCore GetInstance ()
+    {
+        
+        return _instance;
+    }
+
+    private void SetInstance ()
+    {
+       //initialising 
+    }
+
+   
     // Start is called before the first frame update
     void Start()
     {

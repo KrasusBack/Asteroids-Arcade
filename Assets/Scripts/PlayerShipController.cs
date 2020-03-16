@@ -15,12 +15,12 @@ public class PlayerShipController : MonoBehaviour
     [SerializeField]
     private GameObject bulletPrefab;
 
-    Rigidbody2D _rigidBody2D;
+    Rigidbody2D _rigidbody2D;
     BoxCollider2D _boxCollider2D;
 
     void Start()
     {
-        _rigidBody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
@@ -31,7 +31,7 @@ public class PlayerShipController : MonoBehaviour
         RotateHandler();
         MoveForwardHandler();
 
-        ScreenWrap.CheckAndWrapAround(_rigidBody2D);
+        ScreenWrap.CheckAndWrapAround(_rigidbody2D);
     }
 
     private void RotateHandler()
@@ -39,14 +39,14 @@ public class PlayerShipController : MonoBehaviour
         var horizontalAxisInput = Input.GetAxis("Horizontal");
         if (horizontalAxisInput == 0) return;
 
-        _rigidBody2D.rotation += rotationSpeed * -horizontalAxisInput;
+        _rigidbody2D.rotation += rotationSpeed * -horizontalAxisInput;
     }
 
     private void MoveForwardHandler()
     {
         if (Input.GetAxis("Vertical") <= 0) return;
 
-        _rigidBody2D.AddRelativeForce(Vector2.right * movementVelocity);
+        _rigidbody2D.AddRelativeForce(Vector2.right * movementVelocity);
     }
 
     private void HyperSpaceHandler()
@@ -69,7 +69,7 @@ public class PlayerShipController : MonoBehaviour
         if (!Input.GetKeyDown(shootKey)) return;
 
         var offsetFromTheShip = 0.5f;
-        var posOffset = _rigidBody2D.position + ((_boxCollider2D.size.x / 2 + offsetFromTheShip) * MathfExtentions.DegreeToVector2(transform.eulerAngles.z));
+        var posOffset = _rigidbody2D.position + ((_boxCollider2D.size.x / 2 + offsetFromTheShip) * MathfExtentions.DegreeToVector2(transform.eulerAngles.z));
 
         GameObject projectileObject = Instantiate(bulletPrefab, posOffset, transform.rotation);
     }
