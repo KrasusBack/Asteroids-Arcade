@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 6114920307276586692}
   - component: {fileID: 6114920307276586694}
   - component: {fileID: 776560037099051181}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Saucer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6114920307276586693
 Transform:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 6114920307299996333}
   - component: {fileID: 6114920307299996334}
   - component: {fileID: 6114920307299996335}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: saucerCollider (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.13222015, y: -0.3639459}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 6114920307904296793}
   - component: {fileID: 6114920307904296794}
   - component: {fileID: 6114920307904296795}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: saucerCollider (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.099321604, y: -0.6317252}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 6114920308255869613}
   - component: {fileID: 6114920308255869614}
   - component: {fileID: 6114920308255869615}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: saucerCollider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.0513512, y: -0.5762643}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 6114920308316865592}
   - component: {fileID: 6114920308316865593}
   - component: {fileID: 6114920308316865594}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: saucerCollider (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.04888016, y: -0.42250782}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 6114920308710803172}
   - component: {fileID: 6114920308710803173}
   - component: {fileID: 6114920308710803174}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: saucerCollider (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.12512285, y: -0.44397402}
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 6114920309245971821}
   - component: {fileID: 6114920309245971822}
   - component: {fileID: 6114920309245971823}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: saucerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.12728524, y: -0.59564066}

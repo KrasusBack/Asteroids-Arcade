@@ -17,13 +17,27 @@ public class GameSettings : ScriptableObject
 
     [Header("PlayerShipSettings")]
     [SerializeField]
-    private float playerMoveSpeed;
+    private GameObject playerBulletPrefab;
     [SerializeField]
-    private float playerRotationSpeed;
+    private float playerMoveSpeed = 15;
     [SerializeField]
-    private float playersBulletSpeed;
+    private float playerRotationSpeed = 3;
     [SerializeField]
-    private float playerBulletTravelDistance;
+    private float playersBulletSpeed = 1;
+    [SerializeField]
+    private float playerBulletTravelDistance = 100;
+
+    [Header("Saucers")]
+    [SerializeField]
+    private GameObject saucerBulletPrefab;
+    [SerializeField]
+    private float saucersMoveSpeed = 40;
+    [SerializeField]
+    private float saucersBulletSpeed = 10;
+    [SerializeField]
+    private float saucerBulletTravelDistance = 100;
+    [SerializeField]
+    private float saucerShootingSpeed = 0.8f;
 
     #region Asteroids
     [System.Serializable]
@@ -57,6 +71,11 @@ public class GameSettings : ScriptableObject
 
     #region PlayerShip
 
+    public GameObject PlayerBulletPrefab()
+    {
+        return playerBulletPrefab;
+    }
+
     public float PlayerMoveSpeed()
     {
         return playerMoveSpeed;
@@ -75,6 +94,35 @@ public class GameSettings : ScriptableObject
     public float PlayerBulletTravelDistance()
     {
         return playerBulletTravelDistance;
+    }
+
+    #endregion
+
+    #region Saucers
+
+    public GameObject SaucerBulletPrefab()
+    {
+        return saucerBulletPrefab;
+    }
+
+    public float SaucersMoveSpeed ()
+    {
+        return saucersMoveSpeed;
+    }
+
+    public float SaucersBulletSpeed ()
+    {
+        return saucersBulletSpeed;
+    }
+
+    public float SaucerBulletTravelDistance()
+    {
+        return saucerBulletTravelDistance;
+    }
+
+    public float SaucerShootingSpeed()
+    {
+        return saucerShootingSpeed;
     }
 
     #endregion

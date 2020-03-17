@@ -5,15 +5,11 @@ using UnityEngine;
 public class PlayerShipController : MonoBehaviour
 {
     [SerializeField]
-    private float movementVelocity = 15f;
-    [SerializeField]
-    private float rotationSpeed = 5f;
-    [SerializeField]
     private KeyCode hyperSpaceKey = KeyCode.LeftShift;
     [SerializeField]
     private KeyCode shootKey = KeyCode.Space;
-    [SerializeField]
-    private GameObject bulletPrefab;
+
+    private GameObject BulletPrefab => GameCore.GetInstance().GameSettings().PlayerBulletPrefab();
 
     Rigidbody2D _rigidbody2D;
     BoxCollider2D _boxCollider2D;
@@ -39,14 +35,14 @@ public class PlayerShipController : MonoBehaviour
         var horizontalAxisInput = Input.GetAxis("Horizontal");
         if (horizontalAxisInput == 0) return;
 
-        _rigidbody2D.rotation += rotationSpeed * -horizontalAxisInput;
+        _rigidbody2D.rotation += GameCore.GetInstance().GameSettings().PlayerRotationSpeed() * -horizontalAxisInput;
     }
 
     private void MoveForwardHandler()
     {
         if (Input.GetAxis("Vertical") <= 0) return;
 
-        _rigidbody2D.AddRelativeForce(Vector2.right * movementVelocity);
+        _rigidbody2D.AddRelativeForce(Vector2.right * GameCore.GetInstance().GameSettings().PlayerMoveSpeed());
     }
 
     private void HyperSpaceHandler()
@@ -71,7 +67,7 @@ public class PlayerShipController : MonoBehaviour
         var offsetFromTheShip = 0.5f;
         var posOffset = _rigidbody2D.position + ((_boxCollider2D.size.x / 2 + offsetFromTheShip) * MathfExtentions.DegreeToVector2(transform.eulerAngles.z));
 
-        GameObject projectileObject = Instantiate(bulletPrefab, posOffset, transform.rotation);
+        GameObject projectileObject = Instantiate(BulletPrefab, posOffset, transform.rotation);
     }
 
 }
