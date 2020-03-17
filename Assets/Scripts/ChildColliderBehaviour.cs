@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChildColliderBehaviour : MonoBehaviour
+public class AsteroidColliderBehaviour : MonoBehaviour
 {
     private bool _collided = false;
 

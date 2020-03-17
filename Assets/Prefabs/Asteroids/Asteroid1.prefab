@@ -587,7 +587,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8059782310693702096}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -612,9 +612,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d745aa4f110151d48ba3fd870cbb4dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 1
-  maxSpeed: 3
-  asteroidPrefabs:
-  - {fileID: 8059782310693702096}
-  asteroidScaleMedium: 0.5
-  asteroidScaleSmall: 0.25

@@ -6,7 +6,6 @@ public class BulletBehaviour : MonoBehaviour
 {
     private float _bulletSpeed = 1f;
     private float _travelDistance = 100f;
-    
     private Rigidbody2D _rigidbody2D;
     private float _distanceCovered = 0f;
 
@@ -16,17 +15,16 @@ public class BulletBehaviour : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _bulletSpeed = GameCore.GetInstance().GameSettings().PlayersBulletSpeed();
         _travelDistance = GameCore.GetInstance().GameSettings().PlayerBulletTravelDistance();
-        print("bSpeed:" + _bulletSpeed);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         ScreenWrap.CheckAndWrapAround(_rigidbody2D);
-        Travel();      
+        Move();      
     }
 
-    private void Travel ()
+    private void Move ()
     {
         _distanceCovered += _bulletSpeed;
         if (_distanceCovered >= _travelDistance)

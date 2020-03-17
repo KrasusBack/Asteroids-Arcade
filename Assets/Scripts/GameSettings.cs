@@ -14,6 +14,7 @@ public class GameSettings : ScriptableObject
     private Asteroid mediumAsteroid;
     [SerializeField]
     private Asteroid smallAsteroid;
+
     [Header("PlayerShipSettings")]
     [SerializeField]
     private float playerMoveSpeed;
