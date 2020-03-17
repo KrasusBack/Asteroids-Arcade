@@ -4,24 +4,12 @@ using UnityEngine;
 
 public class AsteroidBehaviour : MonoBehaviour
 {
-
-    [SerializeField]
-    private float minSpeed = 1f;
-    [SerializeField]
-    private float maxSpeed = 5f;
-    [SerializeField]
-    private GameObject[] asteroidPrefabs;
-    [SerializeField]
-    private float asteroidScaleMedium = 0.5f;
-    [SerializeField]
-    private float asteroidScaleSmall = 0.25f;
-
     public enum AsteroidSize { Large, Medium, Small };
 
     private Vector2 _velocityVector;
     private Rigidbody2D _rigidbody2D;
     private AsteroidColliderBehaviour[] _asteroidColliderBehaviours;
-    private float _speed;
+    private float _speed = 0f;
     private AsteroidSize _asteroidSize = AsteroidSize.Large;
 
     // Start is called before the first frame update
@@ -30,14 +18,15 @@ public class AsteroidBehaviour : MonoBehaviour
         _asteroidColliderBehaviours = GetComponentsInChildren<AsteroidColliderBehaviour>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _velocityVector = MathfExtentions.DegreeToVector2(Random.Range(0, 360));
-        _speed = Random.Range(minSpeed, maxSpeed);
+        if (_asteroidSize == AsteroidSize.Large) SetAsteroidSettings(_asteroidSize);
+        print(gameObject.name);
     }
 
     private void CheckCollisions()
     {
         foreach (AsteroidColliderBehaviour asteroidColliderBehaviour in _asteroidColliderBehaviours)
         {
-            if (asteroidColliderBehaviour.СollidedThisFrame())
+            if (asteroidColliderBehaviour.Сollided())
             {
                 Destroy();
                 return;
@@ -53,21 +42,34 @@ public class AsteroidBehaviour : MonoBehaviour
         Move();
     }
 
+    private GameSettings.Asteroid FetchAsteroidSettings(AsteroidSize asteroidSize)
+    {
+        switch (asteroidSize)
+        {
+            case AsteroidSize.Large:
+                return GameCore.GetInstance().GameSettings().LargeAsteroid();
+            case AsteroidSize.Medium:
+                return GameCore.GetInstance().GameSettings().MediumAsteroid();
+        }
+        //Small
+        return GameCore.GetInstance().GameSettings().SmallAsteroid();
+    }
+
     private void ShatterAsteroid()
     {
         if (_asteroidSize == AsteroidSize.Small) return;
         SpawnNewAsteroids();
     }
 
-    private void SpawnNewAsteroids ()
+    private void SpawnNewAsteroids()
     {
         for (var i = 0; i < 2; ++i)
         {
-            var variation = Random.Range(0, asteroidPrefabs.Length - 1);
-            var newAsteroid = Instantiate(asteroidPrefabs[variation], _rigidbody2D.position, transform.rotation);
+            var asteroidPrefab = GameCore.GetInstance().GameSettings().GetRandomAsteroidPrefab();
+            var newAsteroid = Instantiate(asteroidPrefab, _rigidbody2D.position, transform.rotation);
 
             AsteroidSize newAsteroidSize = GetPreviousSize(_asteroidSize);
-            newAsteroid.GetComponent<AsteroidBehaviour>().SetSize(newAsteroidSize);
+            newAsteroid.GetComponent<AsteroidBehaviour>().SetAsteroidSettings(newAsteroidSize);
         }
     }
 
@@ -78,24 +80,18 @@ public class AsteroidBehaviour : MonoBehaviour
     }
 
     //Returns Small Size if there is no previous
-    private AsteroidSize GetPreviousSize (AsteroidSize size)
+    private AsteroidSize GetPreviousSize(AsteroidSize size)
     {
-        switch (size)
-        {
-            case AsteroidSize.Large:
-                    return AsteroidSize.Medium;
-            case AsteroidSize.Medium:
-                return AsteroidSize.Small;
-        }
+        if (size == AsteroidSize.Large) return AsteroidSize.Medium;
         return AsteroidSize.Small;
     }
 
-    public void SetSize(AsteroidSize size)
+    public void SetAsteroidSettings(AsteroidSize size)
     {
         _asteroidSize = size;
-
-        if (size == AsteroidSize.Medium) { transform.localScale = asteroidScaleMedium*Vector3.one; return; }
-        if (size == AsteroidSize.Small) transform.localScale = asteroidScaleSmall*Vector3.one;
+        var asteroidSettings = FetchAsteroidSettings(size);
+        transform.localScale = asteroidSettings.sizeScale * Vector3.one;
+        _speed = asteroidSettings.speed;
     }
 
     private void Destroy()

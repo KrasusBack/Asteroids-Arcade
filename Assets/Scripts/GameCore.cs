@@ -17,6 +17,11 @@ public class GameCore : MonoBehaviour
         return _instance;
     }
 
+    public GameSettings GameSettings()
+    {
+        return gameSettings;
+    }
+
     private void SetInstance ()
     {
         if (_instance == null) _instance = this;
@@ -24,7 +29,7 @@ public class GameCore : MonoBehaviour
 
    
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SetInstance();
     }

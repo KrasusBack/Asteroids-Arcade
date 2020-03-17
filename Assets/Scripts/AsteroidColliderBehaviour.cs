@@ -6,7 +6,7 @@ public class AsteroidColliderBehaviour : MonoBehaviour
 {
     private bool _collidedThisFrame = false;
 
-    public bool СollidedThisFrame ()
+    public bool Сollided ()
     {
         return _collidedThisFrame;
     }

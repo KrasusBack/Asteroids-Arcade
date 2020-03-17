@@ -26,3 +26,7 @@ MonoBehaviour:
   smallAsteroid:
     speed: 1
     sizeScale: 0.25
+  playerMoveSpeed: 15
+  playerRotationSpeed: 3
+  playersBulletSpeed: 1
+  playerBulletTravelDistance: 100

@@ -14,9 +14,17 @@ public class GameSettings : ScriptableObject
     private Asteroid mediumAsteroid;
     [SerializeField]
     private Asteroid smallAsteroid;
+    [Header("PlayerShipSettings")]
+    [SerializeField]
+    private float playerMoveSpeed;
+    [SerializeField]
+    private float playerRotationSpeed;
+    [SerializeField]
+    private float playersBulletSpeed;
+    [SerializeField]
+    private float playerBulletTravelDistance;
 
-    
-
+    #region Asteroids
     [System.Serializable]
     public struct Asteroid
     {
@@ -38,4 +46,35 @@ public class GameSettings : ScriptableObject
     {
         return smallAsteroid;
     }
+
+    public GameObject GetRandomAsteroidPrefab()
+    {
+        var variation = Random.Range(0, asteroidPrefabs.Length - 1);
+        return asteroidPrefabs[variation];
+    }
+    #endregion
+
+    #region PlayerShip
+
+    public float PlayerMoveSpeed()
+    {
+        return playerMoveSpeed;
+    }
+
+    public float PlayerRotationSpeed()
+    {
+        return playerRotationSpeed;
+    }
+
+    public float PlayersBulletSpeed()
+    {
+        return playersBulletSpeed;
+    }
+
+    public float PlayerBulletTravelDistance()
+    {
+        return playerBulletTravelDistance;
+    }
+
+    #endregion
 }
