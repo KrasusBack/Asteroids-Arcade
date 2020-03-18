@@ -10,13 +10,13 @@ public class SaucerBehaviour : MonoBehaviour
     private GameObject PlayerShip => GameCore.GetInstance().PlayerShip();
 
     private Rigidbody2D _rigidbody2D;
-    private Vector2 _playerShipPos;
+    private Transform _playerShipTransform;
     private float _lastTimeShot = 0f;
 
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _playerShipPos = PlayerShip.transform.position;
+        _playerShipTransform = PlayerShip.transform;
     }
 
     private void FixedUpdate()
@@ -29,19 +29,21 @@ public class SaucerBehaviour : MonoBehaviour
 
     private void Shoot()
     {
-        if ((Time.fixedTime - _lastTimeShot) < ShootSpeed) return;
+        if (ShootSpeed == 0) return;
+        if (Time.fixedTime - _lastTimeShot < 1 / ShootSpeed) return;
+        _lastTimeShot = Time.fixedTime;
 
-        var playerShipPosition = _playerShipPos;
-        print(playerShipPosition);
-        var shootAngle = Vector2.Angle(transform.position, playerShipPosition);
-        GameObject projectileObject = Instantiate(BulletObj, _rigidbody2D.position, transform.rotation);
+        var direction = _playerShipTransform.position - transform.position;
+        var angle = Vector2.SignedAngle(Vector2.right, direction);
+        var rotation = Quaternion.Euler(0, 0, angle);
+
+        Instantiate(BulletObj, _rigidbody2D.position, rotation);
     }
 
     private void Move()
     {
         var newPos = _rigidbody2D.position + Vector2.right * MoveSpeed;
         _rigidbody2D.MovePosition(newPos);
-    } 
+    }
 
-    //private void 
 }

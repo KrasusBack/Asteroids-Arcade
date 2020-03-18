@@ -67,7 +67,7 @@ public class PlayerShipController : MonoBehaviour
         var offsetFromTheShip = 0.5f;
         var posOffset = _rigidbody2D.position + ((_boxCollider2D.size.x / 2 + offsetFromTheShip) * MathfExtentions.DegreeToVector2(transform.eulerAngles.z));
 
-        GameObject projectileObject = Instantiate(BulletPrefab, posOffset, transform.rotation);
+        Instantiate(BulletPrefab, posOffset, transform.rotation);
     }
 
 }
