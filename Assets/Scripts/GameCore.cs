@@ -6,6 +6,7 @@ public class GameCore : MonoBehaviour
     private GameSettings gameSettings;
     [SerializeField]
     private GameObject playerShip;
+
     private int _currentWave = 1;
     private int _livesCount = 3;
     private int _currentScore = 0;
