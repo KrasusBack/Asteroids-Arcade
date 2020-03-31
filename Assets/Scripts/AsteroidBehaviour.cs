@@ -28,7 +28,7 @@ public class AsteroidBehaviour : MonoBehaviour
         {
             if (asteroidColliderBehaviour.Сollided())
             {
-                Destroy();
+                DestroyAsteroid();
                 return;
             }
         }
@@ -94,7 +94,7 @@ public class AsteroidBehaviour : MonoBehaviour
         _speed = asteroidSettings.speed;
     }
 
-    private void Destroy()
+    private void DestroyAsteroid()
     {
         ShatterAsteroid();
         Destroy(gameObject);
