@@ -5,9 +5,8 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     private float _bulletSpeed = 1f;
-    private float _travelDistance = 100f;
+    private float _travelDistance = 10f;
     private Rigidbody2D _rigidbody2D;
-    private float _distanceCovered = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +14,10 @@ public class BulletBehaviour : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _bulletSpeed = GameCore.GetInstance().GameSettings().PlayersBulletSpeed();
         _travelDistance = GameCore.GetInstance().GameSettings().PlayerBulletTravelDistance();
+
+        Destroy(gameObject, _travelDistance / _bulletSpeed);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         ScreenWrap.CheckAndWrapAround(_rigidbody2D);
@@ -26,12 +26,6 @@ public class BulletBehaviour : MonoBehaviour
 
     private void Move ()
     {
-        _distanceCovered += _bulletSpeed;
-        if (_distanceCovered >= _travelDistance)
-        {
-            Destroy(gameObject);
-            return;
-        }
         Vector2 newPos = _rigidbody2D.position + MathfExtentions.DegreeToVector2(_rigidbody2D.rotation) * _bulletSpeed;
         _rigidbody2D.MovePosition(newPos);
     }

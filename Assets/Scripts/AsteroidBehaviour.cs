@@ -42,7 +42,7 @@ public class AsteroidBehaviour : MonoBehaviour
         Move();
     }
 
-    private GameSettings.Asteroid FetchAsteroidSettings(AsteroidSize asteroidSize)
+    private GameSettings.AsteroidProperties FetchAsteroidSettings(AsteroidSize asteroidSize)
     {
         switch (asteroidSize)
         {

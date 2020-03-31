@@ -30,8 +30,8 @@ MonoBehaviour:
     type: 3}
   playerMoveSpeed: 50
   playerRotationSpeed: 3
-  playersBulletSpeed: 0.5
-  playerBulletTravelDistance: 250
+  playersBulletSpeed: 1
+  playerBulletTravelDistance: 2
   saucerBulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
   saucersMoveSpeed: 1

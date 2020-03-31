@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/GameSettings", order = 1)]
 
@@ -9,11 +8,11 @@ public class GameSettings : ScriptableObject
     [SerializeField]
     private GameObject[] asteroidPrefabs;
     [SerializeField]
-    private Asteroid largeAsteroid;
+    private AsteroidProperties largeAsteroid;
     [SerializeField]
-    private Asteroid mediumAsteroid;
+    private AsteroidProperties mediumAsteroid;
     [SerializeField]
-    private Asteroid smallAsteroid;
+    private AsteroidProperties smallAsteroid;
 
     [Header("PlayerShipSettings")]
     [SerializeField]
@@ -41,23 +40,23 @@ public class GameSettings : ScriptableObject
 
     #region Asteroids
     [System.Serializable]
-    public struct Asteroid
+    public struct AsteroidProperties
     {
         public float speed;
         public float sizeScale;
     }
 
-    public Asteroid LargeAsteroid()
+    public AsteroidProperties LargeAsteroid()
     {
         return largeAsteroid;
     }
 
-    public Asteroid MediumAsteroid()
+    public AsteroidProperties MediumAsteroid()
     {
         return mediumAsteroid;
     }
 
-    public Asteroid SmallAsteroid()
+    public AsteroidProperties SmallAsteroid()
     {
         return smallAsteroid;
     }

@@ -16,7 +16,7 @@ public class GameCore : MonoBehaviour
     private int _currentScore = 0;
 
 
-    public static GameCore GetInstance ()
+    public static GameCore GetInstance()
     {
         return _instance;
     }
@@ -26,26 +26,21 @@ public class GameCore : MonoBehaviour
         return gameSettings;
     }
 
-    private void SetInstance ()
+    private void SetInstance()
     {
         if (_instance == null) _instance = this;
     }
 
-    public GameObject PlayerShip ()
+    public GameObject PlayerShip()
     {
         return playerShip;
     }
 
-   
+
     // Start is called before the first frame update
     void Awake()
     {
         SetInstance();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
