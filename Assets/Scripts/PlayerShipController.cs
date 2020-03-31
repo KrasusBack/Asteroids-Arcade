@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerShipController : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class PlayerShipController : MonoBehaviour
     [SerializeField]
     private KeyCode shootKey = KeyCode.Space;
 
-    private GameObject BulletPrefab => GameCore.GetInstance().GameSettings().PlayerBulletPrefab();
+    private GameObject BulletPrefab => GameCore.Instance.GameSettings.PlayerBulletPrefab;
 
     Rigidbody2D _rigidbody2D;
     BoxCollider2D _boxCollider2D;
@@ -35,14 +33,14 @@ public class PlayerShipController : MonoBehaviour
         var horizontalAxisInput = Input.GetAxis("Horizontal");
         if (horizontalAxisInput == 0) return;
 
-        _rigidbody2D.rotation += GameCore.GetInstance().GameSettings().PlayerRotationSpeed() * -horizontalAxisInput;
+        _rigidbody2D.rotation += GameCore.Instance.GameSettings.PlayerRotationSpeed * -horizontalAxisInput;
     }
 
     private void MoveForwardHandler()
     {
         if (Input.GetAxis("Vertical") <= 0) return;
 
-        _rigidbody2D.AddRelativeForce(Vector2.right * GameCore.GetInstance().GameSettings().PlayerMoveSpeed());
+        _rigidbody2D.AddRelativeForce(Vector2.right * GameCore.Instance.GameSettings.PlayerMoveSpeed);
     }
 
     private void HyperSpaceHandler()

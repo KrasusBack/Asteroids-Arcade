@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -12,8 +10,8 @@ public class BulletBehaviour : MonoBehaviour
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _bulletSpeed = GameCore.GetInstance().GameSettings().PlayersBulletSpeed();
-        _travelDistance = GameCore.GetInstance().GameSettings().PlayerBulletTravelDistance();
+        _bulletSpeed = GameCore.Instance.GameSettings.PlayersBulletSpeed;
+        _travelDistance = GameCore.Instance.GameSettings.PlayerBulletTravelDistance;
 
         Destroy(gameObject, _travelDistance / _bulletSpeed);
     }

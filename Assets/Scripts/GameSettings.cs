@@ -46,82 +46,85 @@ public class GameSettings : ScriptableObject
         public float sizeScale;
     }
 
-    public AsteroidProperties LargeAsteroid()
+    public AsteroidProperties LargeAsteroid
     {
-        return largeAsteroid;
+        get => largeAsteroid;
     }
 
-    public AsteroidProperties MediumAsteroid()
+    public AsteroidProperties MediumAsteroid
     {
-        return mediumAsteroid;
+        get => mediumAsteroid;
     }
 
-    public AsteroidProperties SmallAsteroid()
+    public AsteroidProperties SmallAsteroid
     {
-        return smallAsteroid;
+        get => smallAsteroid;
     }
 
-    public GameObject GetRandomAsteroidPrefab()
+    public GameObject RandomAsteroidPrefab
     {
-        var variation = Random.Range(0, asteroidPrefabs.Length - 1);
-        return asteroidPrefabs[variation];
+        get
+        {
+            var variation = Random.Range(0, asteroidPrefabs.Length - 1);
+            return asteroidPrefabs[variation];
+        } 
     }
     #endregion
 
     #region PlayerShip
 
-    public GameObject PlayerBulletPrefab()
+    public GameObject PlayerBulletPrefab
     {
-        return playerBulletPrefab;
+        get => playerBulletPrefab;
     }
 
-    public float PlayerMoveSpeed()
+    public float PlayerMoveSpeed
     {
-        return playerMoveSpeed;
+        get => playerMoveSpeed;
     }
 
-    public float PlayerRotationSpeed()
+    public float PlayerRotationSpeed
     {
-        return playerRotationSpeed;
+        get => playerRotationSpeed;
     }
 
-    public float PlayersBulletSpeed()
+    public float PlayersBulletSpeed
     {
-        return playersBulletSpeed;
+        get => playersBulletSpeed;
     }
 
-    public float PlayerBulletTravelDistance()
+    public float PlayerBulletTravelDistance
     {
-        return playerBulletTravelDistance;
+        get => playerBulletTravelDistance;
     }
 
     #endregion
 
     #region Saucers
 
-    public GameObject SaucerBulletPrefab()
+    public GameObject SaucerBulletPrefab
     {
-        return saucerBulletPrefab;
+        get => saucerBulletPrefab;
     }
 
-    public float SaucersMoveSpeed ()
+    public float SaucersMoveSpeed 
     {
-        return saucersMoveSpeed;
+        get => saucersMoveSpeed;
     }
 
-    public float SaucersBulletSpeed ()
+    public float SaucersBulletSpeed 
     {
-        return saucersBulletSpeed;
+        get => saucersBulletSpeed;
     }
 
-    public float SaucerBulletTravelDistance()
+    public float SaucerBulletTravelDistance
     {
-        return saucerBulletTravelDistance;
+        get => saucerBulletTravelDistance;
     }
 
-    public float SaucerShootingSpeed()
+    public float SaucerShootingSpeed
     {
-        return saucerShootingSpeed;
+        get => saucerShootingSpeed;
     }
 
     #endregion

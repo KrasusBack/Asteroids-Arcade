@@ -47,12 +47,12 @@ public class AsteroidBehaviour : MonoBehaviour
         switch (asteroidSize)
         {
             case AsteroidSize.Large:
-                return GameCore.GetInstance().GameSettings().LargeAsteroid();
+                return GameCore.Instance.GameSettings.LargeAsteroid;
             case AsteroidSize.Medium:
-                return GameCore.GetInstance().GameSettings().MediumAsteroid();
+                return GameCore.Instance.GameSettings.MediumAsteroid;
         }
         //Small
-        return GameCore.GetInstance().GameSettings().SmallAsteroid();
+        return GameCore.Instance.GameSettings.SmallAsteroid;
     }
 
     private void ShatterAsteroid()
@@ -65,7 +65,7 @@ public class AsteroidBehaviour : MonoBehaviour
     {
         for (var i = 0; i < 2; ++i)
         {
-            var asteroidPrefab = GameCore.GetInstance().GameSettings().GetRandomAsteroidPrefab();
+            var asteroidPrefab = GameCore.Instance.GameSettings.RandomAsteroidPrefab;
             var newAsteroid = Instantiate(asteroidPrefab, _rigidbody2D.position, transform.rotation);
 
             AsteroidSize newAsteroidSize = GetPreviousSize(_asteroidSize);

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SaucerBehaviour : MonoBehaviour
 {
-    private float MoveSpeed => GameCore.GetInstance().GameSettings().SaucersMoveSpeed();
-    private float ShootSpeed => GameCore.GetInstance().GameSettings().SaucerShootingSpeed();
-    private GameObject BulletObj => GameCore.GetInstance().GameSettings().SaucerBulletPrefab();
-    private GameObject PlayerShip => GameCore.GetInstance().PlayerShip();
+    private float MoveSpeed => GameCore.Instance.GameSettings.SaucersMoveSpeed;
+    private float ShootSpeed => GameCore.Instance.GameSettings.SaucerShootingSpeed;
+    private GameObject BulletObj => GameCore.Instance.GameSettings.SaucerBulletPrefab;
+    private GameObject PlayerShip => GameCore.Instance.PlayerShip;
 
     private Rigidbody2D _rigidbody2D;
     private Transform _playerShipTransform;
