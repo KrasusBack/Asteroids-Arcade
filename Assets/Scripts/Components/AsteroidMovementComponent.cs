@@ -5,7 +5,7 @@ public class AsteroidMovementComponent : MovementConponentBase
     private Vector2 _velocityVector;
     private AsteroidBehaviour.AsteroidSize _asteroidSize;
 
-    private void Awake()
+    private void Start()
     {
         _velocityVector = MathfExtentions.DegreeToVector2(Random.Range(0, 360));
         _asteroidSize = GetComponent<AsteroidBehaviour>().Size;

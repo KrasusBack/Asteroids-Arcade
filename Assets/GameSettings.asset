@@ -24,7 +24,7 @@ MonoBehaviour:
     speed: 0.5
     sizeScale: 0.5
   smallAsteroid:
-    speed: 1
+    speed: 0.6
     sizeScale: 0.25
   playerBulletPrefab: {fileID: 3522412154301574141, guid: bd9cc2bdbace9eb44ac96de7a6af5c5c,
     type: 3}

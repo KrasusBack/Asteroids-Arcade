@@ -8,7 +8,7 @@ public abstract class MovementConponentBase : MonoBehaviour
     protected Rigidbody2D RigidBody { get; private set; }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         RigidBody = GetComponent<Rigidbody2D>();
     }

@@ -7,7 +7,10 @@ public static class ScreenWrap
     public static void CheckAndWrapAround(Rigidbody2D rigidbody2D)
     {
         var newPos = WrapAround(rigidbody2D);
-        if (newPos.x != rigidbody2D.position.x || newPos.y != rigidbody2D.position.y) rigidbody2D.position = newPos;
+        if (newPos.x != rigidbody2D.position.x || newPos.y != rigidbody2D.position.y)
+        {
+            rigidbody2D.position = newPos;
+        }    
     }
 
     private static Vector2 WrapAround (Rigidbody2D rigidbody2D)
