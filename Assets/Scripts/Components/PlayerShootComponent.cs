@@ -16,7 +16,7 @@ public class PlayerShootComponent : MonoBehaviour
         _boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKeyDown(shootKey)) Shoot();
     }
