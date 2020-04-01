@@ -69,6 +69,7 @@ public class GameSettings : ScriptableObject
             return asteroidPrefabs[variation];
         } 
     }
+
     #endregion
 
     #region PlayerShip
