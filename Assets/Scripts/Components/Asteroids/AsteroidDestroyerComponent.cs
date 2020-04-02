@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
-using static AsteroidBehaviour;
+using static Asteroid;
 
-[RequireComponent(typeof(AsteroidBehaviour))]
+[RequireComponent(typeof(AsteroidSettingsComponent))]
 public sealed class AsteroidDestroyerComponent : Destroyable
 {
-    private AsteroidSize _asteroidSize;
+    private SizeType _asteroidSize;
     private bool _shatteringRightNow = false;
 
     private void Start()
     {
-        _asteroidSize = GetComponent<AsteroidBehaviour>().Size;
+        _asteroidSize = GetComponent<AsteroidSettingsComponent>().Size;
     }
 
     protected override void BeforeDestroyOperation()
@@ -23,7 +23,7 @@ public sealed class AsteroidDestroyerComponent : Destroyable
 
     private void ShatterAsteroid()
     {
-        if (_asteroidSize == AsteroidSize.Small) return;
+        if (_asteroidSize == SizeType.Small) return;
         SpawnFragments();
     }
 
@@ -36,8 +36,8 @@ public sealed class AsteroidDestroyerComponent : Destroyable
             var asteroidPrefab = GameCore.Instance.GameSettings.RandomAsteroidPrefab;
             var newAsteroid = Instantiate(asteroidPrefab, rb.position, transform.rotation);
 
-            AsteroidSize newAsteroidSize = AsteroidBehaviour.GetPreviousSize(_asteroidSize);
-            newAsteroid.GetComponent<AsteroidBehaviour>().SetAsteroidSettings(newAsteroidSize);
+            SizeType newAsteroidSize = GetPreviousSize(_asteroidSize);
+            newAsteroid.GetComponent<AsteroidSettingsComponent>().SetAsteroidSettings(newAsteroidSize);
         }
     }
 

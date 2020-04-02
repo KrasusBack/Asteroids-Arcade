@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static Asteroid;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/GameSettings", order = 1)]
 
@@ -25,6 +26,10 @@ public class GameSettings : ScriptableObject
     private float playersBulletSpeed = 1;
     [SerializeField]
     private float playerBulletTravelDistance = 100;
+    [SerializeField, Space(10)]
+    private float hyperSpaceCooldown = 1;
+    [SerializeField]
+    private float timeInHyperSpace = 1;
 
     [Header("Saucers")]
     [SerializeField]
@@ -39,12 +44,6 @@ public class GameSettings : ScriptableObject
     private float saucerShootingSpeed = 0.8f;
 
     #region Asteroids
-    [System.Serializable]
-    public struct AsteroidProperties
-    {
-        public float speed;
-        public float sizeScale;
-    }
 
     public AsteroidProperties LargeAsteroid
     {
@@ -99,6 +98,15 @@ public class GameSettings : ScriptableObject
         get => playerBulletTravelDistance;
     }
 
+    public float HyperSpaceCooldown
+    {
+        get => hyperSpaceCooldown;
+    }
+    
+    public float TimeInHyperSpace
+    {
+        get => timeInHyperSpace;
+    }
     #endregion
 
     #region Saucers
