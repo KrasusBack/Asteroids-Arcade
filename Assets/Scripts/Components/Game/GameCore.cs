@@ -8,11 +8,14 @@ public class GameCore : MonoBehaviour
     [SerializeField]
     private GameObject playerShip;
 
+    public HyperspaceHandler Hyperspacehandler { get; private set; }
+
     private int _currentWave = 1;
     private int _livesCount = 3;
     private int _currentScore = 0;
 
     public static GameCore Instance { get; private set; } = null;
+    
 
     public GameSettings GameSettings
     {
