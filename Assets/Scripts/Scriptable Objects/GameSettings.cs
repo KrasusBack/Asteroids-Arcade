@@ -15,7 +15,7 @@ public class GameSettings : ScriptableObject
     [SerializeField]
     private AsteroidProperties smallAsteroid;
 
-    [Header("PlayerShipSettings")]
+    [Header("PlayerShipSettings"), Space(10)]
     [SerializeField]
     private GameObject playerBulletPrefab;
     [SerializeField]
@@ -30,10 +30,10 @@ public class GameSettings : ScriptableObject
     private float hyperSpaceCooldown = 1;
     [SerializeField]
     private float timeInHyperSpace = 1;
-    [SerializeField, Range(0,1)]
+    [SerializeField, Range(0, 1)]
     private float chanceToAppearInsideAsteroid = 0.167f;
 
-    [Header("Saucers")]
+    [Header("Saucers"), Space(10)]
     [SerializeField]
     private GameObject saucerBulletPrefab;
     [SerializeField]
@@ -44,6 +44,13 @@ public class GameSettings : ScriptableObject
     private float saucerBulletTravelDistance = 100;
     [SerializeField]
     private float saucerShootingSpeed = 0.8f;
+
+    [Header("Key Settings"), Space(10)]
+    [SerializeField]
+    private KeyCode shootKey = KeyCode.Space;
+    [SerializeField]
+    private KeyCode hyperSpaceKey = KeyCode.LeftShift;
+
 
     #region Asteroids
 
@@ -68,7 +75,7 @@ public class GameSettings : ScriptableObject
         {
             var variation = Random.Range(0, asteroidPrefabs.Length - 1);
             return asteroidPrefabs[variation];
-        } 
+        }
     }
 
     #endregion
@@ -104,7 +111,7 @@ public class GameSettings : ScriptableObject
     {
         get => hyperSpaceCooldown;
     }
-    
+
     public float TimeInHyperSpace
     {
         get => timeInHyperSpace;
@@ -123,12 +130,12 @@ public class GameSettings : ScriptableObject
         get => saucerBulletPrefab;
     }
 
-    public float SaucersMoveSpeed 
+    public float SaucersMoveSpeed
     {
         get => saucersMoveSpeed;
     }
 
-    public float SaucersBulletSpeed 
+    public float SaucersBulletSpeed
     {
         get => saucersBulletSpeed;
     }
@@ -141,6 +148,20 @@ public class GameSettings : ScriptableObject
     public float SaucerShootingSpeed
     {
         get => saucerShootingSpeed;
+    }
+
+    #endregion
+
+    #region Key Settings
+
+    public KeyCode ShootKey
+    {
+        get => shootKey;
+    }
+
+    public KeyCode HyperSpaceKey
+    {
+        get => hyperSpaceKey;
     }
 
     #endregion

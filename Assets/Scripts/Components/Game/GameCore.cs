@@ -45,7 +45,7 @@ public class GameCore : MonoBehaviour
             ReloadScene();
         }
 
-        if ( !PlayerShip.activeSelf && Input.GetKeyDown(KeyCode.Space) && _livesCount>0)
+        if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.ShootKey) && _livesCount > 0)
         {
             RespawnPlayer();
         }
@@ -68,7 +68,7 @@ public class GameCore : MonoBehaviour
         }
     }
 
-    public void HandlePlayerDeath ()
+    public void HandlePlayerDeath()
     {
         if (!Instance.DecreaseLivesCounter())
         {
@@ -78,10 +78,10 @@ public class GameCore : MonoBehaviour
 
         PlayerShip.SetActive(false);
         PlayerShip.transform.position = Vector3.zero;
-        print("Press Fire Button to respawn. "+ _livesCount + " lives left");
+        print("Press Fire Button to respawn. " + _livesCount + " lives left");
     }
 
-    private void ExecuteGameOver ()
+    private void ExecuteGameOver()
     {
         PlayerShip.SetActive(false);
         print("Game over buddy");
@@ -108,5 +108,5 @@ public class GameCore : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
-   
+
 }
