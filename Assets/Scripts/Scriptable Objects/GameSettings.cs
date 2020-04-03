@@ -30,6 +30,8 @@ public class GameSettings : ScriptableObject
     private float hyperSpaceCooldown = 1;
     [SerializeField]
     private float timeInHyperSpace = 1;
+    [SerializeField, Range(0,1)]
+    private float ChanceToAppearInsideAsteroid = 1/6;
 
     [Header("Saucers")]
     [SerializeField]
