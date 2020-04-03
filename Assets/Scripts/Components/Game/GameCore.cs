@@ -44,6 +44,16 @@ public class GameCore : MonoBehaviour
         {
             ReloadScene();
         }
+
+        if ( !PlayerShip.activeSelf && Input.GetKeyDown(KeyCode.Space) && _livesCount>0)
+        {
+            RespawnPlayer();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (PlayerShip == null) print("Player is gone!");
     }
 
 
@@ -56,6 +66,40 @@ public class GameCore : MonoBehaviour
 
             Instance = this;
         }
+    }
+
+    public void HandlePlayerDeath ()
+    {
+        if (!Instance.DecreaseLivesCounter())
+        {
+            Instance.ExecuteGameOver();
+            return;
+        }
+
+        PlayerShip.SetActive(false);
+        PlayerShip.transform.position = Vector3.zero;
+        print("Press Fire Button to respawn. "+ _livesCount + " lives left");
+    }
+
+    private void ExecuteGameOver ()
+    {
+        PlayerShip.SetActive(false);
+        print("Game over buddy");
+    }
+
+    private void RespawnPlayer()
+    {
+        PlayerShip.SetActive(true);
+    }
+
+    /// <summary>
+    /// Decreases lives counter. Return true if there are lives left
+    /// </summary>
+    private bool DecreaseLivesCounter()
+    {
+        _livesCount--;
+        if (_livesCount == 0) return false;
+        return true;
     }
 
     //test stuff: reload scene

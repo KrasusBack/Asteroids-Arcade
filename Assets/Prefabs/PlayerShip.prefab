@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2061281631}
   - component: {fileID: 2061281632}
   - component: {fileID: 7677671240567533143}
-  - component: {fileID: 3268236437654585065}
+  - component: {fileID: 8250893193198862897}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ad6ec4fc3876f43b19d473af5b58b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3268236437654585065
+--- !u!114 &8250893193198862897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,6 +207,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4906696759052741539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 713354c2a3368ac4aab000fd92598ca8, type: 3}
+  m_Script: {fileID: 11500000, guid: db5effaa90e5e2842a86b787154e8950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

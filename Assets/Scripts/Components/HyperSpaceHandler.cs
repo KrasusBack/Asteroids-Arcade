@@ -25,24 +25,24 @@ public class HyperSpaceHandler : MonoBehaviour
         _readyToGoIntoHyperSpace = true;
     }
 
-    private void SetExitPositionFromHyperSpace(Transform objTransform)
+    private static void SetExitPositionFromHyperSpace(Transform objTransform)
     {
         Vector3 newPos;
 
         if (Random.value > GameCore.Instance.GameSettings.ChanceToAppearInsideAsteroid)
         {
-            newPos = GetNewRandomPositionOnScreen(objTransform.position.z);
+            newPos = GetRandomPositionOnScreen(objTransform.position.z);
         }
         else
         {
             var someAsteroid = GameObject.FindWithTag("Asteroids");
-            newPos = (someAsteroid == null) ? GetNewRandomPositionOnScreen(objTransform.position.z) : someAsteroid.transform.position;
+            newPos = (someAsteroid == null) ? GetRandomPositionOnScreen(objTransform.position.z) : someAsteroid.transform.position;
         }
 
         objTransform.position = newPos;
     }
 
-    private Vector3 GetNewRandomPositionOnScreen(float zPosition)
+    private static Vector3 GetRandomPositionOnScreen(float zPosition)
     {
         var minViewportPos = 0.00f;
         var maxViewportPos = 1.00f;
