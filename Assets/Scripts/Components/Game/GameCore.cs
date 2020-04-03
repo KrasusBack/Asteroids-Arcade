@@ -13,6 +13,8 @@ public class GameCore : MonoBehaviour
     private int _livesCount = 3;
     private int _currentScore = 0;
 
+    private HyperSpaceHandler hyperSpaceHandler = null;
+
     public static GameCore Instance { get; private set; } = null;
 
 
@@ -21,14 +23,14 @@ public class GameCore : MonoBehaviour
         get => gameSettings;
     }
 
-    private void SetInstance()
-    {
-        if (Instance == null) Instance = this;
-    }
-
     public GameObject PlayerShip
     {
         get => playerShip;
+    }
+
+    public void TravelToHyperSpace()
+    {
+        hyperSpaceHandler.TravelToHyperSpace();
     }
 
     private void Awake()
@@ -44,64 +46,23 @@ public class GameCore : MonoBehaviour
         }
     }
 
+
+    private void SetInstance()
+    {
+        if (Instance == null)
+        {
+            if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
+                hyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
+
+            Instance = this;
+        }
+    }
+
     //test stuff: reload scene
     private void ReloadScene()
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
-
-    #region HyperspaceHadler
-    private bool _readyToGoIntoHyperSpace = true;
-
-    public void TravelToHyperSpace()
-    {
-        if (_readyToGoIntoHyperSpace)
-            StartCoroutine(HyperSpace());
-    }
-
-    private IEnumerator HyperSpace()
-    {
-        //print("Going into Hyperspace...");
-        _readyToGoIntoHyperSpace = false;
-        Instance.PlayerShip.SetActive(false);
-        yield return new WaitForSeconds(Instance.GameSettings.TimeInHyperSpace);
-
-        Instance.PlayerShip.SetActive(true);
-        ChooseNewPosition();
-        //print("...and appearing from Hyperspace!");
-        yield return new WaitForSeconds(Instance.GameSettings.HyperSpaceCooldown);
-        _readyToGoIntoHyperSpace = true;
-    }
-
-    private void ChooseNewPosition()
-    {
-        Vector3 newPos;
-
-        if (Random.value > Instance.GameSettings.ChanceToAppearInsideAsteroid)
-        {
-            newPos = GetNewRandomPositionOnScreen();
-        }
-        else
-        {
-            var someAsteroid = GameObject.FindWithTag("Asteroids");
-            newPos = (someAsteroid == null) ? GetNewRandomPositionOnScreen() : someAsteroid.transform.position;
-        }
-
-        Instance.PlayerShip.GetComponent<Rigidbody2D>().position = newPos;
-    }
-
-    private Vector3 GetNewRandomPositionOnScreen()
-    {
-        var minPos = 0.00f;
-        var maxPos = 1.00f;
-
-        var origZPos = transform.position.z;
-        var newPos = new Vector3(Random.Range(minPos, maxPos), Random.Range(minPos, maxPos), Camera.main.transform.position.z);
-        newPos = Camera.main.ViewportToWorldPoint(newPos);
-        newPos.z = origZPos;
-
-        return newPos;
-    }
-    #endregion
+   
 }
