@@ -14,7 +14,4 @@ public class PlayerHyperSpaceComponent : MonoBehaviour
             GameCore.Instance.TravelToHyperSpace();
         }
     }
-
-    //наладить с помощью корутинов
-    //добавить возможность появления внутри астероида (еще одна настройка - шанс спавна внутри астероида)
 }

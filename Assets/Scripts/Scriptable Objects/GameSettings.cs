@@ -31,7 +31,7 @@ public class GameSettings : ScriptableObject
     [SerializeField]
     private float timeInHyperSpace = 1;
     [SerializeField, Range(0,1)]
-    private float ChanceToAppearInsideAsteroid = 1/6;
+    private float chanceToAppearInsideAsteroid = 0.167f;
 
     [Header("Saucers")]
     [SerializeField]
@@ -109,6 +109,11 @@ public class GameSettings : ScriptableObject
     {
         get => timeInHyperSpace;
     }
+    public float ChanceToAppearInsideAsteroid
+    {
+        get => chanceToAppearInsideAsteroid;
+    }
+
     #endregion
 
     #region Saucers

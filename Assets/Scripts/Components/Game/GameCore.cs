@@ -62,19 +62,36 @@ public class GameCore : MonoBehaviour
 
     private IEnumerator HyperSpace()
     {
-        print("Going into Hyperspace...");
+        //print("Going into Hyperspace...");
         _readyToGoIntoHyperSpace = false;
         Instance.PlayerShip.SetActive(false);
         yield return new WaitForSeconds(Instance.GameSettings.TimeInHyperSpace);
 
         Instance.PlayerShip.SetActive(true);
         ChooseNewPosition();
-        print("...and appearing from Hyperspace!");
+        //print("...and appearing from Hyperspace!");
         yield return new WaitForSeconds(Instance.GameSettings.HyperSpaceCooldown);
         _readyToGoIntoHyperSpace = true;
     }
 
     private void ChooseNewPosition()
+    {
+        Vector3 newPos;
+
+        if (Random.value > Instance.GameSettings.ChanceToAppearInsideAsteroid)
+        {
+            newPos = GetNewRandomPositionOnScreen();
+        }
+        else
+        {
+            var someAsteroid = GameObject.FindWithTag("Asteroids");
+            newPos = (someAsteroid == null) ? GetNewRandomPositionOnScreen() : someAsteroid.transform.position;
+        }
+
+        Instance.PlayerShip.GetComponent<Rigidbody2D>().position = newPos;
+    }
+
+    private Vector3 GetNewRandomPositionOnScreen()
     {
         var minPos = 0.00f;
         var maxPos = 1.00f;
@@ -84,7 +101,7 @@ public class GameCore : MonoBehaviour
         newPos = Camera.main.ViewportToWorldPoint(newPos);
         newPos.z = origZPos;
 
-        Instance.PlayerShip.GetComponent<Rigidbody2D>().position = newPos;
+        return newPos;
     }
     #endregion
 }
