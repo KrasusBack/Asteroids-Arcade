@@ -27,7 +27,8 @@ public class SaucerShootingComponent : MonoBehaviour
 
     private void Shoot()
     {
-        if (_playerShipTransform == null) return;
+        //if (_playerShipTransform == null) return;
+        if (!GameCore.Instance.PlayerShip.activeSelf) return;
         if (GameCore.Instance.GameSettings.SaucerShootingSpeed == 0) return;
 
         var direction = _playerShipTransform.position - transform.position;
