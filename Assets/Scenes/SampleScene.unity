@@ -240,7 +240,7 @@ PrefabInstance:
     - target: {fileID: 8059782310693702096, guid: 81cc0ba12f5d20c47b452c8006328d98,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059782310693702101, guid: 81cc0ba12f5d20c47b452c8006328d98,
         type: 3}
@@ -314,7 +314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &573653848
 Transform:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ PrefabInstance:
     - target: {fileID: 8059782310693702096, guid: a1e2d49f89edd414c819fac3a6bb13af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059782310693702101, guid: a1e2d49f89edd414c819fac3a6bb13af,
         type: 3}
@@ -427,7 +427,7 @@ PrefabInstance:
     - target: {fileID: 8059782310693702096, guid: 13f4f4ed89972e9499879cc8ff30ac70,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8059782310693702101, guid: 13f4f4ed89972e9499879cc8ff30ac70,
         type: 3}
@@ -591,6 +591,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saucer
       objectReference: {fileID: 0}
+    - target: {fileID: 6114920307276586691, guid: 45161d381c2a3614ca900779f3c08682,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6114920307276586693, guid: 45161d381c2a3614ca900779f3c08682,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -599,7 +604,7 @@ PrefabInstance:
     - target: {fileID: 6114920307276586693, guid: 45161d381c2a3614ca900779f3c08682,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -45.1
+      value: -22.3
       objectReference: {fileID: 0}
     - target: {fileID: 6114920307276586693, guid: 45161d381c2a3614ca900779f3c08682,
         type: 3}

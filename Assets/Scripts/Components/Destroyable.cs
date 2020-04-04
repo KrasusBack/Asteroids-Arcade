@@ -2,26 +2,41 @@
 
 public class Destroyable : MonoBehaviour
 {
-    private float hitFrame = 0;
+    private float _hitFrame = 0;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CheckAndDestroy();
+        if (MoreThanOnCollisionThisFrame()) return;
+        print(GetType().ToString() + ": OnCollisionEnter2D - " + name);
+        HandleCollision(collision?.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        CheckAndDestroy();
+        if (MoreThanOnCollisionThisFrame()) return;
+        print(GetType().ToString() + ": OnTriggerEnter2D - " + name);
+
+        var collider = collision;
+        var rb = collision.attachedRigidbody;
+        var obj = collision.attachedRigidbody.gameObject;
+
+        HandleCollision(collision.attachedRigidbody.gameObject);
     }
 
     /// <summary>
-    /// Checks if there are more than one hit this frame and call DestroyOperation. Prevents more than one DestroyOperation call. 
+    /// Calls DestroyableGoingToDestroyObject and DestroyOperation.
     /// </summary>
-    private void CheckAndDestroy()
+    private void HandleCollision(GameObject objCausedDestroying)
     {
-        if (Time.frameCount == hitFrame) return;
-        hitFrame = Time.frameCount;
+        DestroyableGoingToDestroyObject(objCausedDestroying);
         DestroyOperation();
+    }
+
+    private bool MoreThanOnCollisionThisFrame()
+    {
+        if (Time.fixedTime == _hitFrame) return true;
+        _hitFrame = Time.fixedTime;
+        return false;
     }
 
     protected virtual void DestroyOperation()
@@ -31,5 +46,8 @@ public class Destroyable : MonoBehaviour
     }
 
     /// <summary> Called right before destroying gameObject in DestroyOperation </summary>
-    protected virtual void BeforeDestroyOperation () { }
+    protected virtual void BeforeDestroyOperation() { }
+
+    public delegate void DoBeforeDestroyByDestroyableHandler(GameObject objCausedDestroying);
+    public event DoBeforeDestroyByDestroyableHandler DestroyableGoingToDestroyObject;
 }

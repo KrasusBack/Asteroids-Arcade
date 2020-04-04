@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 8250893193198862897}
   m_Layer: 0
   m_Name: PlayerShip
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4bcd4821145604eb422b4ca30e32b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hyperSpaceKey: 304
 --- !u!114 &2061281630
 MonoBehaviour:
   m_ObjectHideFlags: 0

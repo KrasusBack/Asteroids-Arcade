@@ -8,6 +8,7 @@ public class PointsGiverComponent : MonoBehaviour
 
     private void Start()
     {
+        GetComponent<Destroyable>().DestroyableGoingToDestroyObject+= CheckAndGivePoints;
         SetPointsAfterDestroy();
     }
 
@@ -46,9 +47,14 @@ public class PointsGiverComponent : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    /// <summary>
+    /// Checks if player caused destroying of an object and increased score for it
+    /// </summary>
+    private void CheckAndGivePoints(GameObject objCausedDestroying)
     {
-        print(gameObject.name + " destroyed! +" + _pointsAfterDestroy);
+        //Сделать через событие? Так этот класс не будет знать что происходит с этой информацией
+        if (objCausedDestroying?.tag != "Player") return;
+        //print(gameObject.name + " destroyed! +" + _pointsAfterDestroy);
         GameCore.Instance.AddPointsToScore(_pointsAfterDestroy);
     }
 
