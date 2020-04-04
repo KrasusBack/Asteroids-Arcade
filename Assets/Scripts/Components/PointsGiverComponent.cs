@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Destroyable))]
 public class PointsGiverComponent : MonoBehaviour
 {
     private int _pointsAfterDestroy = 0;
@@ -54,7 +55,6 @@ public class PointsGiverComponent : MonoBehaviour
     {
         //Сделать через событие? Так этот класс не будет знать что происходит с этой информацией
         if (objCausedDestroying?.tag != "Player") return;
-        //print(gameObject.name + " destroyed! +" + _pointsAfterDestroy);
         GameCore.Instance.AddPointsToScore(_pointsAfterDestroy);
     }
 

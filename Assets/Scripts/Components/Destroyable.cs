@@ -6,37 +6,23 @@ public class Destroyable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (MoreThanOnCollisionThisFrame()) return;
-        print(GetType().ToString() + ": OnCollisionEnter2D - " + name);
-        HandleCollision(collision?.gameObject);
+        CheckAndHandleCollision(collision.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (MoreThanOnCollisionThisFrame()) return;
-        print(GetType().ToString() + ": OnTriggerEnter2D - " + name);
-
-        var collider = collision;
-        var rb = collision.attachedRigidbody;
-        var obj = collision.attachedRigidbody.gameObject;
-
-        HandleCollision(collision.attachedRigidbody.gameObject);
+        CheckAndHandleCollision(collision.attachedRigidbody.gameObject);
     }
 
-    /// <summary>
-    /// Calls DestroyableGoingToDestroyObject and DestroyOperation.
-    /// </summary>
-    private void HandleCollision(GameObject objCausedDestroying)
+    /// <summary> Calls DestroyableGoingToDestroyObject and DestroyOperation. 
+    /// Can be only called once per Time.fixedTime </summary>
+    private void CheckAndHandleCollision(GameObject objCausedDestroying)
     {
-        DestroyableGoingToDestroyObject(objCausedDestroying);
-        DestroyOperation();
-    }
-
-    private bool MoreThanOnCollisionThisFrame()
-    {
-        if (Time.fixedTime == _hitFrame) return true;
+        if (Time.fixedTime == _hitFrame) return;
         _hitFrame = Time.fixedTime;
-        return false;
+
+        DestroyableGoingToDestroyObject?.Invoke(objCausedDestroying);
+        DestroyOperation();
     }
 
     protected virtual void DestroyOperation()
