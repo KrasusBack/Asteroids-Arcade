@@ -35,9 +35,18 @@ MonoBehaviour:
   hyperSpaceCooldown: 1
   timeInHyperSpace: 1
   chanceToAppearInsideAsteroid: 0.167
+  startingLifesAmount: 3
   saucerBulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
   saucersMoveSpeed: 1
   saucersBulletSpeed: 0.8
   saucerBulletTravelDistance: 2
   saucerShootingSpeed: 1
+  largeAsteroidPoints: 20
+  mediumAsteroidPoints: 50
+  smallAsteroidPoints: 100
+  bigSaucerPoints: 200
+  smalSaucerPoints: 1000
+  pointsForAddingLife: 1000
+  shootKey: 32
+  hyperSpaceKey: 304

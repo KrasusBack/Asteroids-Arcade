@@ -9,9 +9,9 @@ public class GameCore : MonoBehaviour
     [SerializeField]
     private GameObject playerShip;
 
-    private int _currentWave = 1;
-    private int _livesCount = 3;
-    private int _currentScore = 0;
+    private int CurrentWave { get; set; } = 1;
+    private int LivesCount { get; set; } = 3;
+    private int CurrentScore { get; set; } = 0;
 
     private HyperSpaceHandler hyperSpaceHandler = null;
 
@@ -45,7 +45,7 @@ public class GameCore : MonoBehaviour
             ReloadScene();
         }
 
-        if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.ShootKey) && _livesCount > 0)
+        if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.ShootKey) && LivesCount > 0)
         {
             RespawnPlayer();
         }
@@ -68,6 +68,8 @@ public class GameCore : MonoBehaviour
         }
     }
 
+    #region Game Process control
+
     public void HandlePlayerDeath()
     {
         if (!Instance.DecreaseLivesCounter())
@@ -78,14 +80,8 @@ public class GameCore : MonoBehaviour
 
         PlayerShip.SetActive(false);
         PlayerShip.transform.position = Vector3.zero;
-        print("Press Fire Button to respawn. " + _livesCount + " lives left");
-    }
-
-    public void AddPointsToScore(int points)
-    {
-        _currentScore += points;
-        print("Current Score: " + _currentScore);
-    }
+        print("Press Fire Button to respawn. " + LivesCount + " lives left");
+    }  
 
     private void ExecuteGameOver()
     {
@@ -98,13 +94,35 @@ public class GameCore : MonoBehaviour
         PlayerShip.SetActive(true);
     }
 
+    #endregion
+
+    public void AddPointsToScore(int points)
+    {
+        BonusLifeCheckAndHandle(CurrentScore, CurrentScore += points);
+        print("Current Score: " + CurrentScore);
+    }
+
+    private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
+    {
+        var pointsNeededForBonusLife = GameSettings.PointsForAddingLife;
+        
+        if ((scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
+            AddLife();        
+    }
+
+    private void AddLife()
+    {
+        print("! Bonus life added !");
+        LivesCount++;
+    }
+
     /// <summary>
     /// Decreases lives counter. Return true if there are lives left
     /// </summary>
     private bool DecreaseLivesCounter()
     {
-        _livesCount--;
-        if (_livesCount == 0) return false;
+        LivesCount--;
+        if (LivesCount == 0) return false;
         return true;
     }
 
