@@ -31,28 +31,16 @@ public class HyperSpaceHandler : MonoBehaviour
 
         if (Random.value > GameCore.Instance.GameSettings.ChanceToAppearInsideAsteroid)
         {
-            newPos = GetRandomPositionOnScreen(objTransform.position.z);
+            newPos = ScreenToWorld.GetRandomPositionOnScreen(objTransform.position.z);
         }
         else
         {
             var someAsteroid = GameObject.FindWithTag("Asteroids");
-            newPos = (someAsteroid == null) ? GetRandomPositionOnScreen(objTransform.position.z) : someAsteroid.transform.position;
+            newPos = (someAsteroid == null) ? ScreenToWorld.GetRandomPositionOnScreen(objTransform.position.z) : someAsteroid.transform.position;
         }
 
         objTransform.position = newPos;
     }
 
-    private static Vector3 GetRandomPositionOnScreen(float zPosition)
-    {
-        var minViewportPos = 0.00f;
-        var maxViewportPos = 1.00f;
-
-        var newPos = new Vector3(Random.Range(minViewportPos, maxViewportPos),
-                                 Random.Range(minViewportPos, maxViewportPos),
-                                 Camera.main.transform.position.z);
-        newPos = Camera.main.ViewportToWorldPoint(newPos);
-        newPos.z = zPosition;
-
-        return newPos;
-    }
+    
 }

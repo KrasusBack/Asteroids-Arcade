@@ -81,6 +81,12 @@ public class GameCore : MonoBehaviour
         print("Press Fire Button to respawn. " + _livesCount + " lives left");
     }
 
+    public void AddPointsToScore(int points)
+    {
+        _currentScore += points;
+        print("Current Score: " + _currentScore);
+    }
+
     private void ExecuteGameOver()
     {
         PlayerShip.SetActive(false);

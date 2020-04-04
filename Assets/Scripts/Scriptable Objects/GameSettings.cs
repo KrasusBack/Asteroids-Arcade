@@ -32,6 +32,8 @@ public class GameSettings : ScriptableObject
     private float timeInHyperSpace = 1;
     [SerializeField, Range(0, 1)]
     private float chanceToAppearInsideAsteroid = 0.167f;
+    [SerializeField]
+    private int startingLifesAmount = 3; 
 
     [Header("Saucers"), Space(10)]
     [SerializeField]
@@ -45,12 +47,25 @@ public class GameSettings : ScriptableObject
     [SerializeField]
     private float saucerShootingSpeed = 0.8f;
 
+    [Header("Points settings"), Space(10)]
+    [SerializeField]
+    private int largeAsteroidPoints = 20;
+    [SerializeField]
+    private int mediumAsteroidPoints = 50;
+    [SerializeField]
+    private int smallAsteroidPoints = 100;
+    [SerializeField]
+    private int bigSaucerPoints = 200;
+    [SerializeField]
+    private int smalSaucerPoints = 1000;
+    [SerializeField]
+    private int pointsForAddingLife = 10000;
+
     [Header("Key Settings"), Space(10)]
     [SerializeField]
     private KeyCode shootKey = KeyCode.Space;
     [SerializeField]
     private KeyCode hyperSpaceKey = KeyCode.LeftShift;
-
 
     #region Asteroids
 
@@ -121,6 +136,11 @@ public class GameSettings : ScriptableObject
         get => chanceToAppearInsideAsteroid;
     }
 
+    public int StartingLifesAmount
+    {
+        get => startingLifesAmount;
+    }
+
     #endregion
 
     #region Saucers
@@ -148,6 +168,40 @@ public class GameSettings : ScriptableObject
     public float SaucerShootingSpeed
     {
         get => saucerShootingSpeed;
+    }
+
+    #endregion
+
+    #region Points Settings
+
+    public int LargeAsteroidPoints
+    {
+        get => largeAsteroidPoints;
+    }
+
+    public int MediumAsteroidPoints
+    {
+        get => mediumAsteroidPoints;
+    }
+
+    public int SmallAsteroidPoints
+    {
+        get => smallAsteroidPoints;
+    }
+
+    public int BigSaucerPoints
+    {
+        get => bigSaucerPoints;
+    }
+
+    public int SmalSaucerPoints
+    {
+        get => smalSaucerPoints;
+    }
+
+    public int PointsForAddingLife
+    {
+        get => pointsForAddingLife;
     }
 
     #endregion

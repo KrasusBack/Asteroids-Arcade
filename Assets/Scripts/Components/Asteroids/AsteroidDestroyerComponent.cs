@@ -5,7 +5,6 @@ using static Asteroid;
 public sealed class AsteroidDestroyerComponent : Destroyable
 {
     private SizeType _asteroidSize;
-    private bool _shatteringRightNow = false;
 
     private void Start()
     {
@@ -14,10 +13,6 @@ public sealed class AsteroidDestroyerComponent : Destroyable
 
     protected override void BeforeDestroyOperation()
     {
-        //Preventing more than 1 call from children colliders
-        if (_shatteringRightNow) return;
-        _shatteringRightNow = true;
-
         ShatterAsteroid();
     }
 

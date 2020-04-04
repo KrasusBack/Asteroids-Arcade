@@ -14,9 +14,11 @@ GameObject:
   - component: {fileID: 5845097199933769122}
   - component: {fileID: 466603761548764573}
   - component: {fileID: 5130722191805571058}
+  - component: {fileID: 1032835486767451243}
+  - component: {fileID: 2998514915536077277}
   m_Layer: 9
   m_Name: Saucer
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +150,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ad6ec4fc3876f43b19d473af5b58b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1032835486767451243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6114920307276586691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8848a55a9d9fada43b68de96244e0660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2998514915536077277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6114920307276586691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713354c2a3368ac4aab000fd92598ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6114920307299996332
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +184,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6114920307299996333}
   - component: {fileID: 6114920307299996334}
-  - component: {fileID: 6114920307299996335}
   m_Layer: 9
   m_Name: saucerCollider (4)
   m_TagString: Untagged
@@ -206,18 +231,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7021253, y: 0.6979271}
   m_EdgeRadius: 0
---- !u!114 &6114920307299996335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114920307299996332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c2dde1353ce424a8257a8d862af232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6114920307904296792
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +241,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6114920307904296793}
   - component: {fileID: 6114920307904296794}
-  - component: {fileID: 6114920307904296795}
   m_Layer: 9
   m_Name: saucerCollider (5)
   m_TagString: Untagged
@@ -276,18 +288,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5208755, y: 1.1360457}
   m_EdgeRadius: 0
---- !u!114 &6114920307904296795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114920307904296792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c2dde1353ce424a8257a8d862af232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6114920308255869612
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +298,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6114920308255869613}
   - component: {fileID: 6114920308255869614}
-  - component: {fileID: 6114920308255869615}
   m_Layer: 9
   m_Name: saucerCollider (1)
   m_TagString: Untagged
@@ -346,18 +345,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.97606975, y: 1.122564}
   m_EdgeRadius: 0
---- !u!114 &6114920308255869615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114920308255869612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c2dde1353ce424a8257a8d862af232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6114920308316865575
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +355,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6114920308316865592}
   - component: {fileID: 6114920308316865593}
-  - component: {fileID: 6114920308316865594}
   m_Layer: 9
   m_Name: saucerCollider (3)
   m_TagString: Untagged
@@ -416,18 +402,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.80801046, y: 0.9283384}
   m_EdgeRadius: 0
---- !u!114 &6114920308316865594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114920308316865575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c2dde1353ce424a8257a8d862af232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6114920308710803171
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +412,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6114920308710803172}
   - component: {fileID: 6114920308710803173}
-  - component: {fileID: 6114920308710803174}
   m_Layer: 9
   m_Name: saucerCollider (2)
   m_TagString: Untagged
@@ -486,18 +459,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9604958, y: 0.85798335}
   m_EdgeRadius: 0
---- !u!114 &6114920308710803174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114920308710803171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c2dde1353ce424a8257a8d862af232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6114920309245971820
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +469,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6114920309245971821}
   - component: {fileID: 6114920309245971822}
-  - component: {fileID: 6114920309245971823}
   m_Layer: 9
   m_Name: saucerCollider
   m_TagString: Untagged
@@ -556,15 +516,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.1044765, y: 1.3694754}
   m_EdgeRadius: 0
---- !u!114 &6114920309245971823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114920309245971820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c2dde1353ce424a8257a8d862af232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
