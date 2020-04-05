@@ -9,14 +9,61 @@ public class GameCore : MonoBehaviour
     [SerializeField]
     private GameObject playerShip;
 
-    private int CurrentWave { get; set; } = 1;
-    private int LivesCount { get; set; } = 3;
-    private int CurrentScore { get; set; } = 0;
+    private int _currentStage = 1;
+    private int _livesCount = 3;
+    private int _currentScore = 0;
+
+    public int CurrentStage
+    {
+        get
+        {
+            return _currentStage;
+        }
+        private set
+        {
+            _currentStage = value;
+            StageNumberUpdated?.Invoke();
+        }
+    }
+
+    public int LivesCount
+    {
+        get
+        {
+            return _livesCount;
+        }
+        private set
+        {
+            _livesCount = value;
+            LivesCountUpdated?.Invoke();
+        }
+    }
+
+    public int CurrentScore
+    {
+        get
+        {
+            return _currentScore;
+        }
+        private set
+        {
+            _currentScore = value;
+            ScoreUpdated?.Invoke();
+        }
+    }
 
     private HyperSpaceHandler hyperSpaceHandler = null;
 
     public static GameCore Instance { get; private set; } = null;
 
+    public delegate void ScoreUpdateHandler();
+    public event ScoreUpdateHandler ScoreUpdated;
+
+    public delegate void StageNumberUpdateHandler();
+    public event StageNumberUpdateHandler StageNumberUpdated;
+
+    public delegate void LivesCountUpdateHandler();
+    public event LivesCountUpdateHandler LivesCountUpdated;
 
     public GameSettings GameSettings
     {
@@ -99,6 +146,7 @@ public class GameCore : MonoBehaviour
     public void AddPointsToScore(int points)
     {
         BonusLifeCheckAndHandle(CurrentScore, CurrentScore += points);
+        
         print("Current Score: " + CurrentScore);
     }
 
