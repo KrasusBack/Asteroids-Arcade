@@ -98,18 +98,14 @@ public class GameCore : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (PlayerShip == null) print("Player is gone!");
-    }
-
-
     private void SetInstance()
     {
         if (Instance == null)
         {
             if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
                 hyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
+
+            LivesCount = GameSettings.StartingLifesAmount;
 
             Instance = this;
         }

@@ -2,11 +2,11 @@
 {
     protected override void AdditionalOperationsInStart()
     {
-        UpdateLivesText();
-        GameCore.Instance.LivesCountUpdated += UpdateLivesText;
+        UpdateLivesDisplay();
+        GameCore.Instance.LivesCountUpdated += UpdateLivesDisplay;
     }
 
-    private void UpdateLivesText()
+    private void UpdateLivesDisplay()
     {
         TextComponent.text = "Lives: " + GameCore.Instance.LivesCount.ToString();
     }
