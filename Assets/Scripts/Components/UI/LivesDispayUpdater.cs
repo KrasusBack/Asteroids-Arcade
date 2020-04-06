@@ -7,7 +7,7 @@ public class LivesDispayUpdater : TMPUpdater
     [SerializeField]
     private GameObject lifeSpritePrefab;
 
-    private static int maxSpritesAllowed = 30;
+    private static int maxSpritesAllowed = 30; 
 
     protected override void AdditionalOperationsInStart()
     {
@@ -18,7 +18,7 @@ public class LivesDispayUpdater : TMPUpdater
     private void UpdateLivesDisplay()
     {
         var livesCount = GameCore.Instance.LivesCount;
-        int activeObjects = 0;
+        int activeSpriteObjects = 0;
         float spriteWidth = 0f;
 
         //check if we have enough active sprites for display
@@ -28,40 +28,40 @@ public class LivesDispayUpdater : TMPUpdater
             {
                 if (spriteWidth == 0)
                     spriteWidth = childTransform.rect.size.y * childTransform.localScale.y;
-                activeObjects++;
+                activeSpriteObjects++;
             }
         }
         //activate more if needed
-        if (activeObjects < livesCount)
+        if (activeSpriteObjects < livesCount)
         {
             foreach (Transform childTransform in transform)
             {
-                if (activeObjects == maxSpritesAllowed) break;
+                if (activeSpriteObjects == maxSpritesAllowed) break;
                 if (!childTransform.gameObject.activeSelf)
                 {
                     childTransform.gameObject.SetActive(true);
-                    activeObjects++;
-                    if (activeObjects == livesCount) break;
+                    activeSpriteObjects++;
+                    if (activeSpriteObjects == livesCount) break;
                 }
             }
 
             //If there are not enough children add new one (to maxSpritesAllowed extense)
-            while (activeObjects < maxSpritesAllowed && activeObjects < livesCount)
+            while (activeSpriteObjects < maxSpritesAllowed && activeSpriteObjects < livesCount)
             {
                 Instantiate(lifeSpritePrefab, transform.position, Quaternion.identity);
-                activeObjects++;
+                activeSpriteObjects++;
             }
         }
         //deactivate if we have more than enough sprites 
-        if (activeObjects > livesCount)
+        if (activeSpriteObjects > livesCount)
         {
             foreach (Transform childTransform in transform)
             {
                 if (childTransform.gameObject.activeSelf)
                 {
                     childTransform.gameObject.SetActive(false);
-                    activeObjects--;
-                    if (activeObjects == livesCount) break;
+                    activeSpriteObjects--;
+                    if (activeSpriteObjects == livesCount) break;
                 }
             }
         }
@@ -70,37 +70,30 @@ public class LivesDispayUpdater : TMPUpdater
         //Check is all sprites can fit in the rect
         var rectTransform = GetComponent<RectTransform>();
         var rectWidth = rectTransform.rect.size.x * transform.localScale.x;
-        var widthRatio = rectWidth / (spriteWidth * activeObjects);
-        //Debug.Log("widthRatio = boxWidth / (spriteWidth * activeObjects) " + widthRatio + "=" + boxWidth + "/(" + spriteWidth + "*" + activeObjects + ")");
+        var widthRatio = rectWidth / (spriteWidth * activeSpriteObjects);
+
         var startPoint = 0f;
-        if (widthRatio <= 1)
+        if (widthRatio <= 1) //All sprites cannot fit properly. They will share space
         {
             //start right from left border
             startPoint = rectTransform.anchoredPosition.x - rectWidth / 2 + spriteWidth / 2;
-            //Debug.Log("widthRation<=1: startPoint = transform.position.x - (boxWidth - spriteWidth) / 2; " + startPoint + "=" + transform.position.x + "-(" + rectWidth + "-" + spriteWidth + ")");
         }
-        else
+        else //All sprites can fit, normal filling
         {
-            //all sprites can fit, normal filling
             widthRatio = 1;
             startPoint = rectTransform.anchoredPosition.x - spriteWidth * livesCount / 2 + spriteWidth / 2;
-            //Debug.Log("widthRation>1: startPoint = rectTransform.anchoredPosition.x - spriteWidth * livesCount / 2 + spriteWidth/2;; " + startPoint + "=" + rectTransform.anchoredPosition.x + "-" + spriteWidth + "*" + livesCount + "/2+" + spriteWidth + "/2");
         }
+
+        startPoint -= rectTransform.position.x;
 
         //place life sprites
         foreach (RectTransform childTransform in transform)
         {
             if (!childTransform.gameObject.activeSelf) continue;
             print(childTransform.gameObject.name);
-            //childTransform.anchoredPosition = new Vector3(startPoint, childTransform.position.y, childTransform.position.z);
             childTransform.anchoredPosition = new Vector2(startPoint, childTransform.anchoredPosition.y);
             startPoint += spriteWidth * widthRatio;
-            print("sp " + startPoint);
         }
 
-        //! Next !
-        //If there are more than some amount of lifes (7 for ex) change diplay - 
-        //instead of regular squize all sprites show 1 spite and int text amount near
-        //btw delete all over limit sprites
     }
 }
