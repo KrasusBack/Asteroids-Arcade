@@ -65,6 +65,12 @@ public class GameCore : MonoBehaviour
     public delegate void LivesCountUpdateHandler();
     public event LivesCountUpdateHandler LivesCountUpdated;
 
+    public delegate void GameOverHandler();
+    public event GameOverHandler GameIsOver;
+
+    public delegate void PlayerDiedHandler();
+    public event PlayerDiedHandler PlayerDied;
+
     public GameSettings GameSettings
     {
         get => gameSettings;
@@ -130,12 +136,14 @@ public class GameCore : MonoBehaviour
 
         PlayerShip.SetActive(false);
         PlayerShip.transform.position = Vector3.zero;
+        PlayerDied?.Invoke();
         print("Press Fire Button to respawn. " + LivesCount + " lives left");
     }
 
     private void ExecuteGameOver()
     {
         PlayerShip.SetActive(false);
+        GameIsOver?.Invoke();
         print("Game over buddy");
     }
 
