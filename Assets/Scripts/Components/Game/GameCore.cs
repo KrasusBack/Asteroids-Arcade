@@ -87,9 +87,16 @@ public class GameCore : MonoBehaviour
 
     private void Update()
     {
+        //Reload scene
         if (Input.GetKeyDown(KeyCode.C))
         {
             ReloadScene();
+        }
+
+        //Kill player
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            HandlePlayerDeath();
         }
 
         if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.ShootKey) && LivesCount > 0)
@@ -115,16 +122,16 @@ public class GameCore : MonoBehaviour
 
     public void HandlePlayerDeath()
     {
-        if (!Instance.DecreaseLivesCounter())
+        if (LivesCount == 0)
         {
-            Instance.ExecuteGameOver();
+            ExecuteGameOver();
             return;
         }
 
         PlayerShip.SetActive(false);
         PlayerShip.transform.position = Vector3.zero;
         print("Press Fire Button to respawn. " + LivesCount + " lives left");
-    }  
+    }
 
     private void ExecuteGameOver()
     {
@@ -134,6 +141,7 @@ public class GameCore : MonoBehaviour
 
     private void RespawnPlayer()
     {
+        DecreaseLivesCounter();
         PlayerShip.SetActive(true);
     }
 
@@ -142,16 +150,16 @@ public class GameCore : MonoBehaviour
     public void AddPointsToScore(int points)
     {
         BonusLifeCheckAndHandle(CurrentScore, CurrentScore += points);
-        
+
         print("Current Score: " + CurrentScore);
     }
 
     private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
     {
         var pointsNeededForBonusLife = GameSettings.PointsForAddingLife;
-        
+
         if ((scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
-            AddLife();        
+            AddLife();
     }
 
     private void AddLife()
@@ -160,14 +168,9 @@ public class GameCore : MonoBehaviour
         LivesCount++;
     }
 
-    /// <summary>
-    /// Decreases lives counter. Return true if there are lives left
-    /// </summary>
-    private bool DecreaseLivesCounter()
+    private void DecreaseLivesCounter()
     {
         LivesCount--;
-        if (LivesCount == 0) return false;
-        return true;
     }
 
     //test stuff: reload scene

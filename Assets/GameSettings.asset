@@ -33,9 +33,9 @@ MonoBehaviour:
   playersBulletSpeed: 1
   playerBulletTravelDistance: 2
   hyperSpaceCooldown: 1
-  timeInHyperSpace: 1
-  chanceToAppearInsideAsteroid: 0.167
-  startingLifesAmount: 5
+  timeInHyperSpace: 0.1
+  chanceToAppearInsideAsteroid: 0.1667
+  startingLifesAmount: 7
   saucerBulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
   saucersMoveSpeed: 1
