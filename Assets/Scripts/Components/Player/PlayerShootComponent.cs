@@ -18,7 +18,7 @@ public class PlayerShootComponent : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(GameCore.Instance.GameSettings.ShootKey)) Shoot();
+        if (Input.GetKeyDown(GameCore.Instance.GameSettings.FireKey)) Shoot();
     }
 
     void Shoot()

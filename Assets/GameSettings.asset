@@ -29,13 +29,13 @@ MonoBehaviour:
   playerBulletPrefab: {fileID: 3522412154301574141, guid: bd9cc2bdbace9eb44ac96de7a6af5c5c,
     type: 3}
   playerMoveSpeed: 50
-  playerRotationSpeed: 3
+  playerRotationSpeed: 5
   playersBulletSpeed: 1
   playerBulletTravelDistance: 2
   hyperSpaceCooldown: 1
   timeInHyperSpace: 0.1
   chanceToAppearInsideAsteroid: 0.1667
-  startingLifesAmount: 7
+  startingLifesAmount: 3
   saucerBulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
   saucersMoveSpeed: 1

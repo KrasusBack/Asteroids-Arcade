@@ -15,7 +15,9 @@ public class PressButtonToContinueOverlayCaller : MonoBehaviour
 
     private void ShowOverlay()
     {
-        GetComponent<TextMeshProUGUI>().enabled = true;
+        var component = GetComponent<TextMeshProUGUI>();
+        component.text = "press [" + GameCore.Instance.GameSettings.FireKey.ToString() + "] button to resurrect";
+        component.enabled = true;
     }
 
     private void HideOverlay()

@@ -105,7 +105,7 @@ public class GameCore : MonoBehaviour
             HandlePlayerDeath();
         }
 
-        if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.ShootKey) && LivesCount > 0)
+        if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.FireKey) && LivesCount > 0)
         {
             RespawnPlayer();
         }

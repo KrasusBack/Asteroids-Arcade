@@ -63,7 +63,7 @@ public class GameSettings : ScriptableObject
 
     [Header("Key Settings"), Space(10)]
     [SerializeField]
-    private KeyCode shootKey = KeyCode.Space;
+    private KeyCode fireKey = KeyCode.Space;
     [SerializeField]
     private KeyCode hyperSpaceKey = KeyCode.LeftShift;
 
@@ -208,9 +208,9 @@ public class GameSettings : ScriptableObject
 
     #region Key Settings
 
-    public KeyCode ShootKey
+    public KeyCode FireKey
     {
-        get => shootKey;
+        get => fireKey;
     }
 
     public KeyCode HyperSpaceKey
