@@ -25,7 +25,12 @@ public class GameCore : MonoBehaviour
         {
             if (value < 0) throw new System.ArgumentOutOfRangeException("DestroyableObjectInTheScene cant be <0");
             _destroyableObjectInTheScene = value;
-            if (value == 0) StageCleared?.Invoke();
+            if (value == 0)
+            {
+                print("Calling StageCleared");
+                StageCleared?.Invoke();
+            }
+                
         }
     }
     private HyperSpaceHandler HyperSpaceHandler { get; set; } = null;
@@ -130,6 +135,7 @@ public class GameCore : MonoBehaviour
         {
             Init();
             Instance = this;
+            print("-------GameStarted!-------");
         }
     }
 
@@ -208,6 +214,7 @@ public class GameCore : MonoBehaviour
 
     private void ReloadScene()
     {
+        StageCleared = null;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
