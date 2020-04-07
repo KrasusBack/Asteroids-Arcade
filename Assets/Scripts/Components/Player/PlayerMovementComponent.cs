@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovementComponent : MovementConponentBase
+public sealed class PlayerMovementComponent : MovementConponentBase
 {
     void FixedUpdate()
     {

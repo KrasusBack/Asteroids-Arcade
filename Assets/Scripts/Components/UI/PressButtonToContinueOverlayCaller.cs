@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PressButtonToContinueOverlayCaller : MonoBehaviour
+public sealed class PressButtonToContinueOverlayCaller : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

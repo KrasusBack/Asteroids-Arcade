@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SaucerShootingComponent : MonoBehaviour
 {
-    Transform _playerShipTransform;
-    Rigidbody2D _rb;
+    private Transform _playerShipTransform;
+    private Rigidbody2D _rb;
 
     // Start is called before the first frame update
     void Start()

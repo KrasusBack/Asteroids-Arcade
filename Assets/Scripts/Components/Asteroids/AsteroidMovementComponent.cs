@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AsteroidMovementComponent : MovementConponentBase
+public sealed class AsteroidMovementComponent : MovementConponentBase
 {
     private Vector2 _velocityVector;
     private Asteroid.SizeType _asteroidSize;
@@ -8,7 +8,7 @@ public class AsteroidMovementComponent : MovementConponentBase
     private void Start()
     {
         _velocityVector = MathfExtentions.DegreeToVector2(Random.Range(0, 360));
-        _asteroidSize = GetComponent<AsteroidSettingsComponent>().Size;
+        _asteroidSize = GetComponent<AsteroidSettingsComponent>().AsteroidSize;
     }
 
     private void FixedUpdate()

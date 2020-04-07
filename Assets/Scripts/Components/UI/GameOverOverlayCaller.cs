@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameOverOverlayCaller : MonoBehaviour
+public sealed class GameOverOverlayCaller : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

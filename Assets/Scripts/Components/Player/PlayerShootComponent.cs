@@ -2,7 +2,7 @@
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerShootComponent : MonoBehaviour
+public sealed class PlayerShootComponent : MonoBehaviour
 {
     [SerializeField]
     private KeyCode shootKey = KeyCode.Space;

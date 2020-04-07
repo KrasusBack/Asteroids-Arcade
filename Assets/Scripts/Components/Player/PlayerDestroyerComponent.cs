@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDestroyerComponent : Destroyable
+public sealed class PlayerDestroyerComponent : Destroyable
 {
     protected override void DestroyOperation()
     {

@@ -1,4 +1,4 @@
-﻿public class ScoreTextUpdater : TMPUpdater
+﻿public sealed class ScoreTextUpdater : TMPUpdater
 {
     protected override void AdditionalOperationsInStart()
     {

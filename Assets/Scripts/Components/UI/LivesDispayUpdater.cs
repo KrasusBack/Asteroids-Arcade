@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LivesDispayUpdater : TMPUpdater
+public sealed class LivesDispayUpdater : TMPUpdater
 {
     [SerializeField]
     private GameObject lifeSpritePrefab;
 
-    private static int maxSpritesAllowed = 30; 
+    private readonly static int maxSpritesAllowed = 30; 
 
     protected override void AdditionalOperationsInStart()
     {

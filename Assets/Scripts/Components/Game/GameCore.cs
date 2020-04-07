@@ -13,6 +13,10 @@ public class GameCore : MonoBehaviour
     private int _livesCount = 3;
     private int _currentScore = 0;
 
+    private HyperSpaceHandler HyperSpaceHandler { get; set; } = null;
+
+    public static GameCore Instance { get; private set; } = null;
+
     public int CurrentStage
     {
         get
@@ -25,7 +29,6 @@ public class GameCore : MonoBehaviour
             StageNumberUpdated?.Invoke();
         }
     }
-
     public int LivesCount
     {
         get
@@ -38,7 +41,6 @@ public class GameCore : MonoBehaviour
             LivesCountUpdated?.Invoke();
         }
     }
-
     public int CurrentScore
     {
         get
@@ -52,9 +54,15 @@ public class GameCore : MonoBehaviour
         }
     }
 
-    private HyperSpaceHandler hyperSpaceHandler = null;
+    public GameSettings GameSettings
+    {
+        get => gameSettings;
+    }
+    public GameObject PlayerShip
+    {
+        get => playerShip;
+    }
 
-    public static GameCore Instance { get; private set; } = null;
 
     public delegate void ScoreUpdateHandler();
     public event ScoreUpdateHandler ScoreUpdated;
@@ -71,20 +79,6 @@ public class GameCore : MonoBehaviour
     public delegate void PlayerDiedHandler();
     public event PlayerDiedHandler PlayerDied;
 
-    public GameSettings GameSettings
-    {
-        get => gameSettings;
-    }
-
-    public GameObject PlayerShip
-    {
-        get => playerShip;
-    }
-
-    public void TravelToHyperSpace()
-    {
-        hyperSpaceHandler.TravelToHyperSpace();
-    }
 
     private void Awake()
     {
@@ -93,18 +87,18 @@ public class GameCore : MonoBehaviour
 
     private void Update()
     {
+        CheckAndHandleInput();
+    }
+
+    private void CheckAndHandleInput()
+    {
         //Reload scene
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ReloadScene();
-        }
+        if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
 
         //Kill player
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            HandlePlayerDeath();
-        }
+        if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
 
+        //Respawn player
         if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.FireKey) && LivesCount > 0)
         {
             RespawnPlayer();
@@ -115,36 +109,34 @@ public class GameCore : MonoBehaviour
     {
         if (Instance == null)
         {
-            if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
-                hyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
-
-            LivesCount = GameSettings.StartingLifesAmount;
-
+            Init();
             Instance = this;
         }
+    }
+
+    private void Init()
+    {
+        if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
+            HyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
+
+        LivesCount = GameSettings.StartingLifesAmount;
     }
 
     #region Game Process control
 
     public void HandlePlayerDeath()
     {
-        if (LivesCount == 0)
-        {
-            ExecuteGameOver();
-            return;
-        }
+        if (LivesCount == 0) { ExecuteGameOver(); return; }
 
         PlayerShip.SetActive(false);
         PlayerShip.transform.position = Vector3.zero;
         PlayerDied?.Invoke();
-        print("Press Fire Button to respawn. " + LivesCount + " lives left");
     }
 
     private void ExecuteGameOver()
     {
         PlayerShip.SetActive(false);
         GameIsOver?.Invoke();
-        print("Game over buddy");
     }
 
     private void RespawnPlayer()
@@ -155,11 +147,14 @@ public class GameCore : MonoBehaviour
 
     #endregion
 
+    public void TravelToHyperSpace()
+    {
+        HyperSpaceHandler.TravelToHyperSpace();
+    }
+
     public void AddPointsToScore(int points)
     {
         BonusLifeCheckAndHandle(CurrentScore, CurrentScore += points);
-
-        print("Current Score: " + CurrentScore);
     }
 
     private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
@@ -172,7 +167,7 @@ public class GameCore : MonoBehaviour
 
     private void AddLife()
     {
-        print("! Bonus life added !");
+        print("! Bonus life added !"); //add bonus life event
         LivesCount++;
     }
 
@@ -181,11 +176,14 @@ public class GameCore : MonoBehaviour
         LivesCount--;
     }
 
-    //test stuff: reload scene
+    #region Stuff for Tests
+
     private void ReloadScene()
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
+
+    #endregion
 
 }

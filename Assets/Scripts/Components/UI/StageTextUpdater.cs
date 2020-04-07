@@ -1,4 +1,4 @@
-﻿public class StageTextUpdater : TMPUpdater
+﻿public sealed class StageTextUpdater : TMPUpdater
 {
     protected override void AdditionalOperationsInStart()
     {

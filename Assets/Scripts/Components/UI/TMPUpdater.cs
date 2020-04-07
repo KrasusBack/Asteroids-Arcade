@@ -5,7 +5,7 @@ using TMPro;
 
 public abstract class TMPUpdater : MonoBehaviour
 {
-    protected TextMeshProUGUI TextComponent { get; set; }
+    protected TextMeshProUGUI TextComponent { get; private set; }
 
     void Start()
     {

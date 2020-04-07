@@ -1,13 +1,31 @@
 ﻿using UnityEngine;
 using static Asteroid;
 
-public class AsteroidSettingsComponent : MonoBehaviour
+public sealed class AsteroidSettingsComponent : MonoBehaviour
 {
-    public SizeType Size { get; private set; } = SizeType.Large;
+    [SerializeField]
+    private SizeType asteroidSize = SizeType.Large;
 
-    public void SetAsteroidSettings(SizeType size)
+    private void Start()
     {
-        Size = size;
-        transform.localScale = FetchAsteroidSettings(size).sizeScale * Vector3.one;
+        SetAsteroidSettings();
+    }
+
+    public SizeType AsteroidSize
+    {
+        get => asteroidSize;
+        private set => asteroidSize = value;
+    }
+
+    public void SetAsteroidSettings(SizeType newSize)
+    {
+        if (newSize == AsteroidSize) return;
+        AsteroidSize = newSize;
+        SetAsteroidSettings();
+    }
+
+    private void SetAsteroidSettings()
+    {
+        transform.localScale = FetchAsteroidSettings(AsteroidSize).sizeScale * Vector3.one;
     }
 }

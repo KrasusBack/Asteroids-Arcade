@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerTurnComponent : MonoBehaviour
+public sealed class PlayerTurnComponent : MonoBehaviour
 {
     private Rigidbody2D _rb;
 

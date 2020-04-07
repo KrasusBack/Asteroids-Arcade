@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HyperSpaceHandler : MonoBehaviour
+public sealed class HyperSpaceHandler : MonoBehaviour
 {
     private bool _readyToGoIntoHyperSpace = true;
 
@@ -36,11 +36,10 @@ public class HyperSpaceHandler : MonoBehaviour
         else
         {
             var someAsteroid = GameObject.FindWithTag("Asteroids");
-            newPos = (someAsteroid == null) ? ScreenToWorld.GetRandomPositionOnScreen(objTransform.position.z) : someAsteroid.transform.position;
+            newPos = (someAsteroid == null) ? ScreenToWorld.GetRandomPositionOnScreen(objTransform.position.z) 
+                                            : someAsteroid.transform.position;
         }
 
         objTransform.position = newPos;
-    }
-
-    
+    }  
 }

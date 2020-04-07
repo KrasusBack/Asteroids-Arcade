@@ -1,4 +1,4 @@
-﻿public class LivesTextUpdater : TMPUpdater
+﻿public sealed class LivesTextUpdater : TMPUpdater
 {
     protected override void AdditionalOperationsInStart()
     {

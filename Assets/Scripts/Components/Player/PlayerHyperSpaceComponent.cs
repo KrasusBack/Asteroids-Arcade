@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerHyperSpaceComponent : MonoBehaviour
+public sealed class PlayerHyperSpaceComponent : MonoBehaviour
 {
     private void Update()
     {

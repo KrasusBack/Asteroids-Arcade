@@ -30,7 +30,7 @@ public class PointsGiverComponent : MonoBehaviour
 
     private int GetAsteroidPointsInfo()
     {
-        var size = GetComponent<AsteroidSettingsComponent>()?.Size;
+        var size = GetComponent<AsteroidSettingsComponent>()?.AsteroidSize;
         if (size == null)
         {
             print(GetType().ToString() + ": wrong tag on object " + gameObject.name);
