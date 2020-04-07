@@ -12,7 +12,22 @@ public class GameCore : MonoBehaviour
     private int _currentStage = 1;
     private int _livesCount = 3;
     private int _currentScore = 0;
+    private int _destroyableObjectInTheScene = 0;
 
+    private int DestroyableObjectsInTheScene
+    {
+        get
+        {
+            return _destroyableObjectInTheScene;
+        }
+
+        set
+        {
+            if (value < 0) throw new System.ArgumentOutOfRangeException("DestroyableObjectInTheScene cant be <0");
+            _destroyableObjectInTheScene = value;
+            if (value == 0) StageCleared?.Invoke();
+        }
+    }
     private HyperSpaceHandler HyperSpaceHandler { get; set; } = null;
 
     public static GameCore Instance { get; private set; } = null;
@@ -53,6 +68,7 @@ public class GameCore : MonoBehaviour
             ScoreUpdated?.Invoke();
         }
     }
+    
 
     public GameSettings GameSettings
     {
@@ -78,6 +94,9 @@ public class GameCore : MonoBehaviour
 
     public delegate void PlayerDiedHandler();
     public event PlayerDiedHandler PlayerDied;
+
+    public delegate void StageClearedHandler();
+    public event StageClearedHandler StageCleared;
 
 
     private void Awake()
@@ -146,6 +165,15 @@ public class GameCore : MonoBehaviour
     }
 
     #endregion
+
+    public void DecreaseDestroyableObjectsCounter()
+    {
+        DestroyableObjectsInTheScene--;
+    }
+    public void IncreaseDestroyableObjectsCounter()
+    {
+        DestroyableObjectsInTheScene++;
+    }
 
     public void TravelToHyperSpace()
     {

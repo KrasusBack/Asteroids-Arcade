@@ -9,7 +9,7 @@ public class PointsGiverComponent : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<Destroyable>().DestroyableGoingToDestroyObject+= CheckAndGivePoints;
+        GetComponent<Destroyable>().DestroyableGonnaDestroyObject+= CheckAndGivePoints;
         SetPointsAfterDestroy();
     }
 
@@ -33,8 +33,7 @@ public class PointsGiverComponent : MonoBehaviour
         var size = GetComponent<AsteroidSettingsComponent>()?.AsteroidSize;
         if (size == null)
         {
-            print(GetType().ToString() + ": wrong tag on object " + gameObject.name);
-            return 0;
+            throw new System.Exception(GetType().ToString() + ": wrong tag on Asteroid object " + gameObject.name);
         }
 
         switch (size)

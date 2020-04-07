@@ -4,6 +4,12 @@ public class Destroyable : MonoBehaviour
 {
     private float _hitFrame = 0;
 
+    private void Start()
+    {
+        DoInStart();
+        GameCore.Instance.IncreaseDestroyableObjectsCounter();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CheckAndHandleCollision(collision.gameObject);
@@ -21,7 +27,7 @@ public class Destroyable : MonoBehaviour
         if (Time.fixedTime == _hitFrame) return;
         _hitFrame = Time.fixedTime;
 
-        DestroyableGoingToDestroyObject?.Invoke(objCausedDestroying);
+        DestroyableGonnaDestroyObject?.Invoke(objCausedDestroying);
         DestroyOperation();
     }
 
@@ -31,9 +37,16 @@ public class Destroyable : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnDestroy()
+    {
+        GameCore.Instance.DecreaseDestroyableObjectsCounter();
+    }
+
+    /// <summary> Called in Start after Destroyable initialisation </summary>
+    protected virtual void DoInStart() { }
     /// <summary> Called right before destroying gameObject in DestroyOperation </summary>
     protected virtual void BeforeDestroyOperation() { }
 
     public delegate void DoBeforeDestroyByDestroyableHandler(GameObject objCausedDestroying);
-    public event DoBeforeDestroyByDestroyableHandler DestroyableGoingToDestroyObject;
+    public event DoBeforeDestroyByDestroyableHandler DestroyableGonnaDestroyObject;
 }

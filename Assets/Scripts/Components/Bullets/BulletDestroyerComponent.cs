@@ -5,7 +5,7 @@ using UnityEngine;
 public sealed class BulletDestroyerComponent : Destroyable
 {
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, CalculateLifetime());
     }
@@ -29,4 +29,7 @@ public sealed class BulletDestroyerComponent : Destroyable
 
         return bulletTravelDistance/bulletSpeed;
     }
+
+    //to prevent subtract from objCounters
+    private void OnDestroy() { }
 }

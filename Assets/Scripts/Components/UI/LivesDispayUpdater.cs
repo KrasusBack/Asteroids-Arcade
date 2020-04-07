@@ -31,7 +31,7 @@ public sealed class LivesDispayUpdater : TMPUpdater
                 activeSpriteObjects++;
             }
         }
-        //activate more if needed
+        //activate more sprites if needed
         if (activeSpriteObjects < livesCount)
         {
             foreach (Transform childTransform in transform)
@@ -90,7 +90,6 @@ public sealed class LivesDispayUpdater : TMPUpdater
         foreach (RectTransform childTransform in transform)
         {
             if (!childTransform.gameObject.activeSelf) continue;
-            print(childTransform.gameObject.name);
             childTransform.anchoredPosition = new Vector2(startPoint, childTransform.anchoredPosition.y);
             startPoint += spriteWidth * widthRatio;
         }

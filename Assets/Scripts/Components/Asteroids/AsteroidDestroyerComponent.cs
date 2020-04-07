@@ -6,7 +6,7 @@ public sealed class AsteroidDestroyerComponent : Destroyable
 {
     private SizeType AsteroidSize { get; set; }
 
-    private void Start()
+    protected override void DoInStart()
     {
         AsteroidSize = GetComponent<AsteroidSettingsComponent>().AsteroidSize;
     }
