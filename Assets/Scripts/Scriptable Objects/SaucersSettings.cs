@@ -10,9 +10,9 @@ public class SaucersSettings : ScriptableObject
     [SerializeField]
     private float moveSpeed = 40;
     [SerializeField]
-    private float bulletSpeed = 10;
+    private float bulletSpeed = 1;
     [SerializeField]
-    private float bulletTravelDistance = 100;
+    private float bulletTravelDistance = 2;
     [SerializeField]
     private float shootingSpeed = 0.8f;
 

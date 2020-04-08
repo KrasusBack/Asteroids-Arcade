@@ -12,7 +12,7 @@ public class PlayerShipSettings : ScriptableObject
 
     [Header("Movement")]
     [SerializeField]
-    private float moveSpeed = 15;
+    private float moveSpeed = 50;
     [SerializeField]
     private float rotationSpeed = 3;
 
@@ -22,7 +22,7 @@ public class PlayerShipSettings : ScriptableObject
     [SerializeField]
     private float bulletSpeed = 1;
     [SerializeField]
-    private float bulletTravelDistance = 100;
+    private float bulletTravelDistance = 2;
 
     [Header("HyperSpace")]
     [SerializeField]

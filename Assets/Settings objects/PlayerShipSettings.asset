@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingLifesAmount: 1
   delayBeforeRespawn: 1
-  moveSpeed: 15
+  moveSpeed: 50
   rotationSpeed: 3
   bulletPrefab: {fileID: 3522412154301574141, guid: bd9cc2bdbace9eb44ac96de7a6af5c5c,
     type: 3}
   bulletSpeed: 1
-  bulletTravelDistance: 100
+  bulletTravelDistance: 2
   hyperSpaceCooldown: 1
   timeInHyperSpace: 1
   chanceToAppearInsideAsteroid: 0.1667
