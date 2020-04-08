@@ -8,7 +8,7 @@ public sealed class AsteroidMovementComponent : MovementConponentBase
     private void Start()
     {
         _velocityVector = MathfExtentions.DegreeToVector2(Random.Range(0, 360));
-        _asteroidSize = GetComponent<AsteroidSettingsComponent>().AsteroidSize;
+        _asteroidSize = GetComponent<AsteroidPropertiesComponent>().AsteroidSize;
     }
 
     private void FixedUpdate()

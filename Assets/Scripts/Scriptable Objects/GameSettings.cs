@@ -86,7 +86,7 @@ public class GameSettings : ScriptableObject
         get => smallAsteroid;
     }
 
-    public GameObject RandomAsteroidPrefab
+    public GameObject RandomAsteroid
     {
         get
         {

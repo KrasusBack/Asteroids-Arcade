@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using static Asteroid;
 
-public sealed class AsteroidSettingsComponent : MonoBehaviour
+public sealed class AsteroidPropertiesComponent : MonoBehaviour
 {
     [SerializeField]
     private SizeType asteroidSize = SizeType.Large;
