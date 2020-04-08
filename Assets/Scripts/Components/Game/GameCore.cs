@@ -13,6 +13,7 @@ public class GameCore : MonoBehaviour
     private int _livesCount = 3;
     private int _currentScore = 0;
     private int _destroyableObjectInTheScene = 0;
+    
 
     private int DestroyableObjectsInTheScene
     {
@@ -34,6 +35,7 @@ public class GameCore : MonoBehaviour
         }
     }
     private HyperSpaceHandler HyperSpaceHandler { get; set; } = null;
+    private bool PlayerCanBeRespawned { get; set; } = true;
 
     public static GameCore Instance { get; private set; } = null;
 
@@ -59,6 +61,7 @@ public class GameCore : MonoBehaviour
         {
             _livesCount = value;
             LivesCountUpdated?.Invoke();
+            if (value == 0) PlayerCanBeRespawned = false;
         }
     }
     public int CurrentScore
@@ -123,7 +126,7 @@ public class GameCore : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
 
         //Respawn player
-        if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.FireKey) && LivesCount > 0)
+        if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.FireKey) && PlayerCanBeRespawned)
         {
             RespawnPlayer();
         }
@@ -135,7 +138,7 @@ public class GameCore : MonoBehaviour
         {
             Init();
             Instance = this;
-            print("-------GameStarted!-------");
+            print("-------Game Started!-------");
         }
     }
 
@@ -151,16 +154,32 @@ public class GameCore : MonoBehaviour
 
     public void HandlePlayerDeath()
     {
-        if (LivesCount == 0) { ExecuteGameOver(); return; }
-
         PlayerShip.SetActive(false);
+        if (LivesCount == 0)
+        {
+            StartCoroutine(WaitBeforeCalling_GameOver()); // dramatic pause before calling game over overlay
+            return;
+        }
         PlayerShip.transform.position = Vector3.zero;
-        PlayerDied?.Invoke();
+        StartCoroutine(WaitBeforeCalling_Respawn());
+    }
+
+    private IEnumerator WaitBeforeCalling_GameOver()
+    {
+        yield return new WaitForSeconds(gameSettings.DelayBeforeRespawn);
+        ExecuteGameOver();
+    }
+
+    private IEnumerator WaitBeforeCalling_Respawn()
+    {
+        PlayerCanBeRespawned = false;
+        yield return new WaitForSeconds(gameSettings.DelayBeforeRespawn);
+        PlayerDied?.Invoke(); //mainly used by overlay ui
+        PlayerCanBeRespawned = true;
     }
 
     private void ExecuteGameOver()
     {
-        PlayerShip.SetActive(false);
         GameIsOver?.Invoke();
     }
 

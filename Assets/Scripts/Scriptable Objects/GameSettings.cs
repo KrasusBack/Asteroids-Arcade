@@ -33,7 +33,9 @@ public class GameSettings : ScriptableObject
     [SerializeField, Range(0, 1)]
     private float chanceToAppearInsideAsteroid = 0.167f;
     [SerializeField]
-    private int startingLifesAmount = 3; 
+    private int startingLifesAmount = 3;
+    [SerializeField,  Range(0,10)]
+    private float delayBeforeRespawn = 1;
 
     [Header("Saucers"), Space(10)]
     [SerializeField]
@@ -139,6 +141,11 @@ public class GameSettings : ScriptableObject
     public int StartingLifesAmount
     {
         get => startingLifesAmount;
+    }
+
+        public float DelayBeforeRespawn
+    {
+        get => delayBeforeRespawn;
     }
 
     #endregion
