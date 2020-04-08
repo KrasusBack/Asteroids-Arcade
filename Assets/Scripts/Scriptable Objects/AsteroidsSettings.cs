@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using static Asteroid;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "AsteroidsSettings", menuName = "ScriptableObjects/AsteroidsSettings", order = 2)]
 
 public class AsteroidsSettings : ScriptableObject
 {
     [SerializeField]
-    private GameObject[] asteroidPrefabs;
+    private List<GameObject> asteroidPrefabs;
     [SerializeField]
     private AsteroidProperties largeAsteroid;
     [SerializeField]
@@ -34,9 +35,20 @@ public class AsteroidsSettings : ScriptableObject
     {
         get
         {
-            var variation = Random.Range(0, asteroidPrefabs.Length - 1);
+            var variation = Random.Range(0, asteroidPrefabs.Count);
             return asteroidPrefabs[variation];
         }
     }
+
+    public int AsteroidPrefabsCount
+    {
+        get => asteroidPrefabs.Count;
+    }
+
+    public GameObject GetCertainAsteroidPrefab(int index)
+    {
+        return asteroidPrefabs[index];
+    }
+
     #endregion
 }

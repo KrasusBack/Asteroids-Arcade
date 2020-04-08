@@ -17,6 +17,8 @@ MonoBehaviour:
   - {fileID: 8059782310693702096, guid: 13f4f4ed89972e9499879cc8ff30ac70, type: 3}
   - {fileID: 8059782310693702096, guid: a1e2d49f89edd414c819fac3a6bb13af, type: 3}
   - {fileID: 8059782310693702096, guid: 81cc0ba12f5d20c47b452c8006328d98, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   largeAsteroid:
     speed: 0.25
     sizeScale: 1
