@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e28f0cdbf838148a9b551088ed4f39, type: 3}
   m_Name: AsteroidsSettings
   m_EditorClassIdentifier: 
+  asteroidBaseObject: {fileID: 8059782310693702096, guid: 8cc1570f9b42b0d4caab5c65b3327231,
+    type: 3}
   asteroidPrefabs:
   - {fileID: 8059782310693702096, guid: a5ee3058fa55b594eac9bcf0d68ec2b0, type: 3}
   - {fileID: 8059782310693702096, guid: 13f4f4ed89972e9499879cc8ff30ac70, type: 3}
   - {fileID: 8059782310693702096, guid: a1e2d49f89edd414c819fac3a6bb13af, type: 3}
   - {fileID: 8059782310693702096, guid: 81cc0ba12f5d20c47b452c8006328d98, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
   largeAsteroid:
     speed: 0.25
     sizeScale: 1

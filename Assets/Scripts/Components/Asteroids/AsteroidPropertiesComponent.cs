@@ -6,8 +6,8 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
 {
     [SerializeField]
     private SizeType asteroidSize = SizeType.Large;
-    [Tooltip("Asteroid variation. -1 - random"), SerializeField, Min(-1)]
-    private int variation = 0;
+    [Tooltip("Asteroid variation. -1 = random"), SerializeField, Min(-1)]
+    private int variation = -1;
 
     private int Variation
     {
@@ -27,7 +27,9 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
 
     private void Start()
     {
-        SetAsteroidSettings();
+        print("asteroid start");
+        SetAsteroidAppearence();
+        UpdateTransformScale();
     }
 
     public SizeType AsteroidSize
@@ -38,14 +40,13 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
 
     public void SetAsteroidSettings(SizeType newSize)
     {
+        print("--set settings");
         if (newSize == AsteroidSize) return;
         AsteroidSize = newSize;
-        SetAsteroidSettings();
     }
 
-    private void SetAsteroidSettings()
+    private void UpdateTransformScale()
     {
-        SetAsteroidAppearence();
         transform.localScale = FetchAsteroidSettings(AsteroidSize).sizeScale * Vector3.one;
     }
 

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidSize: 0
-  variation: 0
+  variation: -1
 --- !u!114 &1201753272990754850
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class AsteroidsSettings : ScriptableObject
 {
     [SerializeField]
+    private GameObject asteroidBaseObject;
+    [SerializeField]
     private List<GameObject> asteroidPrefabs;
     [SerializeField]
     private AsteroidProperties largeAsteroid;
@@ -16,6 +18,13 @@ public class AsteroidsSettings : ScriptableObject
     private AsteroidProperties smallAsteroid;
 
     #region Public Getters
+
+    /// <summary> Base object that will transform into certain asteroid (random by default) /// </summary>
+    public GameObject AsteroidBaseObject
+    {
+        get => asteroidBaseObject;
+    }
+
     public AsteroidProperties LargeAsteroid
     {
         get => largeAsteroid;
