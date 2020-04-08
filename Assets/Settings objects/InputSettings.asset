@@ -9,16 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00e28f0cdbf838148a9b551088ed4f39, type: 3}
-  m_Name: AsteroidsSettings
+  m_Script: {fileID: 11500000, guid: 264be63dafa8180468d14eb15ccfff1f, type: 3}
+  m_Name: InputSettings
   m_EditorClassIdentifier: 
-  asteroidPrefabs: []
-  largeAsteroid:
-    speed: 0
-    sizeScale: 0
-  mediumAsteroid:
-    speed: 0
-    sizeScale: 0
-  smallAsteroid:
-    speed: 0
-    sizeScale: 0
+  fireKey: 32
+  hyperSpaceKey: 304
