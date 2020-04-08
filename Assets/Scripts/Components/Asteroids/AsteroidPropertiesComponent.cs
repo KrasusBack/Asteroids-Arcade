@@ -27,7 +27,6 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
 
     private void Start()
     {
-        print("asteroid start");
         SetAsteroidAppearence();
         UpdateTransformScale();
     }
@@ -40,7 +39,6 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
 
     public void SetAsteroidSettings(SizeType newSize)
     {
-        print("--set settings");
         if (newSize == AsteroidSize) return;
         AsteroidSize = newSize;
     }
