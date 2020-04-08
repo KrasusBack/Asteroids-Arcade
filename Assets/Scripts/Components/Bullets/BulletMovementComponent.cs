@@ -25,7 +25,7 @@ public sealed class BulletMovementComponent : MovementConponentBase
 
     void FixedUpdate()
     {
-        var direction = MathfExtentions.DegreeToVector2(RigidBody.rotation);
+        var direction = MathfExtentions.DegreeToVector2(ObjectRB.rotation);
         MoveKinematicRB(_speed, direction);
     }
 }

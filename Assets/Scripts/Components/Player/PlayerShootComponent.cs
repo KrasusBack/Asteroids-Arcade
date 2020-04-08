@@ -1,20 +1,9 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
 public sealed class PlayerShootComponent : MonoBehaviour
 {
     [SerializeField]
     private KeyCode shootKey = KeyCode.Space;
-
-    private Rigidbody2D _rb;
-    private BoxCollider2D _boxCollider2D;
-
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-        _boxCollider2D = GetComponent<BoxCollider2D>();
-    }
 
     void Update()
     {
@@ -23,8 +12,8 @@ public sealed class PlayerShootComponent : MonoBehaviour
 
     void Shoot()
     {
-        var offsetFromTheShip = 0.5f;
-        var posOffset = _rb.position + ((_boxCollider2D.size.x / 2 + offsetFromTheShip) * MathfExtentions.DegreeToVector2(transform.eulerAngles.z));
+        //var offsetFromTheShip = 0.5f;
+        var posOffset = transform.position; //+ ((_boxCollider2D.size.x / 2 + offsetFromTheShip) * MathfExtentions.DegreeToVector2(transform.eulerAngles.z));
 
         Instantiate(GameCore.Instance.GameSettings.PlayerBulletPrefab, posOffset, transform.rotation);
     }
