@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0917d8a380d06a9488147f108018fd8c, type: 3}
   m_Name: SaucersSettings
   m_EditorClassIdentifier: 
-  saucerBulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
+  bulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
-  saucersMoveSpeed: 1
-  saucersBulletSpeed: 0.8
-  saucerBulletTravelDistance: 2
-  saucerShootingSpeed: 1
+  moveSpeed: 40
+  bulletSpeed: 10
+  bulletTravelDistance: 100
+  shootingSpeed: 0.8

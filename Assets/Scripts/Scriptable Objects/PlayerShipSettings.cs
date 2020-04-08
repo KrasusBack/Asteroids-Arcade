@@ -12,17 +12,17 @@ public class PlayerShipSettings : ScriptableObject
 
     [Header("Movement")]
     [SerializeField]
-    private float playerMoveSpeed = 15;
+    private float moveSpeed = 15;
     [SerializeField]
-    private float playerRotationSpeed = 3;
+    private float rotationSpeed = 3;
 
     [Header("Shooting")]
     [SerializeField]
-    private GameObject playerBulletPrefab;
+    private GameObject bulletPrefab;
     [SerializeField]
-    private float playersBulletSpeed = 1;
+    private float bulletSpeed = 1;
     [SerializeField]
-    private float playerBulletTravelDistance = 100;
+    private float bulletTravelDistance = 100;
 
     [Header("HyperSpace")]
     [SerializeField]
@@ -34,29 +34,29 @@ public class PlayerShipSettings : ScriptableObject
 
     #region Public Getters
 
-    public GameObject PlayerBulletPrefab
+    public GameObject BulletPrefab
     {
-        get => playerBulletPrefab;
+        get => bulletPrefab;
     }
 
-    public float PlayerMoveSpeed
+    public float MoveSpeed
     {
-        get => playerMoveSpeed;
+        get => moveSpeed;
     }
 
-    public float PlayerRotationSpeed
+    public float RotationSpeed
     {
-        get => playerRotationSpeed;
+        get => rotationSpeed;
     }
 
-    public float PlayersBulletSpeed
+    public float BulletSpeed
     {
-        get => playersBulletSpeed;
+        get => bulletSpeed;
     }
 
-    public float PlayerBulletTravelDistance
+    public float BulletTravelDistance
     {
-        get => playerBulletTravelDistance;
+        get => bulletTravelDistance;
     }
 
     public float HyperSpaceCooldown

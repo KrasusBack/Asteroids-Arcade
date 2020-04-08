@@ -5,7 +5,16 @@ using System.Collections;
 public class GameCore : MonoBehaviour
 {
     [SerializeField]
-    private GameSettings gameSettings;
+    private AsteroidsSettings asteroidsSettings;
+    [SerializeField]
+    private PlayerShipSettings playerShipSettings;
+    [SerializeField]
+    private SaucersSettings saucersSettings;
+    [SerializeField]
+    private PointsSettings pointsSettings;
+    [SerializeField]
+    private InputSettings inputSettings;
+
     [SerializeField]
     private GameObject playerShip;
 
@@ -13,7 +22,6 @@ public class GameCore : MonoBehaviour
     private int _livesCount = 3;
     private int _currentScore = 0;
     private int _destroyableObjectInTheScene = 0;
-    
 
     private int DestroyableObjectsInTheScene
     {
@@ -76,17 +84,33 @@ public class GameCore : MonoBehaviour
             ScoreUpdated?.Invoke();
         }
     }
-    
 
-    public GameSettings GameSettings
+    #region Public Getters
+    public AsteroidsSettings AsteroidsSettings
     {
-        get => gameSettings;
+        get => asteroidsSettings;
+    }
+    public PlayerShipSettings PlayerShipSettings
+    {
+        get => playerShipSettings;
+    }
+    public SaucersSettings SaucersSettings
+    {
+        get => saucersSettings;
+    }
+    public PointsSettings PointsSettings
+    {
+        get => pointsSettings;
+    }
+    public InputSettings InputSettings
+    {
+        get => inputSettings;
     }
     public GameObject PlayerShip
     {
         get => playerShip;
     }
-
+    #endregion
 
     public delegate void ScoreUpdateHandler();
     public event ScoreUpdateHandler ScoreUpdated;
@@ -106,31 +130,16 @@ public class GameCore : MonoBehaviour
     public delegate void StageClearedHandler();
     public event StageClearedHandler StageCleared;
 
-
     private void Awake()
     {
         SetInstance();
     }
-
     private void Update()
     {
         CheckAndHandleInput();
     }
 
-    private void CheckAndHandleInput()
-    {
-        //Reload scene
-        if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
-
-        //Kill player
-        if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
-
-        //Respawn player
-        if (!PlayerShip.activeSelf && Input.GetKeyDown(GameSettings.FireKey) && PlayerCanBeRespawned)
-        {
-            RespawnPlayer();
-        }
-    }
+    
 
     private void SetInstance()
     {
@@ -147,7 +156,7 @@ public class GameCore : MonoBehaviour
         if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
             HyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
 
-        LivesCount = GameSettings.StartingLifesAmount;
+        LivesCount = PlayerShipSettings.StartingLifesAmount;
     }
 
     #region Game Process control
@@ -163,30 +172,40 @@ public class GameCore : MonoBehaviour
         PlayerShip.transform.position = Vector3.zero;
         StartCoroutine(WaitBeforeCalling_Respawn());
     }
-
     private IEnumerator WaitBeforeCalling_GameOver()
     {
-        yield return new WaitForSeconds(gameSettings.DelayBeforeRespawn);
+        yield return new WaitForSeconds(PlayerShipSettings.DelayBeforeRespawn);
         ExecuteGameOver();
     }
-
     private IEnumerator WaitBeforeCalling_Respawn()
     {
         PlayerCanBeRespawned = false;
-        yield return new WaitForSeconds(gameSettings.DelayBeforeRespawn);
+        yield return new WaitForSeconds(PlayerShipSettings.DelayBeforeRespawn);
         PlayerDied?.Invoke(); //mainly used by overlay ui
         PlayerCanBeRespawned = true;
     }
-
     private void ExecuteGameOver()
     {
         GameIsOver?.Invoke();
     }
-
     private void RespawnPlayer()
     {
-        DecreaseLivesCounter();
+        RemoveLive();
         PlayerShip.SetActive(true);
+    }
+    private void CheckAndHandleInput()
+    {
+        //Reload scene
+        if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
+
+        //Kill player
+        if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
+
+        //Respawn player
+        if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && PlayerCanBeRespawned)
+        {
+            RespawnPlayer();
+        }
     }
 
     #endregion
@@ -212,7 +231,7 @@ public class GameCore : MonoBehaviour
 
     private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
     {
-        var pointsNeededForBonusLife = GameSettings.PointsForAddingLife;
+        var pointsNeededForBonusLife = PointsSettings.CostOfAddingBonusLife;
 
         if ((scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
             AddLife();
@@ -223,8 +242,7 @@ public class GameCore : MonoBehaviour
         print("! Bonus life added !"); //add bonus life event
         LivesCount++;
     }
-
-    private void DecreaseLivesCounter()
+    private void RemoveLive()
     {
         LivesCount--;
     }

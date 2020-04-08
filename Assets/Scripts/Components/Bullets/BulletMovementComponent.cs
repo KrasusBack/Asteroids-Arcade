@@ -15,10 +15,10 @@ public sealed class BulletMovementComponent : MovementConponentBase
         switch(gameObject.tag)
         {
             case "Player":
-                _speed = GameCore.Instance.GameSettings.PlayersBulletSpeed;
+                _speed = GameCore.Instance.PlayerShipSettings.BulletSpeed;
                 return;
             case "Enemies":
-                _speed = GameCore.Instance.GameSettings.SaucersBulletSpeed;
+                _speed = GameCore.Instance.SaucersSettings.BulletSpeed;
                 return;
         }
     }

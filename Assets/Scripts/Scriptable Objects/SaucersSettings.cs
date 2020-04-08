@@ -6,41 +6,41 @@ public class SaucersSettings : ScriptableObject
 {
     [Header("Shooting")]
     [SerializeField]
-    private GameObject saucerBulletPrefab;
+    private GameObject bulletPrefab;
     [SerializeField]
-    private float saucersMoveSpeed = 40;
+    private float moveSpeed = 40;
     [SerializeField]
-    private float saucersBulletSpeed = 10;
+    private float bulletSpeed = 10;
     [SerializeField]
-    private float saucerBulletTravelDistance = 100;
+    private float bulletTravelDistance = 100;
     [SerializeField]
-    private float saucerShootingSpeed = 0.8f;
+    private float shootingSpeed = 0.8f;
 
     #region PublicGetters
 
-    public GameObject SaucerBulletPrefab
+    public GameObject BulletPrefab
     {
-        get => saucerBulletPrefab;
+        get => bulletPrefab;
     }
 
-    public float SaucersMoveSpeed
+    public float MoveSpeed
     {
-        get => saucersMoveSpeed;
+        get => moveSpeed;
     }
 
-    public float SaucersBulletSpeed
+    public float BulletSpeed
     {
-        get => saucersBulletSpeed;
+        get => bulletSpeed;
     }
 
-    public float SaucerBulletTravelDistance
+    public float BulletTravelDistance
     {
-        get => saucerBulletTravelDistance;
+        get => bulletTravelDistance;
     }
 
-    public float SaucerShootingSpeed
+    public float ShootingSpeed
     {
-        get => saucerShootingSpeed;
+        get => shootingSpeed;
     }
 
     #endregion

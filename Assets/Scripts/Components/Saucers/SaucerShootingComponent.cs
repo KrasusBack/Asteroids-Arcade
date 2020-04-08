@@ -21,20 +21,20 @@ public class SaucerShootingComponent : MonoBehaviour
         while (true)
         {
             Shoot();
-            yield return new WaitForSeconds(1 / GameCore.Instance.GameSettings.SaucerShootingSpeed);
+            yield return new WaitForSeconds(1 / GameCore.Instance.SaucersSettings.ShootingSpeed);
         }
     }
 
     private void Shoot()
     {
         if (!GameCore.Instance.PlayerShip.activeSelf) return;
-        if (GameCore.Instance.GameSettings.SaucerShootingSpeed == 0) return;
+        if (GameCore.Instance.SaucersSettings.ShootingSpeed == 0) return;
 
         var direction = _playerShipTransform.position - transform.position;
         var angle = Vector2.SignedAngle(Vector2.right, direction);
         var rotation = Quaternion.Euler(0, 0, angle);
 
-        var bulletObj = GameCore.Instance.GameSettings.SaucerBulletPrefab;
+        var bulletObj = GameCore.Instance.SaucersSettings.BulletPrefab;
         Instantiate(bulletObj, _rb.position, rotation);
     }
 

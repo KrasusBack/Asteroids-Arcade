@@ -7,7 +7,7 @@ public sealed class PlayerShootComponent : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(GameCore.Instance.GameSettings.FireKey)) Shoot();
+        if (Input.GetKeyDown(GameCore.Instance.InputSettings.FireKey)) Shoot();
     }
 
     void Shoot()
@@ -15,6 +15,6 @@ public sealed class PlayerShootComponent : MonoBehaviour
         //var offsetFromTheShip = 0.5f;
         var posOffset = transform.position; //+ ((_boxCollider2D.size.x / 2 + offsetFromTheShip) * MathfExtentions.DegreeToVector2(transform.eulerAngles.z));
 
-        Instantiate(GameCore.Instance.GameSettings.PlayerBulletPrefab, posOffset, transform.rotation);
+        Instantiate(GameCore.Instance.PlayerShipSettings.BulletPrefab, posOffset, transform.rotation);
     }
 }

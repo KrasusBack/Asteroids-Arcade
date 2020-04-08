@@ -15,7 +15,7 @@ public class PointsSettings : ScriptableObject
     [SerializeField]
     private int smalSaucerPoints = 1000;
     [SerializeField]
-    private int pointsForAddingLife = 10000;
+    private int costOfAddingBonusLife = 10000;
 
     #region Public Getters
 
@@ -44,9 +44,9 @@ public class PointsSettings : ScriptableObject
         get => smalSaucerPoints;
     }
 
-    public int PointsForAddingLife
+    public int CostOfAddingBonusLife
     {
-        get => pointsForAddingLife;
+        get => costOfAddingBonusLife;
     }
 
     #endregion

@@ -23,7 +23,7 @@ public class PointsGiverComponent : MonoBehaviour
 
             case "Enemies":
                 //затычка на пока. Тут должен определяться типи тарелки перед принятием решения
-                _pointsAfterDestroy = GameCore.Instance.GameSettings.BigSaucerPoints;
+                _pointsAfterDestroy = GameCore.Instance.PointsSettings.BigSaucerPoints;
                 break;
         }
     }
@@ -39,11 +39,11 @@ public class PointsGiverComponent : MonoBehaviour
         switch (size)
         {
             case Asteroid.SizeType.Large:
-                return GameCore.Instance.GameSettings.LargeAsteroidPoints;
+                return GameCore.Instance.PointsSettings.LargeAsteroidPoints;
             case Asteroid.SizeType.Medium:
-                return GameCore.Instance.GameSettings.MediumAsteroidPoints;
+                return GameCore.Instance.PointsSettings.MediumAsteroidPoints;
             default:
-                return GameCore.Instance.GameSettings.SmallAsteroidPoints;
+                return GameCore.Instance.PointsSettings.SmallAsteroidPoints;
         }
     }
 

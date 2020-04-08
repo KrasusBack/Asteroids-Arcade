@@ -14,11 +14,11 @@
         switch (asteroidSize)
         {
             case SizeType.Large:
-                return GameCore.Instance.GameSettings.LargeAsteroid;
+                return GameCore.Instance.AsteroidsSettings.LargeAsteroid;
             case SizeType.Medium:
-                return GameCore.Instance.GameSettings.MediumAsteroid;
+                return GameCore.Instance.AsteroidsSettings.MediumAsteroid;
         }
-        return GameCore.Instance.GameSettings.SmallAsteroid;
+        return GameCore.Instance.AsteroidsSettings.SmallAsteroid;
     }
 
     //Returns Small Size if there is no previous

@@ -751,7 +751,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610ea7cbd2630064eb3e8d1e8cb99c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSettings: {fileID: 11400000, guid: 185927075659e164d93aada7039b7f11, type: 2}
+  asteroidsSettings: {fileID: 11400000, guid: d0404b18866e8814298709623d1ff015, type: 2}
+  playerShipSettings: {fileID: 11400000, guid: 7e60f019367c8e6428bbc8219aa13488, type: 2}
+  saucersSettings: {fileID: 11400000, guid: 5d614e54d0c5f8b4b8e170aa50b091d9, type: 2}
+  pointsSettings: {fileID: 11400000, guid: 370fe30aec0c4ce4997bf16500a76a39, type: 2}
+  inputSettings: {fileID: 11400000, guid: 91e265493c1e0874d933f1d01043f4fe, type: 2}
   playerShip: {fileID: 2061281628}
 --- !u!20 &519420031
 Camera:

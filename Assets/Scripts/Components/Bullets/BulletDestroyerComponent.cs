@@ -18,12 +18,12 @@ public sealed class BulletDestroyerComponent : Destroyable
         switch (gameObject.tag)
         {
             case "Player":
-                bulletTravelDistance = GameCore.Instance.GameSettings.PlayerBulletTravelDistance;
-                bulletSpeed = GameCore.Instance.GameSettings.PlayersBulletSpeed;
+                bulletTravelDistance = GameCore.Instance.PlayerShipSettings.BulletTravelDistance;
+                bulletSpeed = GameCore.Instance.PlayerShipSettings.BulletSpeed;
                 break;
             case "Enemies":
-                bulletTravelDistance = GameCore.Instance.GameSettings.SaucerBulletTravelDistance;
-                bulletSpeed = GameCore.Instance.GameSettings.SaucersBulletSpeed;
+                bulletTravelDistance = GameCore.Instance.SaucersSettings.BulletTravelDistance;
+                bulletSpeed = GameCore.Instance.SaucersSettings.BulletSpeed;
                 break;
         }
 

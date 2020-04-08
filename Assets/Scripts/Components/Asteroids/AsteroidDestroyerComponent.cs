@@ -28,7 +28,7 @@ public sealed class AsteroidDestroyerComponent : Destroyable
 
         for (var i = 0; i < 2; ++i)
         {
-            var asteroidPrefab = GameCore.Instance.GameSettings.RandomAsteroid;
+            var asteroidPrefab = GameCore.Instance.AsteroidsSettings.RandomAsteroid;
             var newAsteroid = Instantiate(asteroidPrefab, rb.position, transform.rotation);
 
             SizeType newAsteroidSize = GetPreviousSize(AsteroidSize);

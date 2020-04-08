@@ -5,6 +5,6 @@ public class SaucerMovementComponent : MovementConponentBase
 {
     void FixedUpdate()
     {
-        MoveKinematicRB(GameCore.Instance.GameSettings.SaucersMoveSpeed, Vector2.right);
+        MoveKinematicRB(GameCore.Instance.SaucersSettings.MoveSpeed, Vector2.right);
     }
 }
