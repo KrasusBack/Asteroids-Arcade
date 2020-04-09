@@ -2588,7 +2588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   innerCollider: {fileID: 1715213036}
   outerCollider: {fileID: 1715213034}
-  testObject: {fileID: 4231557012329071493}
+  testObject: {fileID: 8059782310693702096, guid: 8cc1570f9b42b0d4caab5c65b3327231,
+    type: 3}
 --- !u!1 &1723456665
 GameObject:
   m_ObjectHideFlags: 0
