@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 203793652}
   - component: {fileID: 203793653}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 433011038}
   - component: {fileID: 433011039}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShipItself
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 464068408}
   - component: {fileID: 464068409}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1409904391}
   - component: {fileID: 1409904392}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: collider (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1576027552}
   - component: {fileID: 1576027553}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2145950731}
   - component: {fileID: 2145950732}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: collider (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 2061281632}
   - component: {fileID: 7677671240567533143}
   - component: {fileID: 8250893193198862897}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerShip
   m_TagString: Player
   m_Icon: {fileID: 0}

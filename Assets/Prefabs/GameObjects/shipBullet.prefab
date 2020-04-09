@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4435749294680114695}
   - component: {fileID: 8563129219710705991}
   - component: {fileID: 117026463615363663}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: shipBullet
   m_TagString: Player
   m_Icon: {fileID: 0}
