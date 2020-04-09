@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class GameCore : MonoBehaviour
+public sealed class GameCore : MonoBehaviour
 {
     [SerializeField]
     private AsteroidsSettings asteroidsSettings;
@@ -14,6 +14,8 @@ public class GameCore : MonoBehaviour
     private PointsSettings pointsSettings;
     [SerializeField]
     private InputSettings inputSettings;
+    [SerializeField]
+    private LevelSettings levelSettings;
 
     [SerializeField]
     private GameObject playerShip;
@@ -106,6 +108,11 @@ public class GameCore : MonoBehaviour
     {
         get => inputSettings;
     }
+    public LevelSettings LevelSettings
+    {
+        get => levelSettings;
+    }
+
     public GameObject PlayerShip
     {
         get => playerShip;
@@ -124,6 +131,9 @@ public class GameCore : MonoBehaviour
     public delegate void GameOverHandler();
     public event GameOverHandler GameIsOver;
 
+    public delegate void GameStartedHandler();
+    public event GameStartedHandler GameIsStarted;
+
     public delegate void PlayerDiedHandler();
     public event PlayerDiedHandler PlayerDied;
 
@@ -134,12 +144,15 @@ public class GameCore : MonoBehaviour
     {
         SetInstance();
     }
+    private void Start()
+    {
+        StartGame();
+    }
     private void Update()
     {
         CheckAndHandleInput();
     }
 
-    
 
     private void SetInstance()
     {
@@ -160,6 +173,15 @@ public class GameCore : MonoBehaviour
     }
 
     #region Game Process control
+
+    private void StartGame()
+    {
+        GameIsStarted?.Invoke();
+    }
+    private void ExecuteGameOver()
+    {
+        GameIsOver?.Invoke();
+    }
 
     public void HandlePlayerDeath()
     {
@@ -183,16 +205,14 @@ public class GameCore : MonoBehaviour
         yield return new WaitForSeconds(PlayerShipSettings.DelayBeforeRespawn);
         PlayerDied?.Invoke(); //mainly used by overlay ui
         PlayerCanBeRespawned = true;
-    }
-    private void ExecuteGameOver()
-    {
-        GameIsOver?.Invoke();
-    }
+    } 
+    
     private void RespawnPlayer()
     {
         RemoveLive();
         PlayerShip.SetActive(true);
     }
+
     private void CheckAndHandleInput()
     {
         //Reload scene
@@ -210,6 +230,18 @@ public class GameCore : MonoBehaviour
 
     #endregion
 
+    private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
+    {
+        var pointsNeededForBonusLife = PointsSettings.CostOfAddingBonusLife;
+
+        if ((scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
+            AddLife();
+    }
+    public void AddPointsToScore(int points)
+    {
+        BonusLifeCheckAndHandle(CurrentScore, CurrentScore += points);
+    }
+
     public void DecreaseDestroyableObjectsCounter()
     {
         DestroyableObjectsInTheScene--;
@@ -222,19 +254,6 @@ public class GameCore : MonoBehaviour
     public void TravelToHyperSpace()
     {
         HyperSpaceHandler.TravelToHyperSpace();
-    }
-
-    public void AddPointsToScore(int points)
-    {
-        BonusLifeCheckAndHandle(CurrentScore, CurrentScore += points);
-    }
-
-    private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
-    {
-        var pointsNeededForBonusLife = PointsSettings.CostOfAddingBonusLife;
-
-        if ((scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
-            AddLife();
     }
 
     private void AddLife()

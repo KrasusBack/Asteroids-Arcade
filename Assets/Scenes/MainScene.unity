@@ -2489,107 +2489,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1603265863}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1715213033
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1715213035}
-  - component: {fileID: 1715213037}
-  - component: {fileID: 1715213036}
-  - component: {fileID: 1715213034}
-  m_Layer: 0
-  m_Name: ObjectSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &1715213034
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715213033}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 153.1, y: 113.1}
-  m_EdgeRadius: 0
---- !u!4 &1715213035
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715213033}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 99}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6096078032562520174}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1715213036
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715213033}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 94, y: 67.2}
-  m_EdgeRadius: 0
---- !u!114 &1715213037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715213033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8963de3ec94c464e8562af80a102266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  innerCollider: {fileID: 1715213036}
-  outerCollider: {fileID: 1715213034}
-  testObject: {fileID: 8059782310693702096, guid: 8cc1570f9b42b0d4caab5c65b3327231,
-    type: 3}
 --- !u!1 &1723456665
 GameObject:
   m_ObjectHideFlags: 0
@@ -3726,16 +3625,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 6096078032379197458, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2,
-        type: 3}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6096078032379197458, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2,
-        type: 3}
-      propertyPath: orthographic size
-      value: 58.574852
-      objectReference: {fileID: 0}
     - target: {fileID: 6096078032379197459, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2,
         type: 3}
       propertyPath: playerShip
@@ -3798,12 +3687,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2, type: 3}
---- !u!4 &6096078032562520174 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6096078032379197677, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2,
-    type: 3}
-  m_PrefabInstance: {fileID: 6096078032562520173}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6114920308970790792
 PrefabInstance:
   m_ObjectHideFlags: 0

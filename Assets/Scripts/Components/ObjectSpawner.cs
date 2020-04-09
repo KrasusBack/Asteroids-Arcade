@@ -13,18 +13,16 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField]
     private BoxCollider2D outerCollider;
 
-    [SerializeField]
-    private GameObject testObject;
-
     private void Start()
     {
-        SpawnObjectsOutsideSafeArea(testObject, 12);
+        GameCore.Instance.GameIsStarted += SpawnObjectsOutsideSafeArea;
     }
 
-    private void SpawnObjectsOutsideSafeArea(GameObject objectToSpawn, int amount)
+    private void SpawnObjectsOutsideSafeArea()
     {
-        for (var i = 0; i < amount; i++)
-            Instantiate(objectToSpawn, GetRandomPointOutsideSafeArea(), Quaternion.identity);
+        var asteroidsAmount = GameCore.Instance.LevelSettings.BaseAsteroidAmount + GameCore.Instance.LevelSettings.AdditionalAsteroidsEachStage * (GameCore.Instance.CurrentStage-1);
+        for (var i = 0; i < asteroidsAmount; i++)
+            Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointOutsideSafeArea(), Quaternion.identity);
     }
 
     private Vector2 GetRandomPointOutsideSafeArea()
