@@ -5,29 +5,29 @@
 public class PlayerShipSettings : ScriptableObject
 {
     [Header("General")]
-    [SerializeField]
+    [SerializeField, Min(0)]
     private int startingLifesAmount = 3;
-    [SerializeField, Range(0, 10)]
+    [SerializeField, Min(0)]
     private float delayBeforeRespawn = 1;
 
     [Header("Movement")]
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float moveSpeed = 50;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float rotationSpeed = 3;
 
     [Header("Shooting")]
     [SerializeField]
     private GameObject bulletPrefab;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float bulletSpeed = 1;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float bulletTravelDistance = 2;
 
     [Header("HyperSpace")]
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float hyperSpaceCooldown = 1;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float timeInHyperSpace = 1;
     [SerializeField, Range(0, 1)]
     private float chanceToAppearInsideAsteroid = 0.167f;

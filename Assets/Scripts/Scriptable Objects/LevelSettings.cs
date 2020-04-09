@@ -4,13 +4,13 @@
 
 public class LevelSettings : ScriptableObject
 {
-    [SerializeField]
+    [SerializeField, Min(0)]
     private int baseAsteroidAmount = 6;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private int additionalAsteroidsEachStage = 2;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private int baseSaucersAmount = 1;
-    [SerializeField]
+    [SerializeField, Min(1)]
     private int littleSaucerFirstLevelAppearance = 3;
 
     //Additional saucers with each level? Shorter cooldown between appearances?

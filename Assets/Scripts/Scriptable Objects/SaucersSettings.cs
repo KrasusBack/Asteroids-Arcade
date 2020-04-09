@@ -7,13 +7,13 @@ public class SaucersSettings : ScriptableObject
     [Header("Shooting")]
     [SerializeField]
     private GameObject bulletPrefab;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float moveSpeed = 40;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float bulletSpeed = 1;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float bulletTravelDistance = 2;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float shootingSpeed = 0.8f;
 
     #region PublicGetters
