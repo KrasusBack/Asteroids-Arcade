@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 203793653}
   m_Layer: 10
   m_Name: Cannon
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5173075499f79f342a4d81e11fe91c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootKey: 32
 --- !u!1 &433011037
 GameObject:
   m_ObjectHideFlags: 0

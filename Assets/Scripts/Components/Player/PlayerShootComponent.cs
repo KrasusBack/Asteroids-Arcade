@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-public sealed class PlayerShootComponent : MonoBehaviour
+public sealed class PlayerShootComponent : ShootingComponentBase
 {
-    [SerializeField]
-    private KeyCode shootKey = KeyCode.Space;
-
     void Update()
     {
         if (Input.GetKeyDown(GameCore.Instance.InputSettings.FireKey)) Shoot();
@@ -12,9 +9,13 @@ public sealed class PlayerShootComponent : MonoBehaviour
 
     void Shoot()
     {
-        //var offsetFromTheShip = 0.5f;
-        var posOffset = transform.position; //+ ((_boxCollider2D.size.x / 2 + offsetFromTheShip) * MathfExtentions.DegreeToVector2(transform.eulerAngles.z));
+        var bullet = Instantiate(GameCore.Instance.SaucersSettings.BulletPrefab, transform.position, transform.rotation);
+        //Set shooter to set behaviour of bullet based on shooter
+        SetBulletSettings(bullet);
+    }
 
-        Instantiate(GameCore.Instance.PlayerShipSettings.BulletPrefab, posOffset, transform.rotation);
+    protected override void SetBulletSettings(GameObject bullet)
+    {
+        bullet.GetComponent<BulletSettingsComponent>().Shooter = gameObject;
     }
 }

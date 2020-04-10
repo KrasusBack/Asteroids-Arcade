@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class ShootingComponentBase : MonoBehaviour
 {
-    protected abstract void Start();
     protected abstract void SetBulletSettings(GameObject bullet);
 
     /// <summary>

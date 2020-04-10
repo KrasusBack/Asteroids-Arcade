@@ -6,7 +6,7 @@ public sealed class SaucerShootingComponent : ShootingComponentBase
 {
     private IShootingStats _shootingStats;
 
-    protected override void Start()
+    private void Start()
     {
         _shootingStats = GetComponent<SaucerSettingsComponent>().GetStats();
         StartCoroutine(PeriodicShoot());
