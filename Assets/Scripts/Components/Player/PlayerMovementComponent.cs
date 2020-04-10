@@ -5,6 +5,6 @@ public sealed class PlayerMovementComponent : MovementConponentBase
 {
     void FixedUpdate()
     {
-        if (Input.GetAxis("Vertical") > 0) MoveDynamicRB(GameCore.Instance.PlayerShipSettings.MoveSpeed);
+        if (Input.GetAxis("Vertical") > 0) MoveDynamicRB(GameCore.Instance.PlayerShipSettings.MoveSpeed, Vector2.right);
     }
 }

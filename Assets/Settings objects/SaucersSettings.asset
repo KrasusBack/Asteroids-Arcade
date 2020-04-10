@@ -15,10 +15,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
   bigSaucerStats:
-    moveSpeed: 1
+    moveSpeed: 1.9
     bulletSpeed: 1
     bulletTravelDistance: 2
-    shootingSpeed: 0.8
+    shootingSpeed: 0.03
     shootingAccuracy: 1
     avoidingObstaclesMastery: 0
   smallSaucerStats:

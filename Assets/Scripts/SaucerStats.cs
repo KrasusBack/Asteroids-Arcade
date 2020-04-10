@@ -11,7 +11,7 @@ public class SaucerStats : IBullet, IShootingStats
     private float bulletSpeed;
     [SerializeField, Min(0)]
     private float bulletTravelDistance;
-    [SerializeField, Min(0)]
+    [SerializeField, Min(0.001f)]
     private float shootingSpeed;
     [SerializeField, Range(0, 1)]
     private float shootingAccuracy;

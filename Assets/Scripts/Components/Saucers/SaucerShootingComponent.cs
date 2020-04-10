@@ -8,7 +8,7 @@ public sealed class SaucerShootingComponent : ShootingComponentBase
 
     protected override void Start()
     {
-        _shootingStats = GetComponent<IShootingStats>();
+        _shootingStats = GetComponent<SaucerSettingsComponent>().GetStats();
         StartCoroutine(PeriodicShoot());
     }
 
@@ -23,13 +23,14 @@ public sealed class SaucerShootingComponent : ShootingComponentBase
                 var bullet = Shoot(direction, GameCore.Instance.SaucersSettings.BulletPrefab);
                 //Set shooter to set behaviour of bullet based on shooter
                 SetBulletSettings(bullet);
+                print("Saucer shoot: " + bullet.name + " " + Time.frameCount);
             }
             yield return new WaitForSeconds(1 / _shootingStats.ShootingSpeed);
         }
     }
 
-    private void SetBulletSettings(GameObject bullet)
+    protected override void SetBulletSettings(GameObject bullet)
     {
-        bullet.GetComponent<BulletSettingsComponent>().SetShooter(tag);
+        bullet.GetComponent<BulletSettingsComponent>().Shooter = gameObject;
     }
 }

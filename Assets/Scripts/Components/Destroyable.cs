@@ -4,7 +4,7 @@ public class Destroyable : MonoBehaviour
 {
     private float _hitFrame = 0;
 
-    private void Start()
+    protected virtual void Start()
     {
         DoInStart();
         GameCore.Instance.IncreaseDestroyableObjectsCounter();
@@ -37,7 +37,7 @@ public class Destroyable : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         GameCore.Instance.DecreaseDestroyableObjectsCounter();
     }
