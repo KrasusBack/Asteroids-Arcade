@@ -23,7 +23,6 @@ public sealed class SaucerShootingComponent : ShootingComponentBase
                 var bullet = Shoot(direction, GameCore.Instance.SaucersSettings.BulletPrefab);
                 //Set shooter to set behaviour of bullet based on shooter
                 SetBulletSettings(bullet);
-                print("Saucer shoot: " + bullet.name + " " + Time.frameCount);
             }
             yield return new WaitForSeconds(1 / _shootingStats.ShootingSpeed);
         }

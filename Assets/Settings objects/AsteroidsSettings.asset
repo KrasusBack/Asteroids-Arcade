@@ -26,5 +26,5 @@ MonoBehaviour:
     speed: 0.5
     sizeScale: 0.5
   smallAsteroid:
-    speed: 0.6
+    speed: 0.8
     sizeScale: 0.25

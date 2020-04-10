@@ -17,7 +17,7 @@ public abstract class MovementConponentBase : MonoBehaviour
 
     protected void MoveKinematicRB(float speed, Vector2 direction)
     {
-        var newPos = ObjectRB.position + direction * speed * Time.fixedDeltaTime;
+        var newPos = ObjectRB.position + direction * speed;
         ObjectRB.MovePosition(newPos);
     }
 }
