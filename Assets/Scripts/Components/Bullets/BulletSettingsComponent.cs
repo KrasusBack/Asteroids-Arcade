@@ -11,15 +11,11 @@ public class BulletSettingsComponent : MonoBehaviour
         switch (tag)
         {
             case "Player":
+                shootingStats = GameCore.Instance.PlayerShipSettings;
                 break;
-
+            case "Enemies":
+                shootingStats = GetComponent<SaucerSettingsComponent>().GetStats();
+                break;
         }
-        //shootingStats
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SaucerShootingComponentBase : MonoBehaviour
+public abstract class PeriodicShootingComponentBase : MonoBehaviour
 {
     protected abstract void Start();
 

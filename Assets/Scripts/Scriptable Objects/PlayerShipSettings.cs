@@ -2,7 +2,7 @@
 
 [CreateAssetMenu(fileName = "PlayerShipSettings", menuName = "ScriptableObjects/PlayerShipSettings", order = 4)]
 
-public class PlayerShipSettings : ScriptableObject
+public class PlayerShipSettings : ScriptableObject, IShootingBullet
 {
     [Header("General")]
     [SerializeField, Min(0)]

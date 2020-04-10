@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class BigSaucerShootingComponent : SaucerShootingComponentBase
+public sealed class SaucerShootingComponent : PeriodicShootingComponentBase
 {
     protected override void Start()
     {
@@ -13,7 +13,9 @@ public sealed class BigSaucerShootingComponent : SaucerShootingComponentBase
     {
         while (true)
         {
-            Shoot(GameCore.Instance.PlayerShip.transform.position - transform.position);
+            //Shoot in direction of player ship if it's alive (active)
+            if (GameCore.Instance.PlayerShip.activeSelf) 
+                Shoot(GameCore.Instance.PlayerShip.transform.position - transform.position);
             yield return new WaitForSeconds(1 / GameCore.Instance.SaucersSettings.BigSaucerStats.ShootingSpeed);
         }
     }

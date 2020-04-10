@@ -6,6 +6,4 @@ public interface IShootingBullet
 {
     float BulletSpeed { get; }
     float BulletTravelDistance { get; }
-    float ShootingSpeed { get; }
-    float ShootingAccuracy { get; }
 }

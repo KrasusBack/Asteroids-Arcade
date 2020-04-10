@@ -5,7 +5,7 @@ using UnityEngine;
 public sealed class BulletDestroyerComponent : Destroyable
 {
     private float lifeTime;
-
+    
     public BulletDestroyerComponent (float bulletTravelDistance, float bulletSpeed, string shooterTag)
     {
         lifeTime = bulletTravelDistance / bulletSpeed;

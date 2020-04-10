@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SaucerStats : IShootingBullet
+public class SaucerStats : IShootingBullet, IShootingSpeed, IShootingAccuracy
 {
     [SerializeField, Min(0)]
-    private int moveSpeed;
+    private float moveSpeed;
     [SerializeField, Min(0)]
     private float bulletSpeed;
     [SerializeField, Min(0)]
@@ -20,7 +20,7 @@ public class SaucerStats : IShootingBullet
 
     #region Public Getters
 
-    public int MoveSpeed
+    public float MoveSpeed
     {
         get => moveSpeed;
     }
