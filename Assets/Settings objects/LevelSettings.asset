@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7823a77a3b357d24793e0ddaa56206b0, type: 3}
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
-  BaseAsteroidAmount: 6
-  AdditionalAsteroidsEachLevel: 2
-  BaseSaucersAmount: 1
-  LittleSaucerFirstLevelAppearance: 3
+  baseAsteroidAmount: 0
+  additionalAsteroidsEachStage: 2
+  baseSaucersAmount: 1
+  littleSaucerFirstLevelAppearance: 3

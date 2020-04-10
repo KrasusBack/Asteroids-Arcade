@@ -1,10 +1,18 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SaucerSettingsComponent))]
 public class SaucerMovementComponent : MovementConponentBase
 {
+    SaucerStats stats;
+
+    private void Start()
+    {
+        stats = GetComponent<SaucerSettingsComponent>().GetStats();
+    }
+
     void FixedUpdate()
     {
-        MoveKinematicRB(GameCore.Instance.SaucersSettings.MoveSpeed, Vector2.right);
+        MoveKinematicRB(stats.MoveSpeed, Vector2.right);
     }
 }

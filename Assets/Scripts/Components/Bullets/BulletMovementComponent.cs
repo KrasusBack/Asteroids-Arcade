@@ -18,7 +18,7 @@ public sealed class BulletMovementComponent : MovementConponentBase
                 _speed = GameCore.Instance.PlayerShipSettings.BulletSpeed;
                 return;
             case "Enemies":
-                _speed = GameCore.Instance.SaucersSettings.BulletSpeed;
+                _speed = GameCore.Instance.SaucersSettings.BigSaucerStats.BulletSpeed;
                 return;
         }
     }

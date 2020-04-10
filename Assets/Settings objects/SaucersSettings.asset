@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
-  moveSpeed: 1
-  bulletSpeed: 1
-  bulletTravelDistance: 2
-  shootingSpeed: 0.8
+  bigSaucerStats:
+    moveSpeed: 2
+    bulletSpeed: 1
+    bulletTravelDistance: 2
+    shootingSpeed: 0.8
+    shootingAccuracy: 1
+    avoidingObstaclesMastery: 0
+  smallSaucerStats:
+    moveSpeed: 45
+    bulletSpeed: 2
+    bulletTravelDistance: 2
+    shootingSpeed: 0.8
+    shootingAccuracy: 1
+    avoidingObstaclesMastery: 1
