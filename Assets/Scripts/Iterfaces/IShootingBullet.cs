@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IShootingBullet
+public interface IBullet
 {
     float BulletSpeed { get; }
     float BulletTravelDistance { get; }

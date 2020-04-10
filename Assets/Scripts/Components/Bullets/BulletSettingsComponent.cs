@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class BulletSettingsComponent : MonoBehaviour
 {
-    IShootingBullet shootingStats;
+    /// <summary>
+    /// Change bullet object tag to change bullet settings
+    /// </summary>
+    /// <param name="tag"> Shooter's tag</param>
+    public void SetShooter(string tag)
+    {
+        this.tag = tag;
+    }
+
+    IBullet shootingStats;
     // Start is called before the first frame update
     void Start()
     {

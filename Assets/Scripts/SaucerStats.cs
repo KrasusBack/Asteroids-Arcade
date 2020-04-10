@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SaucerStats : IShootingBullet, IShootingSpeed, IShootingAccuracy
+public class SaucerStats : IBullet, IShootingStats
 {
     [SerializeField, Min(0)]
     private float moveSpeed;

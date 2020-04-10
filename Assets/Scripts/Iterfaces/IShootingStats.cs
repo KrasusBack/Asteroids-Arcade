@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IShootingAccuracy
+public interface IShootingStats
 {
+    float ShootingSpeed { get; }
     float ShootingAccuracy { get; }
 }
