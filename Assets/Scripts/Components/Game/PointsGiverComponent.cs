@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SaucerSettingsComponent.SaucerType;
 
 [RequireComponent(typeof(Destroyable))]
 public class PointsGiverComponent : MonoBehaviour
@@ -22,8 +23,18 @@ public class PointsGiverComponent : MonoBehaviour
                 break;
 
             case "Enemies":
-                //затычка на пока. Тут должен определяться типи тарелки перед принятием решения
-                _pointsAfterDestroy = GameCore.Instance.PointsSettings.BigSaucerPoints;
+                var saucerType = GetComponent<SaucerSettingsComponent>().Type;
+                switch(saucerType)
+                {
+                    case Small:
+                        _pointsAfterDestroy = GameCore.Instance.PointsSettings.SmallSaucerPoints;
+                        break;
+                    case Big:
+                        _pointsAfterDestroy = GameCore.Instance.PointsSettings.BigSaucerPoints;
+                        break;
+                    default:
+                        throw new System.IndexOutOfRangeException($"There is no Saucer type such as {saucerType}");
+                }
                 break;
         }
     }

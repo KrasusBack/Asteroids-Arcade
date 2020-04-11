@@ -13,7 +13,7 @@ public class PointsSettings : ScriptableObject
     [SerializeField]
     private int bigSaucerPoints = 200;
     [SerializeField]
-    private int smalSaucerPoints = 1000;
+    private int smallSaucerPoints = 1000;
     [SerializeField]
     private int costOfAddingBonusLife = 10000;
 
@@ -39,9 +39,9 @@ public class PointsSettings : ScriptableObject
         get => bigSaucerPoints;
     }
 
-    public int SmalSaucerPoints
+    public int SmallSaucerPoints
     {
-        get => smalSaucerPoints;
+        get => smallSaucerPoints;
     }
 
     public int CostOfAddingBonusLife
