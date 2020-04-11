@@ -20,4 +20,12 @@ public abstract class MovementConponentBase : MonoBehaviour
         var newPos = ObjectRB.position + direction * speed;
         ObjectRB.MovePosition(newPos);
     }
+
+    /// <summary>
+    /// Get random direction based on angle (from -angle to angle)
+    /// </summary>
+    protected Vector2 GetRandomDirection (float angle)
+    {
+        return MathfExtentions.DegreeToVector2(Random.Range(-angle, angle));
+    }
 }

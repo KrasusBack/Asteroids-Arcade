@@ -12,18 +12,19 @@ public class Destroyable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CheckAndHandleCollision(collision.gameObject);
+        CheckAndHandleCollision(collision?.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        CheckAndHandleCollision(collision.attachedRigidbody.gameObject);
+        CheckAndHandleCollision(collision?.attachedRigidbody?.gameObject);
     }
 
     /// <summary> Calls DestroyableGoingToDestroyObject and DestroyOperation. 
     /// Can be only called once per Time.fixedTime </summary>
     private void CheckAndHandleCollision(GameObject objCausedDestroying)
     {
+        if (objCausedDestroying == null) return;
         if (Time.fixedTime == _hitFrame) return;
         _hitFrame = Time.fixedTime;
 

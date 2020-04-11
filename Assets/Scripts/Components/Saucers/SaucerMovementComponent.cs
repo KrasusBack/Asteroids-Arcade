@@ -4,19 +4,19 @@
 [RequireComponent(typeof(SaucerSettingsComponent))]
 public class SaucerMovementComponent : MovementConponentBase
 {
-    protected Saucer stats;
-
+    private Saucer _saucer;
     private Vector2 direction;
 
     private void Start()
     {
-        stats = GetComponent<SaucerSettingsComponent>().GetSettings();
-        var angle = 60;
-        direction = MathfExtentions.DegreeToVector2(Random.Range(-angle, angle));
+        var someAngle = 60;
+        _saucer = GetComponent<SaucerSettingsComponent>().GetSettings();
+        direction = GetRandomDirection(someAngle);
     }
 
     private void FixedUpdate()
     {
-        MoveKinematicRB(stats.MoveSpeed, direction);
+        MoveKinematicRB(_saucer.MoveSpeed, direction);
     }
+
 }
