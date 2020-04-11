@@ -4,7 +4,7 @@
 [RequireComponent(typeof(SaucerSettingsComponent))]
 public class SaucerMovementComponent : MovementConponentBase
 {
-    protected SaucerStats stats;
+    protected Saucer stats;
 
     private Vector2 direction;
 

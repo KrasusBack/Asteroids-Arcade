@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1032835486767451243}
   - component: {fileID: 2998514915536077277}
   m_Layer: 9
-  m_Name: Saucer
+  m_Name: SaucerSmall
   m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 6114920307276586691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.9601593, y: 8.892091, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.94408023, y: 0.94408023, z: 0.94408023}
   m_Children:
   - {fileID: 6114920309245971821}
   - {fileID: 6114920308255869613}
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8335a3593c5fb644183be9983fd79f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!114 &8293785315505854375
 MonoBehaviour:
   m_ObjectHideFlags: 0

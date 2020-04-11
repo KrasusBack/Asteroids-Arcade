@@ -6,20 +6,20 @@ public class SaucersSettings : ScriptableObject
 {
     [Header("Saucer Stats")]
     [SerializeField]
-    private SaucerStats bigSaucerStats;
+    private Saucer bigSaucer;
     [SerializeField]
-    private SaucerStats smallSaucerStats;
+    private Saucer smallSaucer;
 
     #region PublicGetters
 
-    public SaucerStats BigSaucerStats
+    public Saucer BigSaucer
     {
-        get => bigSaucerStats;
+        get => bigSaucer;
     }
 
-    public SaucerStats SmallSaucerStats
+    public Saucer SmallSaucer
     {
-        get => smallSaucerStats;
+        get => smallSaucer;
     }
 
     #endregion

@@ -17,14 +17,14 @@ public class SaucerSettingsComponent : MonoBehaviour
     /// <summary>
     /// Get stats from GameCore SaucerSettings. It will be based on Type of SaucerSettingsComponent. 
     /// </summary>
-    public SaucerStats GetSettings()
+    public Saucer GetSettings()
     {
         switch (Type)
         {
             case SaucerType.Big:
-                return GameCore.Instance.SaucersSettings.BigSaucerStats;
+                return GameCore.Instance.SaucersSettings.BigSaucer;
             case SaucerType.Small:
-                return GameCore.Instance.SaucersSettings.SmallSaucerStats;
+                return GameCore.Instance.SaucersSettings.SmallSaucer;
             default:
                 throw new System.Exception("There is no SaucerSettings for " + Type);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class SaucerShootingComponent : ShootingComponentBase
 {
-    private SaucerStats _shotingSettings;
+    private Saucer _shotingSettings;
 
     private void Start()
     {
