@@ -7,7 +7,10 @@ public sealed class BulletDestroyerComponent : Destroyable
     // Start is called before the first frame update
     protected override void Start()
     {
-        IBullet bulletStats = GetComponent<BulletSettingsComponent>().ShootingStats;
+        var bulletSettings = GetComponent<BulletSettingsComponent>();
+        IBullet bulletStats = bulletSettings.BulletStats;
+
+        gameObject.layer = bulletSettings.Shooter.layer;
         var lifeTime = bulletStats.BulletTravelDistance / bulletStats.BulletSpeed;
         Destroy(gameObject, lifeTime);
     }

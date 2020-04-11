@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class BulletSettingsComponent : MonoBehaviour
 {
-    public GameObject Shooter { get; set; }
-    public IBullet ShootingStats { get; set; }
+    private GameObject _shooter;
 
-    // Start is called before the first frame update
-    void Start()
+    public IBullet BulletStats { get; set; }  
+    public GameObject Shooter
     {
-        switch (Shooter.tag)
+        get => _shooter;
+        set
         {
-            case "Player":
-                ShootingStats = GameCore.Instance.PlayerShipSettings;
-                print("player bullet :" + ShootingStats.BulletSpeed + " " + ShootingStats.BulletTravelDistance);
-                break;
-            case "Enemies":
-                ShootingStats = Shooter.GetComponent<SaucerSettingsComponent>().GetStats();
-                break;
+            _shooter = value;
+            gameObject.tag = Shooter.tag;
+            switch (gameObject.tag)
+            {
+                case "Player":
+                    BulletStats = GameCore.Instance.PlayerShipSettings;
+                    break;
+                case "Enemies":
+                    BulletStats = Shooter.GetComponent<SaucerSettingsComponent>().GetStats();
+                    break;
+            }
         }
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class ShootingComponentBase : MonoBehaviour
 {
-    protected abstract void SetBulletSettings(GameObject bullet);
-
     /// <summary>
     /// Basic shoot method
     /// </summary>
@@ -18,6 +16,12 @@ public abstract class ShootingComponentBase : MonoBehaviour
         var rotation = Quaternion.Euler(0, 0, angle);
 
         return Instantiate(bulletObj, transform.position, rotation);
+    }
+
+    protected void SetBulletSettings(GameObject bullet)
+    {
+        var settings = bullet.AddComponent<BulletSettingsComponent>();
+        settings.Shooter = gameObject;
     }
 
 }

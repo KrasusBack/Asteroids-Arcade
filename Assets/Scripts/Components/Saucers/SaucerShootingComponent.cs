@@ -21,15 +21,11 @@ public sealed class SaucerShootingComponent : ShootingComponentBase
             {
                 var direction = GameCore.Instance.PlayerShip.transform.position - transform.position;
                 var bullet = Shoot(direction, GameCore.Instance.SaucersSettings.BulletPrefab);
-                //Set shooter to set behaviour of bullet based on shooter
+                //Set behaviour of bullet based on shooter
                 SetBulletSettings(bullet);
             }
             yield return new WaitForSeconds(1 / _shootingStats.ShootingSpeed);
         }
     }
-
-    protected override void SetBulletSettings(GameObject bullet)
-    {
-        bullet.GetComponent<BulletSettingsComponent>().Shooter = gameObject;
-    }
+    
 }

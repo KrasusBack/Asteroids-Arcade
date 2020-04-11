@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public sealed class BulletMovementComponent : MovementConponentBase
 {
-    private float _speed = 0;
+    private float Speed { get; set; } = 0;
 
     private void Start()
     {
@@ -15,17 +15,17 @@ public sealed class BulletMovementComponent : MovementConponentBase
         switch(gameObject.tag)
         {
             case "Player":
-                _speed = GameCore.Instance.PlayerShipSettings.BulletSpeed;
-                return;
+                Speed = GameCore.Instance.PlayerShipSettings.BulletSpeed;
+                break;
             case "Enemies":
-                _speed = GameCore.Instance.SaucersSettings.BigSaucerStats.BulletSpeed;
-                return;
+                Speed = GetComponent<BulletSettingsComponent>().BulletStats.BulletSpeed;
+                break;
         }
     }
 
     void FixedUpdate()
     {
         var direction = MathfExtentions.DegreeToVector2(ObjectRB.rotation);
-        MoveKinematicRB(_speed, direction);
+        MoveKinematicRB(Speed, direction);
     }
 }

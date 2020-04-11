@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 433011039}
   m_Layer: 10
   m_Name: ShipItself
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 2061281631}
   - component: {fileID: 2061281632}
   - component: {fileID: 7677671240567533143}
-  - component: {fileID: 8250893193198862897}
+  - component: {fileID: 1479120143223418794}
   m_Layer: 10
   m_Name: PlayerShip
   m_TagString: Player
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ad6ec4fc3876f43b19d473af5b58b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8250893193198862897
+--- !u!114 &1479120143223418794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
