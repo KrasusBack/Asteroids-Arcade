@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc0bb4c9139500c40a39b41b0bd50740, type: 3}
+  m_Name: PrefabReferences
+  m_EditorClassIdentifier: 
+  bulletBasePrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
+    type: 3}
+  saucerBulletPrefab: {fileID: 3522412154301574141, guid: bd9cc2bdbace9eb44ac96de7a6af5c5c,
+    type: 3}

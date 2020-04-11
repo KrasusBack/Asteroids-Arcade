@@ -4,11 +4,11 @@ using UnityEngine;
 
 public sealed class SaucerShootingComponent : ShootingComponentBase
 {
-    private IShootingStats _shootingStats;
+    private SaucerStats _shotingSettings;
 
     private void Start()
     {
-        _shootingStats = GetComponent<SaucerSettingsComponent>().GetStats();
+        _shotingSettings = GetComponent<SaucerSettingsComponent>().GetSettings();
         StartCoroutine(PeriodicShoot());
     }
 
@@ -20,11 +20,11 @@ public sealed class SaucerShootingComponent : ShootingComponentBase
             if (GameCore.Instance.PlayerShip.activeSelf)
             {
                 var direction = GameCore.Instance.PlayerShip.transform.position - transform.position;
-                var bullet = Shoot(direction, GameCore.Instance.SaucersSettings.BulletPrefab);
+                var bullet = Shoot(direction, _shotingSettings.BulletPrefab);
                 //Set behaviour of bullet based on shooter
                 SetBulletSettings(bullet);
             }
-            yield return new WaitForSeconds(1 / _shootingStats.ShootingSpeed);
+            yield return new WaitForSeconds(1 / _shotingSettings.ShootingSpeed);
         }
     }
     

@@ -8,7 +8,7 @@ public class SaucerMovementComponent : MovementConponentBase
 
     private void Start()
     {
-        stats = GetComponent<SaucerSettingsComponent>().GetStats();
+        stats = GetComponent<SaucerSettingsComponent>().GetSettings();
     }
 
     void FixedUpdate()

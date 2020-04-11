@@ -16,9 +16,9 @@ MonoBehaviour:
   delayBeforeRespawn: 1
   moveSpeed: 50
   rotationSpeed: 3
-  bulletPrefab: {fileID: 3522412154301574141, guid: bd9cc2bdbace9eb44ac96de7a6af5c5c,
+  bulletPrefab: {fileID: 3522412154301574141, guid: b9816be3c681a2d4ead2bf986c779308,
     type: 3}
-  bulletSpeed: 1
+  bulletSpeed: 2
   bulletTravelDistance: 2
   hyperSpaceCooldown: 1
   timeInHyperSpace: 1

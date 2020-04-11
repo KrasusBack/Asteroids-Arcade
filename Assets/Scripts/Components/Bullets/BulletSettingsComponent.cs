@@ -20,9 +20,11 @@ public class BulletSettingsComponent : MonoBehaviour
                     BulletStats = GameCore.Instance.PlayerShipSettings;
                     break;
                 case "Enemies":
-                    BulletStats = Shooter.GetComponent<SaucerSettingsComponent>().GetStats();
+                    BulletStats = Shooter.GetComponent<SaucerSettingsComponent>().GetSettings();
                     break;
             }
+
+            
         }
     }
 }

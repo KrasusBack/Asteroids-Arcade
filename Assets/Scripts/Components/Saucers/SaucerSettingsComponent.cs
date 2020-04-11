@@ -17,7 +17,7 @@ public class SaucerSettingsComponent : MonoBehaviour
     /// <summary>
     /// Get stats from GameCore SaucerSettings. It will be based on Type of SaucerSettingsComponent. 
     /// </summary>
-    public SaucerStats GetStats()
+    public SaucerStats GetSettings()
     {
         switch (Type)
         {

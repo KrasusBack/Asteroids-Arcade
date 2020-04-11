@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class SaucerStats : IBullet, IShootingStats
 {
+    [SerializeField]
+    private GameObject bulletPrefab;
     [SerializeField, Min(0)]
     private float moveSpeed;
     [SerializeField, Min(0)]
@@ -19,6 +21,11 @@ public class SaucerStats : IBullet, IShootingStats
     private float avoidingObstaclesMastery;
 
     #region Public Getters
+
+    public GameObject BulletPrefab
+    {
+        get => bulletPrefab;
+    }
 
     public float MoveSpeed
     {

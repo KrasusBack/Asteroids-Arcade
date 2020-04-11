@@ -18,8 +18,8 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
             if (variation > asteroidPrefabsCount)
             {
                 variation = asteroidPrefabsCount;
-                string errorMessage = string.Format("{0}: variation in {1} out of range of AsteroidsSettings prefab counter ({2}). Variation set to max ({2}",
-                                                GetType().ToString(), gameObject.name, asteroidPrefabsCount);
+                string errorMessage = $"{GetType().ToString()}: variation in {gameObject.name} out of range of AsteroidsSettings prefab counter ({asteroidPrefabsCount}). " +
+                                      $"Variation number set to max ({asteroidPrefabsCount}";
                 throw new IndexOutOfRangeException(errorMessage);
             }
         }

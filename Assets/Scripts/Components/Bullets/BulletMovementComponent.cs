@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public sealed class BulletMovementComponent : MovementConponentBase
 {
     private float Speed { get; set; } = 0;

@@ -4,15 +4,11 @@
 
 public class SaucersSettings : ScriptableObject
 {
-    [Header("Shooting")]
-    [SerializeField]
-    private GameObject bulletPrefab;
     [Header("Saucer Stats")]
     [SerializeField]
     private SaucerStats bigSaucerStats;
     [SerializeField]
     private SaucerStats smallSaucerStats;
-
 
     #region PublicGetters
 
@@ -24,11 +20,6 @@ public class SaucersSettings : ScriptableObject
     public SaucerStats SmallSaucerStats
     {
         get => smallSaucerStats;
-    }
-
-    public GameObject BulletPrefab
-    {
-        get => bulletPrefab;
     }
 
     #endregion
