@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0917d8a380d06a9488147f108018fd8c, type: 3}
   m_Name: SaucersSettings
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3522412154301574141, guid: bd9cc2bdbace9eb44ac96de7a6af5c5c,
-    type: 3}
   bigSaucerStats:
+    moveSpeed: 1
+    avoidingObstaclesMastery: 0
     bulletPrefab: {fileID: 3522412154301574141, guid: 35cd3b80b49cc924e85964319c71c810,
       type: 3}
-    moveSpeed: 1
     bulletSpeed: 1
     bulletTravelDistance: 2
     shootingSpeed: 1.5
-    shootingAccuracy: 1
-    avoidingObstaclesMastery: 0
+    shootingAccuracy: 0.333
+    spreadAngle: 180
   smallSaucerStats:
+    moveSpeed: 1
+    avoidingObstaclesMastery: 1
     bulletPrefab: {fileID: 3522412154301574141, guid: 35cd3b80b49cc924e85964319c71c810,
       type: 3}
-    moveSpeed: 1
     bulletSpeed: 2
     bulletTravelDistance: 2
     shootingSpeed: 1
     shootingAccuracy: 1
-    avoidingObstaclesMastery: 1
+    spreadAngle: 0
