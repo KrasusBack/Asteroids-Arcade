@@ -7,8 +7,6 @@ public class PlayerShipSettings : ScriptableObject, IBullet
     [Header("General")]
     [SerializeField, Min(0)]
     private int startingLifesAmount = 3;
-    [SerializeField, Min(0)]
-    private float delayBeforeRespawn = 1;
 
     [Header("Movement")]
     [SerializeField, Min(0)]
@@ -76,11 +74,6 @@ public class PlayerShipSettings : ScriptableObject, IBullet
     public int StartingLifesAmount
     {
         get => startingLifesAmount;
-    }
-
-    public float DelayBeforeRespawn
-    {
-        get => delayBeforeRespawn;
     }
 
     #endregion

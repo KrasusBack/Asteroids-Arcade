@@ -14,20 +14,7 @@ public class ObjectSpawner : MonoBehaviour
     private BoxCollider2D outerCollider;
 
     private LevelSettings levelSettings;
-    private int _saucersThisLevelCounter;
-
-    private int SaucersThisLevelCounter
-    {
-        get => _saucersThisLevelCounter;
-        set
-        {
-            if (value == GameCore.Instance.LevelSettings.MaxSaucersForLevel)
-            {
-                StopAllCoroutines();
-            }
-            _saucersThisLevelCounter = value;
-        }
-    }
+    private int SaucersThisLevelCounter { get; set; }
 
     private void Start()
     {
@@ -39,20 +26,22 @@ public class ObjectSpawner : MonoBehaviour
 
     private void SpawnLevelObjects()
     {
+        StopAllCoroutines();
+        SaucersThisLevelCounter = 0;
         //asteroids
         var asteroidsAmount = levelSettings.BaseAsteroidAmount + levelSettings.AdditionalAsteroidsEachStage * (GameCore.Instance.CurrentStage - 1);
-        if (asteroidsAmount > levelSettings.AsteroidsMaxAmount) { }
-        asteroidsAmount = levelSettings.AsteroidsMaxAmount;
+        if (asteroidsAmount > levelSettings.AsteroidsMaxAmount)
+            asteroidsAmount = levelSettings.AsteroidsMaxAmount;
         for (var i = 0; i < asteroidsAmount; i++)
             SpawnAsteroid();
 
         //start saucer spawn timer
-        StartCoroutine(saucerSpawnTimer());
+        StartCoroutine(PeriodicSaucerSpawn());
     }
 
-    private IEnumerator saucerSpawnTimer()
+    private IEnumerator PeriodicSaucerSpawn()
     {
-        while (true)
+        while (SaucersThisLevelCounter<=GameCore.Instance.LevelSettings.MaxSaucersForLevel)
         {
             print("ObjectSpawner:" + levelSettings.SaucerSpawnTimer + " before saucer spawn");
             yield return new WaitForSeconds(levelSettings.SaucerSpawnTimer);
@@ -66,7 +55,6 @@ public class ObjectSpawner : MonoBehaviour
             {
                 SpawnSmallSaucer();
             }
-
             SaucersThisLevelCounter++;
         }
     }
@@ -86,10 +74,15 @@ public class ObjectSpawner : MonoBehaviour
         Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointOutsideSafeArea(), Quaternion.identity);
     }
 
+    private void StopSpawning()
+    {
+        StopAllCoroutines();
+    }
+
     private Vector2 GetRandomPointNearTheBorder()
     {
         var somePoint = GetRandomPointOutsideSafeArea();
-        var sidePicker = Random.Range(0, 1);
+        var sidePicker = Random.Range(0, 2);
         if (sidePicker==0)
             somePoint.x = outerCollider.bounds.min.x;
         else somePoint.x = outerCollider.bounds.max.x;
@@ -122,11 +115,6 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         return newPoint;
-    }
-
-    private void StopSpawning()
-    {
-        StopAllCoroutines();
     }
 
 }

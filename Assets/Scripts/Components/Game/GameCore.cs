@@ -146,7 +146,7 @@ public sealed class GameCore : MonoBehaviour
     }
     private void Start()
     {
-        StartNextLevel();
+        StartNewGame();
     }
     private void Update()
     {
@@ -173,13 +173,17 @@ public sealed class GameCore : MonoBehaviour
 
     #region Game Process control
 
-    private void StartNextLevel()
+    private void StartNewGame()
     {
         NewLevelStarted?.Invoke();
     }
     private void ExecuteGameOver()
     {
         GameIsOver?.Invoke();
+    }
+    private void InitiateNewLevel()
+    {
+        StartCoroutine(WaitForNewLevelToStart());
     }
 
     public void HandlePlayerDeath()
@@ -195,25 +199,24 @@ public sealed class GameCore : MonoBehaviour
     }
     private IEnumerator WaitBeforeCalling_GameOver()
     {
-        yield return new WaitForSeconds(PlayerShipSettings.DelayBeforeRespawn);
+        yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
         ExecuteGameOver();
     }
     private IEnumerator WaitBeforeCalling_Respawn()
     {
         PlayerCanBeRespawned = false;
-        yield return new WaitForSeconds(PlayerShipSettings.DelayBeforeRespawn);
+        yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
         PlayerDied?.Invoke(); //mainly used by overlay ui
         PlayerCanBeRespawned = true;
     } 
     private IEnumerator WaitForNewLevelToStart()
     {
-        Time.timeScale = 0;
-        //тут всякие штуки для отмечания зачистки
+        //тут всякие штуки для отмечания зачистки уровня
 
-        yield return new WaitForSeconds(PlayerShipSettings.DelayBeforeRespawn);
+        yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
+        playerShip.transform.position = Vector3.zero;
         CurrentStage++;
-        StartNextLevel();
-        Time.timeScale = 1;
+        NewLevelStarted?.Invoke();
     }
     
     private void RespawnPlayer()
@@ -235,11 +238,6 @@ public sealed class GameCore : MonoBehaviour
         {
             RespawnPlayer();
         }
-    }
-
-    private void InitiateNewLevel ()
-    {
-        WaitForNewLevelToStart();
     }
 
     #endregion
