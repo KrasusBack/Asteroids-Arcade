@@ -16,7 +16,7 @@ public class SaucerSmallMovementComponent : MovementConponentBase
     //появиться там где нет астероида (проверка пригодиться еще и для hyperSpace)
     //задать изначальный вектор
     //раз в n времени сменять направление / сменять направление если встречает препятствие на пути (раз в n времени проверки (зависит от мастерства movement)
-    //
+    //по хорошему еще и определять свободное пространство
     //при любом задании направления проверять есть ли препятствие на пути
     private void Start()
     {
@@ -51,10 +51,12 @@ public class SaucerSmallMovementComponent : MovementConponentBase
 
     private void FixedUpdate()
     {
+        Vector3 perpen = checkerObjectTransform.position;
+        
         if (timeToCheck)
         {
             timeToCheck = false;
-            ChangeDirectionBasedOnNearObjects();
+            perpen = ChangeDirectionBasedOnNearObjects();
         }
         MoveKinematicRB(_saucer.MoveSpeed, direction);
         checkerObjectTransform.position = transform.position;
@@ -64,13 +66,14 @@ public class SaucerSmallMovementComponent : MovementConponentBase
                                         checkerObjectTransform.position.y + direction.y * multiplier, 
                                         checkerObjectTransform.position.z);
         Debug.DrawLine(checkerObjectTransform.position, endPos, Color.cyan);
+        Debug.DrawLine(checkerObjectTransform.position, perpen, Color.red);
     }
 
-    private void ChangeDirectionBasedOnNearObjects()
+    private Vector3 ChangeDirectionBasedOnNearObjects()
     {
         _checkCollider.OverlapCollider(contactFilter2D, collidersNear);
 
-        if (collidersNear.Count == 0) return;
+        if (collidersNear.Count == 0) return checkerObjectTransform.position;
 
         float minDistance = float.MaxValue;
         Collider2D nearestCollider = new Collider2D();
@@ -89,22 +92,33 @@ public class SaucerSmallMovementComponent : MovementConponentBase
             //print("--" + collider.name);
         }
 
-        if (!nearestCollider) return;
+        if (!nearestCollider) return checkerObjectTransform.position;
 
         print("nearest collider: " + nearestCollider.name);
-        
+
         //что-то сделать с minDistance
-        Vector2 directionToNearestCollider = nearestCollider.transform.position - transform.position;
-        var currentDirectionAngle = Vector2.SignedAngle(direction, Vector2.right);
-        var toNearestColliderDirectionAngle = Vector2.SignedAngle(directionToNearestCollider, Vector2.right);
-        var safeAngle = 15;
-        if (currentDirectionAngle - toNearestColliderDirectionAngle > safeAngle) return;
+        Vector2 directionToNearestCollider = nearestCollider.transform.position - checkerObjectTransform.position;
+        var currentDirectionAngle = Vector2.SignedAngle(Vector2.right, direction);
+        var toNearestColliderDirectionAngle = Vector2.SignedAngle(Vector2.right, directionToNearestCollider);
+
+        var safeAngle = 300;
+        //по модулю?
+        print($"{ currentDirectionAngle} - {toNearestColliderDirectionAngle}) > {safeAngle}");
+        if (Mathf.Abs( currentDirectionAngle - toNearestColliderDirectionAngle) > safeAngle) return checkerObjectTransform.position;
 
         var toNearestColliderDirection = MathfExtentions.DegreeToVector2(toNearestColliderDirectionAngle);
         direction = Vector2.Reflect(direction, Vector2.Perpendicular(toNearestColliderDirection));
+        direction.x = -direction.x;
+        direction.y = -direction.y;
+        //direction = Vector2.Reflect(direction, toNearestColliderDirection);
 
-        
+        var multiplier = 4;
+        Vector3 endPos = new Vector3(checkerObjectTransform.position.x + toNearestColliderDirection.x * multiplier,
+                                        checkerObjectTransform.position.y + toNearestColliderDirection.y * multiplier,
+                                        checkerObjectTransform.position.z);
+
         //min time = 0.2f
+        return endPos;
     }
 
     private IEnumerator WaitForTheNextObstaclesCheck()
@@ -112,7 +126,7 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         while(true)
         {
             timeToCheck = true;
-            yield return new WaitForSeconds(1.15f - _saucer.AvoidingObstaclesMastery);
+            yield return new WaitForSeconds(1.2f - _saucer.AvoidingObstaclesMastery);
         }
     }
 
