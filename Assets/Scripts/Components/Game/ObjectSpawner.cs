@@ -8,12 +8,26 @@ public class ObjectSpawner : MonoBehaviour
     //For Context:
     //Safe area - area inside innerCollider
     //Outside safe area - area between innerCollider and outerCollider
-    private LevelSettings levelSettings;
-
     [SerializeField]
     private BoxCollider2D innerCollider;
     [SerializeField]
     private BoxCollider2D outerCollider;
+
+    private LevelSettings levelSettings;
+    private int _saucersThisLevelCounter;
+
+    private int SaucersThisLevelCounter
+    {
+        get => _saucersThisLevelCounter;
+        set
+        {
+            if (value == GameCore.Instance.LevelSettings.MaxSaucersForLevel)
+            {
+                StopAllCoroutines();
+            }
+            _saucersThisLevelCounter = value;
+        }
+    }
 
     private void Start()
     {
@@ -22,51 +36,49 @@ public class ObjectSpawner : MonoBehaviour
         GameCore.Instance.NewLevelStarted += SpawnLevelObjects;
         GameCore.Instance.StageCleared += StopSpawning;
     }
-    /*
-    private void SpawnObjectsOutsideSafeArea() //~asteroids spawn area
-    {
-        var asteroidsAmount = GameCore.Instance.LevelSettings.BaseAsteroidAmount + GameCore.Instance.LevelSettings.AdditionalAsteroidsEachStage * (GameCore.Instance.CurrentStage-1);
-        for (var i = 0; i < asteroidsAmount; i++)
-            Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointOutsideSafeArea(), Quaternion.identity);
-    }
-    */
 
     private void SpawnLevelObjects()
     {
         //asteroids
         var asteroidsAmount = levelSettings.BaseAsteroidAmount + levelSettings.AdditionalAsteroidsEachStage * (GameCore.Instance.CurrentStage - 1);
-        if (asteroidsAmount > levelSettings.AsteroidsMaxAmount)
-            asteroidsAmount = levelSettings.AsteroidsMaxAmount;
+        if (asteroidsAmount > levelSettings.AsteroidsMaxAmount) { }
+        asteroidsAmount = levelSettings.AsteroidsMaxAmount;
         for (var i = 0; i < asteroidsAmount; i++)
             SpawnAsteroid();
 
         //start saucer spawn timer
-        StartCoroutine( saucerSpawnTimer());
+        StartCoroutine(saucerSpawnTimer());
     }
 
     private IEnumerator saucerSpawnTimer()
     {
-        while(true)
+        while (true)
         {
-            var saucerSpawnTimer = GameCore.Instance.LevelSettings.SaucerSpawnTimer - (GameCore.Instance.CurrentStage - 1);
-            yield return new WaitForSeconds(saucerSpawnTimer);
+            print("ObjectSpawner:" + levelSettings.SaucerSpawnTimer + " before saucer spawn");
+            yield return new WaitForSeconds(levelSettings.SaucerSpawnTimer);
 
             //decide saucer type to spawn
-            if (GameCore.Instance.CurrentStage < levelSettings.LittleSaucerFirstLevelAppearance &&
-                //<не последний уровень для появления большой тарелки
-                //расчитать вероятность появления большой тарелки отталкиваясь от последнего уровня для его появления и текущего уровня (~)
-                
+            if (GameCore.Instance.CurrentStage <= levelSettings.LastBigSaucerLevelApperance)
+            {
+                SpawnBigSaucer();
+            }
+            else if (GameCore.Instance.CurrentStage >= levelSettings.LittleSaucerFirstLevelAppearance)
+            {
+                SpawnSmallSaucer();
+            }
+
+            SaucersThisLevelCounter++;
         }
     }
 
     private void SpawnSmallSaucer()
     {
-        Instantiate(GameCore.Instance.SaucersSettings.SmallSaucer.SaucerObjPrefab, GetRandomPointOutsideSafeArea(), Quaternion.identity);
+        Instantiate(GameCore.Instance.SaucersSettings.SmallSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
     }
 
     private void SpawnBigSaucer()
     {
-        Instantiate(GameCore.Instance.SaucersSettings.BigSaucer.SaucerObjPrefab, GetRandomPointOutsideSafeArea(), Quaternion.identity);
+        Instantiate(GameCore.Instance.SaucersSettings.BigSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
     }
 
     private void SpawnAsteroid()
@@ -74,6 +86,16 @@ public class ObjectSpawner : MonoBehaviour
         Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointOutsideSafeArea(), Quaternion.identity);
     }
 
+    private Vector2 GetRandomPointNearTheBorder()
+    {
+        var somePoint = GetRandomPointOutsideSafeArea();
+        var sidePicker = Random.Range(0, 1);
+        if (sidePicker==0)
+            somePoint.x = outerCollider.bounds.min.x;
+        else somePoint.x = outerCollider.bounds.max.x;
+
+        return somePoint;
+    }
 
     private Vector2 GetRandomPointOutsideSafeArea()
     {

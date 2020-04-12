@@ -10,6 +10,7 @@ public sealed class StageClearedOverlayCaller : MonoBehaviour
     {
         HideOverlay();
         GameCore.Instance.StageCleared += ShowOverlay;
+        GameCore.Instance.NewLevelStarted += HideOverlay;
     }
 
     private void ShowOverlay()

@@ -8,8 +8,8 @@ public sealed class GameOverOverlayCaller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HideOverlay();
         GameCore.Instance.GameIsOver += ShowOverlay;
+        GameCore.Instance.NewLevelStarted += HideOverlay;
     }
 
     private void ShowOverlay()

@@ -167,6 +167,7 @@ public sealed class GameCore : MonoBehaviour
         if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
             HyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
 
+        StageCleared += InitiateNewLevel;
         LivesCount = PlayerShipSettings.StartingLifesAmount;
     }
 
@@ -204,6 +205,16 @@ public sealed class GameCore : MonoBehaviour
         PlayerDied?.Invoke(); //mainly used by overlay ui
         PlayerCanBeRespawned = true;
     } 
+    private IEnumerator WaitForNewLevelToStart()
+    {
+        Time.timeScale = 0;
+        //тут всякие штуки для отмечания зачистки
+
+        yield return new WaitForSeconds(PlayerShipSettings.DelayBeforeRespawn);
+        CurrentStage++;
+        StartNextLevel();
+        Time.timeScale = 1;
+    }
     
     private void RespawnPlayer()
     {
@@ -224,6 +235,11 @@ public sealed class GameCore : MonoBehaviour
         {
             RespawnPlayer();
         }
+    }
+
+    private void InitiateNewLevel ()
+    {
+        WaitForNewLevelToStart();
     }
 
     #endregion

@@ -10,12 +10,14 @@ public class LevelSettings : ScriptableObject
     private int asteroidsMaxAmount = 10;
     [SerializeField, Min(0)]
     private int additionalAsteroidsEachStage = 1;
-    [SerializeField, Min(0), Tooltip("Min time from the beginning to start spawn saucers. With each second after that time probability of spawn will increase")]
+    [SerializeField, Min(0)]
     private int saucerSpawnTimer = 20;
     [SerializeField, Min(1)]
     private int littleSaucerFirstLevelAppearance = 3;
     [SerializeField, Min(1)]
     private int lastBigSaucerLevelApperance = 5;
+    [SerializeField, Min(1)]
+    private int maxSaucersForLevel = 5;
 
     //Shorter cooldown between appearances?
     //Saucers shooting ability - spread
@@ -46,6 +48,10 @@ public class LevelSettings : ScriptableObject
     {
         get => lastBigSaucerLevelApperance;
     }
-    
+        public int MaxSaucersForLevel
+    {
+        get => maxSaucersForLevel;
+    }
+
     #endregion
 }
