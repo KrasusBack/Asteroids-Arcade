@@ -9,7 +9,7 @@ public sealed class GameOverOverlayCaller : MonoBehaviour
     void Start()
     {
         GameCore.Instance.GameIsOver += ShowOverlay;
-        GameCore.Instance.NewLevelStarted += HideOverlay;
+        GameCore.Instance.NewLevelInit += HideOverlay;
     }
 
     private void ShowOverlay()

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ObjectSpawner : MonoBehaviour
 {
     //For Context:
@@ -15,19 +14,19 @@ public class ObjectSpawner : MonoBehaviour
 
     private LevelSettings levelSettings;
     private int SaucersThisLevelCounter { get; set; }
+    private List<GameObject> currentSaucers = new List<GameObject>();
 
     private void Start()
     {
         levelSettings = GameCore.Instance.LevelSettings;
 
-        GameCore.Instance.NewLevelStarted += SpawnLevelObjects;
+        GameCore.Instance.NewLevelInit += SpawnLevelObjects;
         GameCore.Instance.StageCleared += StopSpawning;
     }
 
     private void SpawnLevelObjects()
     {
-        StopAllCoroutines();
-        SaucersThisLevelCounter = 0;
+        ResetComponent();
         //asteroids
         var asteroidsAmount = levelSettings.BaseAsteroidAmount + levelSettings.AdditionalAsteroidsEachStage * (GameCore.Instance.CurrentStage - 1);
         if (asteroidsAmount > levelSettings.AsteroidsMaxAmount)
@@ -39,34 +38,54 @@ public class ObjectSpawner : MonoBehaviour
         StartCoroutine(PeriodicSaucerSpawn());
     }
 
+    private void ResetComponent()
+    {
+        StopAllCoroutines();
+        SaucersThisLevelCounter = 0;
+        currentSaucers.Clear();
+    }
+         
     private IEnumerator PeriodicSaucerSpawn()
     {
-        while (SaucersThisLevelCounter<=GameCore.Instance.LevelSettings.MaxSaucersForLevel)
+        while (SaucersThisLevelCounter <= GameCore.Instance.LevelSettings.MaxSaucersForLevel)
         {
-            print("ObjectSpawner:" + levelSettings.SaucerSpawnTimer + " before saucer spawn");
+            //dont spawn if player is not alive
+            if (!GameCore.Instance.PlayerShip.activeSelf)
+                yield return new WaitForSeconds(levelSettings.DelayUntilSpawnNewSaucer);
+            for (var i=0; i<currentSaucers.Count; i++)
+            {
+                if (!currentSaucers[i]) currentSaucers.RemoveAt(i);
+            }
+            if (currentSaucers.Count >= levelSettings.MaxSaucersOnScreen)
+            {
+                //print($"Many S on screen - on screen:{currentSaucers.Count} onThisLevelBefore:{SaucersThisLevelCounter} maxOnScreen:{levelSettings.MaxSaucersOnScreen}");
+                yield return new WaitForSeconds(levelSettings.DelayUntilSpawnNewSaucer);
+                continue;
+            }
+            //print($"Can spawn more - on screen:{currentSaucers.Count} onThisLevelBefore:{SaucersThisLevelCounter} maxOnScreen:{levelSettings.MaxSaucersOnScreen}");
             yield return new WaitForSeconds(levelSettings.SaucerSpawnTimer);
 
             //decide saucer type to spawn
             if (GameCore.Instance.CurrentStage <= levelSettings.LastBigSaucerLevelApperance)
             {
-                SpawnBigSaucer();
+                currentSaucers.Add(SpawnBigSaucer());
             }
             else if (GameCore.Instance.CurrentStage >= levelSettings.LittleSaucerFirstLevelAppearance)
             {
-                SpawnSmallSaucer();
+                currentSaucers.Add(SpawnSmallSaucer());
             }
             SaucersThisLevelCounter++;
         }
     }
 
-    private void SpawnSmallSaucer()
+    private GameObject SpawnSmallSaucer()
     {
-        Instantiate(GameCore.Instance.SaucersSettings.SmallSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
+        return Instantiate(GameCore.Instance.SaucersSettings.SmallSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
     }
 
-    private void SpawnBigSaucer()
+    private GameObject SpawnBigSaucer()
     {
-        Instantiate(GameCore.Instance.SaucersSettings.BigSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
+        return Instantiate(GameCore.Instance.SaucersSettings.BigSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
     }
 
     private void SpawnAsteroid()
@@ -83,7 +102,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         var somePoint = GetRandomPointOutsideSafeArea();
         var sidePicker = Random.Range(0, 2);
-        if (sidePicker==0)
+        if (sidePicker == 0)
             somePoint.x = outerCollider.bounds.min.x;
         else somePoint.x = outerCollider.bounds.max.x;
 

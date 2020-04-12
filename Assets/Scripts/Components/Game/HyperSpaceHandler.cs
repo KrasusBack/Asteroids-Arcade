@@ -16,11 +16,11 @@ public sealed class HyperSpaceHandler : MonoBehaviour
     {
         _readyToGoIntoHyperSpace = false;
         var shipTransform = GameCore.Instance.PlayerShip.GetComponent<Transform>();
-        GameCore.Instance.PlayerShip.SetActive(false);
+        GameCore.Instance.DisablePlayerShip();
         yield return new WaitForSeconds(GameCore.Instance.PlayerShipSettings.TimeInHyperSpace);
 
         SetExitPositionFromHyperSpace(shipTransform);
-        GameCore.Instance.PlayerShip.SetActive(true);
+        GameCore.Instance.EnablePlayerShip();
         yield return new WaitForSeconds(GameCore.Instance.PlayerShipSettings.HyperSpaceCooldown);
         _readyToGoIntoHyperSpace = true;
     }

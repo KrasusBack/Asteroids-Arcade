@@ -41,11 +41,11 @@ public sealed class GameCore : MonoBehaviour
                 print("...Calling StageCleared");
                 StageCleared?.Invoke();
             }
-                
+
         }
     }
     private HyperSpaceHandler HyperSpaceHandler { get; set; } = null;
-    private bool PlayerCanBeRespawned { get; set; } = true;
+    private bool CanActivatePlayerShip { get; set; } = true;
 
     public static GameCore Instance { get; private set; } = null;
 
@@ -71,7 +71,7 @@ public sealed class GameCore : MonoBehaviour
         {
             _livesCount = value;
             LivesCountUpdated?.Invoke();
-            if (value == 0) PlayerCanBeRespawned = false;
+            if (value == 0) CanActivatePlayerShip = false;
         }
     }
     public int CurrentScore
@@ -132,13 +132,16 @@ public sealed class GameCore : MonoBehaviour
     public event GameOverHandler GameIsOver;
 
     public delegate void GameStartedHandler();
-    public event GameStartedHandler NewLevelStarted;
+    public event GameStartedHandler NewLevelInit;
 
     public delegate void PlayerDiedHandler();
     public event PlayerDiedHandler PlayerDied;
 
     public delegate void StageClearedHandler();
     public event StageClearedHandler StageCleared;
+
+    public delegate void LevelStartedHandler();
+    public event LevelStartedHandler LevelStarted; //no use for now
 
     private void Awake()
     {
@@ -168,14 +171,17 @@ public sealed class GameCore : MonoBehaviour
             HyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
 
         StageCleared += InitiateNewLevel;
+        StageCleared += DisablePlayerShip;
+        NewLevelInit += EnablePlayerShip;
         LivesCount = PlayerShipSettings.StartingLifesAmount;
+        DisablePlayerShip();
     }
 
     #region Game Process control
 
     private void StartNewGame()
     {
-        NewLevelStarted?.Invoke();
+        NewLevelInit?.Invoke();
     }
     private void ExecuteGameOver()
     {
@@ -183,12 +189,12 @@ public sealed class GameCore : MonoBehaviour
     }
     private void InitiateNewLevel()
     {
-        StartCoroutine(WaitForNewLevelToStart());
+        StartCoroutine(WaitAndStartNewLevel());
     }
 
     public void HandlePlayerDeath()
     {
-        PlayerShip.SetActive(false);
+        DisablePlayerShip();
         if (LivesCount == 0)
         {
             StartCoroutine(WaitBeforeCalling_GameOver()); // dramatic pause before calling game over overlay
@@ -197,6 +203,17 @@ public sealed class GameCore : MonoBehaviour
         PlayerShip.transform.position = Vector3.zero;
         StartCoroutine(WaitBeforeCalling_Respawn());
     }
+    private void RespawnPlayer()
+    {
+        RemoveLive();
+        EnablePlayerShip();
+    }
+
+    private IEnumerable CallStageTitleCardAndWait()
+    {
+        yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
+
+    }
     private IEnumerator WaitBeforeCalling_GameOver()
     {
         yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
@@ -204,25 +221,21 @@ public sealed class GameCore : MonoBehaviour
     }
     private IEnumerator WaitBeforeCalling_Respawn()
     {
-        PlayerCanBeRespawned = false;
+        CanActivatePlayerShip = false;
         yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
         PlayerDied?.Invoke(); //mainly used by overlay ui
-        PlayerCanBeRespawned = true;
-    } 
-    private IEnumerator WaitForNewLevelToStart()
+        CanActivatePlayerShip = true;
+    }
+    private IEnumerator WaitAndStartNewLevel()
     {
+        CanActivatePlayerShip = false;
         //тут всякие штуки для отмечания зачистки уровня
 
         yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
         playerShip.transform.position = Vector3.zero;
         CurrentStage++;
-        NewLevelStarted?.Invoke();
-    }
-    
-    private void RespawnPlayer()
-    {
-        RemoveLive();
-        PlayerShip.SetActive(true);
+        NewLevelInit?.Invoke();
+        CanActivatePlayerShip = true;
     }
 
     private void CheckAndHandleInput()
@@ -234,14 +247,14 @@ public sealed class GameCore : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
 
         //Respawn player
-        if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && PlayerCanBeRespawned)
+        if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && CanActivatePlayerShip)
         {
             RespawnPlayer();
         }
     }
 
     #endregion
-    
+
     private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
     {
         var pointsNeededForBonusLife = PointsSettings.CostOfAddingBonusLife;
@@ -262,7 +275,7 @@ public sealed class GameCore : MonoBehaviour
     {
         DestroyableObjectsInTheScene--;
     }
-    
+
     public void TravelToHyperSpace()
     {
         HyperSpaceHandler.TravelToHyperSpace();
@@ -277,6 +290,14 @@ public sealed class GameCore : MonoBehaviour
     {
         LivesCount--;
     }
+    public void DisablePlayerShip()
+    {
+        playerShip.SetActive(false);
+    }
+    public void EnablePlayerShip()
+    {
+        playerShip.SetActive(true);
+    }
 
     private void OnDestroy()
     {
@@ -288,7 +309,7 @@ public sealed class GameCore : MonoBehaviour
         StageNumberUpdated = null;
         LivesCountUpdated = null;
         GameIsOver = null;
-        NewLevelStarted = null;
+        NewLevelInit = null;
         PlayerDied = null;
         StageCleared = null;
     }

@@ -18,13 +18,17 @@ public class LevelSettings : ScriptableObject
     private int additionalAsteroidsEachStage = 1;
     [Header("Saucers")]
     [SerializeField, Min(0)]
-    private int saucerSpawnTimer = 20;
+    private float saucerSpawnTimer = 20;
+    [SerializeField, Min(0)]
+    private float delayUntilSpawnNewSaucer = 15;
     [SerializeField, Min(1)]
     private int littleSaucerFirstLevelAppearance = 3;
     [SerializeField, Min(1)]
     private int lastBigSaucerLevelApperance = 5;
     [SerializeField, Min(1)]
     private int maxSaucersForLevel = 3;
+    [SerializeField, Min(1)]
+    private int maxSaucersOnScreen = 1;
 
     //Shorter cooldown between appearances?
     //Saucers shooting ability - spread
@@ -40,7 +44,6 @@ public class LevelSettings : ScriptableObject
     {
         get => delayBeforeRespawn;
     }
-
     public int BaseAsteroidAmount
     {
         get => baseAsteroidAmount;
@@ -53,9 +56,13 @@ public class LevelSettings : ScriptableObject
     {
         get => additionalAsteroidsEachStage;
     }
-    public int SaucerSpawnTimer
+    public float SaucerSpawnTimer
     {
         get => saucerSpawnTimer;
+    }
+    public float DelayUntilSpawnNewSaucer
+    {
+        get => delayUntilSpawnNewSaucer;
     }
     public int LittleSaucerFirstLevelAppearance
     {
@@ -65,9 +72,13 @@ public class LevelSettings : ScriptableObject
     {
         get => lastBigSaucerLevelApperance;
     }
-        public int MaxSaucersForLevel
+    public int MaxSaucersForLevel
     {
         get => maxSaucersForLevel;
+    }
+    public int MaxSaucersOnScreen
+    {
+        get => maxSaucersOnScreen;
     }
     #endregion
 }
