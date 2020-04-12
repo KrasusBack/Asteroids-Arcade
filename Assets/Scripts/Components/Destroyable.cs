@@ -40,7 +40,7 @@ public class Destroyable : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        GameCore.Instance.DecreaseDestroyableObjectsCounter();
+        GameCore.Instance?.DecreaseDestroyableObjectsCounter();
     }
 
     /// <summary> Called in Start after Destroyable initialisation </summary>

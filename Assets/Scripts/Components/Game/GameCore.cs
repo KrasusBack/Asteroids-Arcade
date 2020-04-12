@@ -34,11 +34,11 @@ public sealed class GameCore : MonoBehaviour
 
         set
         {
-            if (value < 0) throw new System.ArgumentOutOfRangeException("DestroyableObjectInTheScene cant be <0");
+            if (value < 0) throw new System.ArgumentOutOfRangeException("DestroyableObjectInTheScene cant be < 0");
             _destroyableObjectInTheScene = value;
             if (value == 0)
             {
-                print("Calling StageCleared");
+                print("...Calling StageCleared");
                 StageCleared?.Invoke();
             }
                 
@@ -229,7 +229,7 @@ public sealed class GameCore : MonoBehaviour
     }
 
     #endregion
-
+    
     private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
     {
         var pointsNeededForBonusLife = PointsSettings.CostOfAddingBonusLife;
@@ -242,15 +242,15 @@ public sealed class GameCore : MonoBehaviour
         BonusLifeCheckAndHandle(CurrentScore, CurrentScore += points);
     }
 
-    public void DecreaseDestroyableObjectsCounter()
-    {
-        DestroyableObjectsInTheScene--;
-    }
     public void IncreaseDestroyableObjectsCounter()
     {
         DestroyableObjectsInTheScene++;
     }
-
+    public void DecreaseDestroyableObjectsCounter()
+    {
+        DestroyableObjectsInTheScene--;
+    }
+    
     public void TravelToHyperSpace()
     {
         HyperSpaceHandler.TravelToHyperSpace();
@@ -266,11 +266,25 @@ public sealed class GameCore : MonoBehaviour
         LivesCount--;
     }
 
+    private void OnDestroy()
+    {
+        ClearEvents();
+    }
+    private void ClearEvents()
+    {
+        ScoreUpdated = null;
+        StageNumberUpdated = null;
+        LivesCountUpdated = null;
+        GameIsOver = null;
+        GameIsStarted = null;
+        PlayerDied = null;
+        StageCleared = null;
+    }
+
     #region Stuff for Tests
 
     private void ReloadScene()
     {
-        StageCleared = null;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }

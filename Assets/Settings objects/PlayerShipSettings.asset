@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9941169125dc6be44917e5897c50f04d, type: 3}
   m_Name: PlayerShipSettings
   m_EditorClassIdentifier: 
-  startingLifesAmount: 3
+  startingLifesAmount: 4
   delayBeforeRespawn: 1
   moveSpeed: 50
   rotationSpeed: 3

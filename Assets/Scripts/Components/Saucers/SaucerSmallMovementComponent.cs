@@ -23,12 +23,12 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         var someAngle = 60;
         _direction = GetRandomDirection(someAngle);
 
-        StartCoroutine(WaitForTheNextObstaclesCheck());
+        StartCoroutine(WaitBeforeNextObstaclesCheck());
     }
 
     private void CreateAndSetUpObstaclesCheckerObject()
     {
-        var checkerObject = new GameObject("obstaclesChecker");
+        var checkerObject = new GameObject(gameObject.name + "_ObstaclesChecker");
         _checkerObjectTransform = checkerObject.transform;
         _checkerObjectTransform.position = transform.position;
         checkerObject.tag = tag;
@@ -83,11 +83,7 @@ public class SaucerSmallMovementComponent : MovementConponentBase
                 minDistance = distance;
             }
         }
-
         //if (!nearestCollider) return _checkerObjectTransform.position;
-
-        //print("nearest collider: " + nearestCollider.name);
-
         //что-то сделать с minDistance
         Vector2 directionToNearestCollider = nearestColliderPos - _checkerObjectTransform.position;
         var currentDirectionAngle = Vector2.SignedAngle(Vector2.right, _direction);
@@ -103,16 +99,17 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         //or just like this:
         //_direction = Vector2.Perpendicular(toNearestColliderDirection);
 
+        /*
         var multiplier = 4;
         Vector3 endPos = new Vector3(_checkerObjectTransform.position.x + toNearestColliderDirection.x * multiplier,
                                         _checkerObjectTransform.position.y + toNearestColliderDirection.y * multiplier,
                                         _checkerObjectTransform.position.z);
-
-        //min time = 0.2f
-        return endPos;
+        return endpos;
+        */     
+        return _checkerObjectTransform.position;
     }
 
-    private IEnumerator WaitForTheNextObstaclesCheck()
+    private IEnumerator WaitBeforeNextObstaclesCheck()
     {
         while (true)
         {
@@ -123,7 +120,8 @@ public class SaucerSmallMovementComponent : MovementConponentBase
 
     private void OnDestroy()
     {
-        Destroy(_checkerObjectTransform.gameObject);
+        if (_checkerObjectTransform)
+            Destroy(_checkerObjectTransform.gameObject);
     }
 
 }
