@@ -58,6 +58,12 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         }
         MoveKinematicRB(_saucer.MoveSpeed, direction);
         checkerObjectTransform.position = transform.position;
+
+        var multiplier = 8;
+        Vector3 endPos = new Vector3(checkerObjectTransform.position.x + direction.x * multiplier, 
+                                        checkerObjectTransform.position.y + direction.y * multiplier, 
+                                        checkerObjectTransform.position.z);
+        Debug.DrawLine(checkerObjectTransform.position, endPos, Color.cyan);
     }
 
     private void ChangeDirectionBasedOnNearObjects()
@@ -93,7 +99,10 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         var toNearestColliderDirectionAngle = Vector2.SignedAngle(directionToNearestCollider, Vector2.right);
         var safeAngle = 15;
         if (currentDirectionAngle - toNearestColliderDirectionAngle > safeAngle) return;
-        direction = Vector2.Reflect(MathfExtentions.DegreeToVector2(toNearestColliderDirectionAngle), direction);
+
+        var toNearestColliderDirection = MathfExtentions.DegreeToVector2(toNearestColliderDirectionAngle);
+        direction = Vector2.Reflect(direction, Vector2.Perpendicular(toNearestColliderDirection));
+
         
         //min time = 0.2f
     }
