@@ -9,7 +9,9 @@ public class SaucerSmallMovementComponent : MovementConponentBase
     private Transform checkerObjectTransform;
     private Vector2 direction;
 
-    Collider2D[] collidersNear;
+    private bool timeToCheck = true;
+
+    List<Collider2D> collidersNear = new List<Collider2D>();
     ContactFilter2D contactFilter2D = new ContactFilter2D();
     //появиться там где нет астероида (проверка пригодиться еще и для hyperSpace)
     //задать изначальный вектор
@@ -43,12 +45,17 @@ public class SaucerSmallMovementComponent : MovementConponentBase
 
         var someAngle = 60;
         direction = GetRandomDirection(someAngle);
+
+        StartCoroutine(WaitForTheNextObstaclesCheck());
     }
 
     private void FixedUpdate()
     {
-        ChangeDirectionBasedOnNearObjects();
-
+        if (timeToCheck)
+        {
+            timeToCheck = false;
+            ChangeDirectionBasedOnNearObjects();
+        }
         MoveKinematicRB(_saucer.MoveSpeed, direction);
         checkerObjectTransform.position = transform.position;
     }
@@ -56,27 +63,17 @@ public class SaucerSmallMovementComponent : MovementConponentBase
     private void ChangeDirectionBasedOnNearObjects()
     {
         _checkCollider.OverlapCollider(contactFilter2D, collidersNear);
-        /*
-        if (collidersNear.Length == 0) return;
+
+        if (collidersNear.Count == 0) return;
 
         float minDistance = float.MaxValue;
         Collider2D nearestCollider = new Collider2D();
-        Vector2[] nearCollidersPositions;// = new Vector2[collidersNear.Length];
-        */
-        //print("Colliders near:");
+        List<Vector2> nearCollidersPositions = new List<Vector2>();
 
-        //Посмотреть на все коллайдеры вокруг. Выбрать ближайший (от него у будем уклоняться
-        //Далее нужно определить куда. Для этого собираем позиции ближайших коллайдеров и отсекаем направления в которых
-        //они находятся. 
-        //Оверкил: можно составить массив весов, в котором чем ближе объект, тем больше его вес. Так, при возникновении
-        // Ситуации в коророй некуда уклоняться придется выбирать направение в сторону самого дальнего объекта
-        //Оверкил: Также можно просто стрелять в ближайший объект 
-
-        /*
         //find nearest collider to avoid
-        for (var i = 0; i<collidersNear.Length; i++ )
+        for (var i = 0; i < collidersNear.Count; i++)
         {
-            nearCollidersPositions[i] = collidersNear[i].transform.position;
+            nearCollidersPositions.Add(collidersNear[i].transform.position);
             var distance = Vector2.Distance(transform.position, nearCollidersPositions[i]);
             if (distance < minDistance)
             {
@@ -85,8 +82,11 @@ public class SaucerSmallMovementComponent : MovementConponentBase
             }
             //print("--" + collider.name);
         }
-        */
-        /*
+
+        if (!nearestCollider) return;
+
+        print("nearest collider: " + nearestCollider.name);
+        
         //что-то сделать с minDistance
         Vector2 directionToNearestCollider = nearestCollider.transform.position - transform.position;
         var currentDirectionAngle = Vector2.SignedAngle(direction, Vector2.right);
@@ -94,7 +94,17 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         var safeAngle = 15;
         if (currentDirectionAngle - toNearestColliderDirectionAngle > safeAngle) return;
         direction = Vector2.Reflect(MathfExtentions.DegreeToVector2(toNearestColliderDirectionAngle), direction);
-        */
+        
+        //min time = 0.2f
+    }
+
+    private IEnumerator WaitForTheNextObstaclesCheck()
+    {
+        while(true)
+        {
+            timeToCheck = true;
+            yield return new WaitForSeconds(1.15f - _saucer.AvoidingObstaclesMastery);
+        }
     }
 
     private void OnDestroy()
