@@ -132,7 +132,7 @@ public sealed class GameCore : MonoBehaviour
     public event GameOverHandler GameIsOver;
 
     public delegate void GameStartedHandler();
-    public event GameStartedHandler GameIsStarted;
+    public event GameStartedHandler NewLevelStarted;
 
     public delegate void PlayerDiedHandler();
     public event PlayerDiedHandler PlayerDied;
@@ -146,13 +146,12 @@ public sealed class GameCore : MonoBehaviour
     }
     private void Start()
     {
-        StartGame();
+        StartNextLevel();
     }
     private void Update()
     {
         CheckAndHandleInput();
     }
-
 
     private void SetInstance()
     {
@@ -163,7 +162,6 @@ public sealed class GameCore : MonoBehaviour
             print("-------Game Started!-------");
         }
     }
-
     private void Init()
     {
         if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
@@ -174,9 +172,9 @@ public sealed class GameCore : MonoBehaviour
 
     #region Game Process control
 
-    private void StartGame()
+    private void StartNextLevel()
     {
-        GameIsStarted?.Invoke();
+        NewLevelStarted?.Invoke();
     }
     private void ExecuteGameOver()
     {
@@ -276,7 +274,7 @@ public sealed class GameCore : MonoBehaviour
         StageNumberUpdated = null;
         LivesCountUpdated = null;
         GameIsOver = null;
-        GameIsStarted = null;
+        NewLevelStarted = null;
         PlayerDied = null;
         StageCleared = null;
     }

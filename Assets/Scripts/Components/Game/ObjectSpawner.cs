@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ObjectSpawner : MonoBehaviour
 {
     //For Context:
     //Safe area - area inside innerCollider
     //Outside safe area - area between innerCollider and outerCollider
+    private LevelSettings levelSettings;
 
     [SerializeField]
     private BoxCollider2D innerCollider;
@@ -15,15 +17,63 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Start()
     {
-        GameCore.Instance.GameIsStarted += SpawnObjectsOutsideSafeArea;
-    }
+        levelSettings = GameCore.Instance.LevelSettings;
 
-    private void SpawnObjectsOutsideSafeArea()
+        GameCore.Instance.NewLevelStarted += SpawnLevelObjects;
+        GameCore.Instance.StageCleared += StopSpawning;
+    }
+    /*
+    private void SpawnObjectsOutsideSafeArea() //~asteroids spawn area
     {
         var asteroidsAmount = GameCore.Instance.LevelSettings.BaseAsteroidAmount + GameCore.Instance.LevelSettings.AdditionalAsteroidsEachStage * (GameCore.Instance.CurrentStage-1);
         for (var i = 0; i < asteroidsAmount; i++)
             Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointOutsideSafeArea(), Quaternion.identity);
     }
+    */
+
+    private void SpawnLevelObjects()
+    {
+        //asteroids
+        var asteroidsAmount = levelSettings.BaseAsteroidAmount + levelSettings.AdditionalAsteroidsEachStage * (GameCore.Instance.CurrentStage - 1);
+        if (asteroidsAmount > levelSettings.AsteroidsMaxAmount)
+            asteroidsAmount = levelSettings.AsteroidsMaxAmount;
+        for (var i = 0; i < asteroidsAmount; i++)
+            SpawnAsteroid();
+
+        //start saucer spawn timer
+        StartCoroutine( saucerSpawnTimer());
+    }
+
+    private IEnumerator saucerSpawnTimer()
+    {
+        while(true)
+        {
+            var saucerSpawnTimer = GameCore.Instance.LevelSettings.SaucerSpawnTimer - (GameCore.Instance.CurrentStage - 1);
+            yield return new WaitForSeconds(saucerSpawnTimer);
+
+            //decide saucer type to spawn
+            if (GameCore.Instance.CurrentStage < levelSettings.LittleSaucerFirstLevelAppearance &&
+                //<не последний уровень для появления большой тарелки
+                //расчитать вероятность появления большой тарелки отталкиваясь от последнего уровня для его появления и текущего уровня (~)
+                
+        }
+    }
+
+    private void SpawnSmallSaucer()
+    {
+        Instantiate(GameCore.Instance.SaucersSettings.SmallSaucer.SaucerObjPrefab, GetRandomPointOutsideSafeArea(), Quaternion.identity);
+    }
+
+    private void SpawnBigSaucer()
+    {
+        Instantiate(GameCore.Instance.SaucersSettings.BigSaucer.SaucerObjPrefab, GetRandomPointOutsideSafeArea(), Quaternion.identity);
+    }
+
+    private void SpawnAsteroid()
+    {
+        Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointOutsideSafeArea(), Quaternion.identity);
+    }
+
 
     private Vector2 GetRandomPointOutsideSafeArea()
     {
@@ -50,6 +100,11 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         return newPoint;
+    }
+
+    private void StopSpawning()
+    {
+        StopAllCoroutines();
     }
 
 }
