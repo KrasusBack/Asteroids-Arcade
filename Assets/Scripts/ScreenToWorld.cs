@@ -21,4 +21,5 @@ public static class ScreenToWorld
         var point = new Vector3(xPos, yPos, Camera.main.transform.position.z);
         return Camera.main.ViewportToWorldPoint(point);
     }
+
 }

@@ -2337,13 +2337,13 @@ MonoBehaviour:
   m_margin: {x: -1.3694055, y: 0, z: 0.9946684, w: -2.9284}
   m_textInfo:
     textComponent: {fileID: 2122520059}
-    characterCount: 12
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 2
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -2513,7 +2513,7 @@ PrefabInstance:
     - target: {fileID: 4906696759052741541, guid: a4b824c7548eed24c9187fc18ca4000e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4906696759052741541, guid: a4b824c7548eed24c9187fc18ca4000e,
         type: 3}
