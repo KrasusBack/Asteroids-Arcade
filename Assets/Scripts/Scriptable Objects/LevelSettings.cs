@@ -29,6 +29,8 @@ public class LevelSettings : ScriptableObject
     private int maxSaucersForLevel = 3;
     [SerializeField, Min(1)]
     private int maxSaucersOnScreen = 1;
+    [SerializeField, Min(1)]
+    private int increaseMaxSaucerOnScreenEachLevels = 3;
 
     //Shorter cooldown between appearances?
     //Saucers shooting ability - spread
@@ -80,5 +82,10 @@ public class LevelSettings : ScriptableObject
     {
         get => maxSaucersOnScreen;
     }
+    public int IncreaseMaxSaucerOnScreenEachLevels
+    {
+        get => increaseMaxSaucerOnScreenEachLevels;
+    }
+    
     #endregion
 }

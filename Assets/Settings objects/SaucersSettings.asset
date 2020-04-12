@@ -15,7 +15,7 @@ MonoBehaviour:
   bigSaucer:
     saucerObjPrefab: {fileID: 6114920307276586691, guid: 45161d381c2a3614ca900779f3c08682,
       type: 3}
-    moveSpeed: 1
+    moveSpeed: 0.25
     avoidingObstaclesMastery: 0
     bulletPrefab: {fileID: 3522412154301574141, guid: 35cd3b80b49cc924e85964319c71c810,
       type: 3}
@@ -27,7 +27,7 @@ MonoBehaviour:
   smallSaucer:
     saucerObjPrefab: {fileID: 6114920307276586691, guid: 2f58cb9b718e6ba4f988cc423d8893a7,
       type: 3}
-    moveSpeed: 0.7
+    moveSpeed: 0.4
     avoidingObstaclesMastery: 0.977
     bulletPrefab: {fileID: 3522412154301574141, guid: 35cd3b80b49cc924e85964319c71c810,
       type: 3}

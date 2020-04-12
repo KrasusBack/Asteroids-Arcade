@@ -47,7 +47,7 @@ public class ObjectSpawner : MonoBehaviour
          
     private IEnumerator PeriodicSaucerSpawn()
     {
-        while (SaucersThisLevelCounter <= GameCore.Instance.LevelSettings.MaxSaucersForLevel)
+        while (SaucersThisLevelCounter <= levelSettings.MaxSaucersForLevel + GameCore.Instance.CurrentStage/levelSettings.IncreaseMaxSaucerOnScreenEachLevels)
         {
             //dont spawn if player is not alive
             if (!GameCore.Instance.PlayerShip.activeSelf)

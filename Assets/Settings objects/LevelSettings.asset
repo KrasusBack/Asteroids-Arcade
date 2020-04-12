@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7823a77a3b357d24793e0ddaa56206b0, type: 3}
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
-  delayBeforeNextLevel: 2.5
+  delayBeforeNextLevel: 2
   delayBeforeRespawn: 1
-  baseAsteroidAmount: 1
+  baseAsteroidAmount: 5
   asteroidsMaxAmount: 10
   additionalAsteroidsEachStage: 1
   saucerSpawnTimer: 5
+  delayUntilSpawnNewSaucer: 15
   littleSaucerFirstLevelAppearance: 2
   lastBigSaucerLevelApperance: 1
   maxSaucersForLevel: 3
+  maxSaucersOnScreen: 1
+  increaseMaxSaucerOnScreenEachLevels: 3

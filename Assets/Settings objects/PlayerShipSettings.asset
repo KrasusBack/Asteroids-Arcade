@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PlayerShipSettings
   m_EditorClassIdentifier: 
   startingLifesAmount: 4
-  delayBeforeRespawn: 1
   moveSpeed: 50
-  rotationSpeed: 3
+  rotationSpeed: 5
   bulletPrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
   bulletSpeed: 2
   bulletTravelDistance: 2
+  shootingSpeed: 3.33
   hyperSpaceCooldown: 1
   timeInHyperSpace: 1
   chanceToAppearInsideAsteroid: 0.1667

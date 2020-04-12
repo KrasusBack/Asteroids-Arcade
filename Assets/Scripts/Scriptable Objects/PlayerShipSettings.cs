@@ -21,6 +21,9 @@ public class PlayerShipSettings : ScriptableObject, IBullet
     private float bulletSpeed = 1;
     [SerializeField, Min(0)]
     private float bulletTravelDistance = 2;
+    [SerializeField, Min(0)]
+    private float shootingSpeed = 3.33f;
+    //(if there is more shootingSpeed realated stats you should add IShootingStats)
 
     [Header("HyperSpace")]
     [SerializeField, Min(0)]
@@ -36,32 +39,30 @@ public class PlayerShipSettings : ScriptableObject, IBullet
     {
         get => bulletPrefab;
     }
-
     public float MoveSpeed
     {
         get => moveSpeed;
     }
-
     public float RotationSpeed
     {
         get => rotationSpeed;
     }
-
     public float BulletSpeed
     {
         get => bulletSpeed;
     }
-
     public float BulletTravelDistance
     {
         get => bulletTravelDistance;
     }
-
+    public float ShootingSpeed
+    {
+        get => shootingSpeed;
+    }
     public float HyperSpaceCooldown
     {
         get => hyperSpaceCooldown;
     }
-
     public float TimeInHyperSpace
     {
         get => timeInHyperSpace;
@@ -70,7 +71,6 @@ public class PlayerShipSettings : ScriptableObject, IBullet
     {
         get => chanceToAppearInsideAsteroid;
     }
-
     public int StartingLifesAmount
     {
         get => startingLifesAmount;
