@@ -26,7 +26,7 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         StartCoroutine(WaitForTheNextObstaclesCheck());
     }
 
-    private void CreateAndSetUpObstaclesCheckerObject ()
+    private void CreateAndSetUpObstaclesCheckerObject()
     {
         var checkerObject = new GameObject("obstaclesChecker");
         _checkerObjectTransform = checkerObject.transform;
@@ -36,7 +36,7 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         _checkCollider = checkerObject.AddComponent<CircleCollider2D>();
         _checkCollider.isTrigger = true;
         //change collider checker radious based on its size and avoiding obstacles mastery 
-        _checkCollider.radius = GetComponent<Renderer>().bounds.max.magnitude + _saucer.MoveSpeed;
+        _checkCollider.radius = GetComponent<Renderer>().bounds.size.magnitude * 2 + _saucer.MoveSpeed;
         contactFilter2D.SetLayerMask(LayerMask.GetMask("Player", "Asteroids"));
         contactFilter2D.useTriggers = true;
     }
