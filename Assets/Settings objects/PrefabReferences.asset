@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletBasePrefab: {fileID: 3522412154301574141, guid: 35ec74c2a560c2448893df23e5e56e43,
     type: 3}
-  saucerBulletPrefab: {fileID: 3522412154301574141, guid: bd9cc2bdbace9eb44ac96de7a6af5c5c,
+  commonDestroyParticleEffect: {fileID: 8981662061019154963, guid: 7dd4cd0ceaf21a946926772406a8de93,
+    type: 3}
+  playerDestroyParticleEffect: {fileID: 8981662061019154963, guid: 25e29e07657b52d4c927c0ab28b0f5d3,
     type: 3}

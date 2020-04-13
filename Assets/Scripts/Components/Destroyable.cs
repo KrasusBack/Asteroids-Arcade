@@ -35,6 +35,7 @@ public class Destroyable : MonoBehaviour
     protected virtual void DestroyOperation()
     {
         BeforeDestroyOperation();
+        //ShowDestroyEffect();
         Destroy(gameObject);
     }
 
@@ -42,6 +43,12 @@ public class Destroyable : MonoBehaviour
     {
         GameCore.Instance?.DecreaseDestroyableObjectsCounter();
     }
+
+    //private void ShowDestroyEffect()
+    //{
+    //    var destroyEffectObj = Instantiate(GameCore.Instance.PrefabReferences.CommonDestroyParticleEffect, transform.position, transform.rotation);
+    //    destroyEffectObj.transform.localScale = transform.localScale;
+    //}
 
     /// <summary> Called in Start after Destroyable initialisation </summary>
     protected virtual void DoInStart() { }

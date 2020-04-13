@@ -16,6 +16,8 @@ public sealed class GameCore : MonoBehaviour
     private InputSettings inputSettings;
     [SerializeField]
     private LevelSettings levelSettings;
+    [SerializeField]
+    private PrefabReferences prefabReferences;
 
     [SerializeField]
     private GameObject playerShip;
@@ -113,7 +115,11 @@ public sealed class GameCore : MonoBehaviour
     {
         get => levelSettings;
     }
-
+    public PrefabReferences PrefabReferences
+    {
+        get => prefabReferences;
+    }
+    
     public GameObject PlayerShip
     {
         get => playerShip;
@@ -198,7 +204,9 @@ public sealed class GameCore : MonoBehaviour
 
     public void HandlePlayerDeath()
     {
+        DeathAnimationCreator.CreatePlayerDeathEffect();
         DisablePlayerShip();
+        
         if (LivesCount == 0)
         {
             //dramatic pause before calling game over overlay
