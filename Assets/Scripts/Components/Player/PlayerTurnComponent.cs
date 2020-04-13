@@ -11,7 +11,7 @@ public sealed class PlayerTurnComponent : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        var horizontalAxisInput = Input.GetAxis("Horizontal");
+        var horizontalAxisInput = Input.GetAxisRaw("Horizontal");
         if (horizontalAxisInput == 0) return;
         _rb.rotation += GameCore.Instance.PlayerShipSettings.RotationSpeed * -horizontalAxisInput;
     }

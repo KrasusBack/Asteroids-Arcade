@@ -34,7 +34,7 @@ public sealed class GameCore : MonoBehaviour
 
         set
         {
-            if (value < 0) throw new System.ArgumentOutOfRangeException("DestroyableObjectInTheScene cant be < 0");
+            if (value < 0) throw new System.ArgumentOutOfRangeException("GameCore: DestroyableObjectInTheScene cant be < 0");
             _destroyableObjectInTheScene = value;
             if (value == 0)
             {
@@ -45,7 +45,8 @@ public sealed class GameCore : MonoBehaviour
         }
     }
     private HyperSpaceHandler HyperSpaceHandler { get; set; } = null;
-    private bool CanActivatePlayerShip { get; set; } = true;
+    //for preventing from spawn in transitions (between level, time after death, etc)
+    private bool CanActivatePlayerShip { get; set; } = true; 
 
     public static GameCore Instance { get; private set; } = null;
 
@@ -137,6 +138,9 @@ public sealed class GameCore : MonoBehaviour
     public delegate void PlayerDiedHandler();
     public event PlayerDiedHandler PlayerDied;
 
+    public delegate void PlayerRespawnedHandler();
+    public event PlayerRespawnedHandler PlayerRespawned;
+
     public delegate void StageClearedHandler();
     public event StageClearedHandler StageCleared;
 
@@ -197,7 +201,8 @@ public sealed class GameCore : MonoBehaviour
         DisablePlayerShip();
         if (LivesCount == 0)
         {
-            StartCoroutine(WaitBeforeCalling_GameOver()); // dramatic pause before calling game over overlay
+            //dramatic pause before calling game over overlay
+            StartCoroutine(WaitBeforeCalling_GameOver()); 
             return;
         }
         PlayerShip.transform.position = Vector3.zero;
@@ -207,12 +212,12 @@ public sealed class GameCore : MonoBehaviour
     {
         RemoveLive();
         EnablePlayerShip();
+        PlayerRespawned?.Invoke();
     }
 
     private IEnumerable CallStageTitleCardAndWait()
     {
         yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
-
     }
     private IEnumerator WaitBeforeCalling_GameOver()
     {
@@ -224,6 +229,7 @@ public sealed class GameCore : MonoBehaviour
         CanActivatePlayerShip = false;
         yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
         PlayerDied?.Invoke(); //mainly used by overlay ui
+        //check preventing end of the level (stage cleared) transition to the next level 
         CanActivatePlayerShip = true;
     }
     private IEnumerator WaitAndStartNewLevel()
@@ -232,10 +238,13 @@ public sealed class GameCore : MonoBehaviour
         //тут всякие штуки для отмечания зачистки уровня
 
         yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
-        playerShip.transform.position = Vector3.zero;
-        CurrentStage++;
-        NewLevelInit?.Invoke();
-        CanActivatePlayerShip = true;
+        if (LivesCount > 0)
+        {
+            playerShip.transform.position = Vector3.zero;
+            CurrentStage++;
+            NewLevelInit?.Invoke();
+            CanActivatePlayerShip = true;
+        }    
     }
 
     private void CheckAndHandleInput()
@@ -305,6 +314,7 @@ public sealed class GameCore : MonoBehaviour
     }
     private void ClearEvents()
     {
+        //preventing calls from/to destroyed objects OnDestroy calls 
         ScoreUpdated = null;
         StageNumberUpdated = null;
         LivesCountUpdated = null;
@@ -312,6 +322,8 @@ public sealed class GameCore : MonoBehaviour
         NewLevelInit = null;
         PlayerDied = null;
         StageCleared = null;
+        PlayerRespawned = null;
+        LevelStarted = null;
     }
 
     #region Stuff for Tests

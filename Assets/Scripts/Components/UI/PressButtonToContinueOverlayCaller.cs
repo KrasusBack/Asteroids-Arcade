@@ -10,7 +10,9 @@ public sealed class PressButtonToContinueOverlayCaller : MonoBehaviour
     {
         HideOverlay();
         GameCore.Instance.PlayerDied += ShowOverlay;
-        GameCore.Instance.LivesCountUpdated += HideOverlay;
+        GameCore.Instance.PlayerRespawned += HideOverlay;
+        //preventing "death" + "end of the level" situations
+        GameCore.Instance.StageCleared += HideOverlay;
     }
 
     private void ShowOverlay()
