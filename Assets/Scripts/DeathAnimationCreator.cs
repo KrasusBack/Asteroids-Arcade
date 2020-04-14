@@ -11,11 +11,16 @@ public abstract class DeathAnimationCreator : MonoBehaviour
                     GameCore.Instance.PlayerShip.transform.rotation);
     }
 
-    public static void CreateSomeDestroyEffect(Transform objTransform)
+    //call for default effect
+    public static void CreateDestroyEffect(Transform objTransform)
     {
-        var effectObj = Instantiate(GameCore.Instance.PrefabReferences.CommonDestroyParticleEffect,
-                                    objTransform.position,
-                                    objTransform.rotation);
+        CreateDestroyEffect(objTransform, GameCore.Instance.PrefabReferences.CommonDestroyParticleEffect);
+    }
+
+    public static void CreateDestroyEffect(Transform objTransform, GameObject destroyEffectObj)
+    {
+        var effectObj = Instantiate(destroyEffectObj, objTransform.position, objTransform.rotation);
+        //aply destroying obj scale
         Vector3 newScale = new Vector3(objTransform.localScale.x * effectObj.transform.localScale.x,
                                        objTransform.localScale.y * effectObj.transform.localScale.y,
                                        objTransform.localScale.z * effectObj.transform.localScale.z);

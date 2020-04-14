@@ -46,6 +46,7 @@ public sealed class GameCore : MonoBehaviour
 
         }
     }
+
     private HyperSpaceHandler HyperSpaceHandler { get; set; } = null;
     //for preventing from spawn in transitions (between level, time after death, etc)
     private bool CanActivatePlayerShip { get; set; } = true; 
@@ -242,6 +243,8 @@ public sealed class GameCore : MonoBehaviour
     }
     private IEnumerator WaitAndStartNewLevel()
     {
+        //wait to satisfy sensation after recent kill
+        yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
         CanActivatePlayerShip = false;
         //тут всякие штуки для отмечания зачистки уровня
 

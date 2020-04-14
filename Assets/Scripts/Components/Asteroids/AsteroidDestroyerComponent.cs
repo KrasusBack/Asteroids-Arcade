@@ -13,7 +13,6 @@ public sealed class AsteroidDestroyerComponent : Destroyable
 
     protected override void BeforeDestroyOperation()
     {
-        DeathAnimationCreator.CreateSomeDestroyEffect(transform);
         ShatterAsteroid();
     }
 
