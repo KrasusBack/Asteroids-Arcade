@@ -9,7 +9,9 @@ public class SaucerSmallMovementComponent : MovementConponentBase
     private Transform _checkerObjectTransform;
     private Vector2 _direction;
     private float _checkInterval = 0.2f;
-    private bool _timeToCheck = true;
+    private float _randomTurnInterval = 2f;
+    private bool _timeToTurn = true;
+    private bool _timeToRandomTurn = false;
 
     List<Collider2D> collidersNear = new List<Collider2D>();
     ContactFilter2D contactFilter2D = new ContactFilter2D();
@@ -17,13 +19,14 @@ public class SaucerSmallMovementComponent : MovementConponentBase
     private void Start()
     {
         _saucer = GetComponent<SaucerSettingsComponent>().GetSettings();
-        //create obstacles checker object
+        //create obstacles checker object (collider that moves with saucer and surve as an obstacle checker)
         CreateAndSetUpObstaclesCheckerObject();
 
         var someAngle = 60;
         _direction = GetRandomDirection(someAngle);
 
         StartCoroutine(WaitBeforeNextObstaclesCheck());
+        StartCoroutine(WaitBeforeNextRandomChangeOfDirection());
     }
 
     private void CreateAndSetUpObstaclesCheckerObject()
@@ -43,12 +46,18 @@ public class SaucerSmallMovementComponent : MovementConponentBase
 
     private void FixedUpdate()
     {
-        //for debug: perpendicular line end pos
+        //for debuging: perpendicular line end pos
         Vector3 perpen = _checkerObjectTransform.position;
 
-        if (_timeToCheck)
+        //random turn before regular turn with obstacles check for possible second change of direction
+        if (_timeToRandomTurn)
         {
-            _timeToCheck = false;
+            _timeToRandomTurn = false;
+            ChangeDirectionToRandom();
+        }
+        if (_timeToTurn)
+        {
+            _timeToTurn = false;
             perpen = ChangeDirectionBasedOnNearObjects();
         }
         MoveKinematicRB(_saucer.MoveSpeed, _direction);
@@ -109,12 +118,26 @@ public class SaucerSmallMovementComponent : MovementConponentBase
         return _checkerObjectTransform.position;
     }
 
+    private void ChangeDirectionToRandom()
+    {
+        _direction = GetRandomDirection(180);
+    }
+
     private IEnumerator WaitBeforeNextObstaclesCheck()
     {
         while (true)
         {
-            _timeToCheck = true;
+            _timeToTurn = true;
             yield return new WaitForSeconds(_checkInterval);
+        }
+    }
+
+    private IEnumerator WaitBeforeNextRandomChangeOfDirection()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(_randomTurnInterval);
+            _timeToRandomTurn = true;
         }
     }
 

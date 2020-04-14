@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforeNextLevel: 2
   delayBeforeRespawn: 1
-  baseAsteroidAmount: 5
+  baseAsteroidAmount: 1
   asteroidsMaxAmount: 10
   additionalAsteroidsEachStage: 1
   saucerSpawnTimer: 5

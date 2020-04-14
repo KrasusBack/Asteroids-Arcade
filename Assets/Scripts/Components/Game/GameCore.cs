@@ -49,7 +49,8 @@ public sealed class GameCore : MonoBehaviour
 
     private HyperSpaceHandler HyperSpaceHandler { get; set; } = null;
     //for preventing from spawn in transitions (between level, time after death, etc)
-    private bool CanActivatePlayerShip { get; set; } = true; 
+    private bool CanActivatePlayerShip { get; set; } = true;
+    private Quaternion playerShipInitialRotation;
 
     public static GameCore Instance { get; private set; } = null;
 
@@ -185,6 +186,8 @@ public sealed class GameCore : MonoBehaviour
         //StageCleared += DisablePlayerShip;
         //NewLevelInit += EnablePlayerShip;
         LivesCount = PlayerShipSettings.StartingLifesAmount;
+
+        playerShipInitialRotation = playerShip.transform.rotation;
         //DisablePlayerShip();
     }
 
@@ -321,6 +324,8 @@ public sealed class GameCore : MonoBehaviour
     }
     public void EnablePlayerShip()
     {
+        //because this method suppose to "respawn player" there will be rotation update to init state
+        playerShip.transform.rotation = playerShipInitialRotation;
         playerShip.SetActive(true);
     }
 
