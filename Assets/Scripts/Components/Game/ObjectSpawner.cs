@@ -5,8 +5,8 @@ using UnityEngine;
 public class ObjectSpawner : MonoBehaviour
 {
     //For Context:
-    //Safe area - area inside innerCollider
-    //Outside safe area - area between innerCollider and outerCollider
+    //Safe area - area inside innerCollider. Must be safe zone without spawns inside of it
+    //Outside safe area - area between innerCollider and outerCollider. Zone for spawn stuff
     [SerializeField]
     private BoxCollider2D innerCollider;
     [SerializeField]
@@ -16,12 +16,18 @@ public class ObjectSpawner : MonoBehaviour
     private int SaucersThisLevelCounter { get; set; }
     private List<GameObject> currentSaucers = new List<GameObject>();
 
+    private int MaxSaucerAmountForCurrentStage
+    {
+        get => levelSettings.MaxSaucersForLevel + GameCore.Instance.CurrentStage / levelSettings.IncreaseMaxSaucerOnScreenEachLevels;
+    }
+
     private void Start()
     {
         levelSettings = GameCore.Instance.LevelSettings;
 
         GameCore.Instance.NewLevelInit += SpawnLevelObjects;
         GameCore.Instance.StageCleared += StopSpawning;
+        GameCore.Instance.GameIsOver += StopSpawning;
     }
 
     private void SpawnLevelObjects()
@@ -47,15 +53,17 @@ public class ObjectSpawner : MonoBehaviour
          
     private IEnumerator PeriodicSaucerSpawn()
     {
-        while (SaucersThisLevelCounter <= levelSettings.MaxSaucersForLevel + GameCore.Instance.CurrentStage/levelSettings.IncreaseMaxSaucerOnScreenEachLevels)
+        while (SaucersThisLevelCounter <= MaxSaucerAmountForCurrentStage)
         {
-            //dont spawn if player is not alive
+            //Dont spawn new saucer if player isn't alive
             if (!GameCore.Instance.PlayerShip.activeSelf)
                 yield return new WaitForSeconds(levelSettings.DelayUntilSpawnNewSaucer);
+
             for (var i=0; i<currentSaucers.Count; i++)
             {
                 if (!currentSaucers[i]) currentSaucers.RemoveAt(i);
             }
+            //Delay new saucer spawn if there current saucers amount on screen is max
             if (currentSaucers.Count >= levelSettings.MaxSaucersOnScreen)
             {
                 //print($"Many S on screen - on screen:{currentSaucers.Count} onThisLevelBefore:{SaucersThisLevelCounter} maxOnScreen:{levelSettings.MaxSaucersOnScreen}");
@@ -65,12 +73,25 @@ public class ObjectSpawner : MonoBehaviour
             //print($"Can spawn more - on screen:{currentSaucers.Count} onThisLevelBefore:{SaucersThisLevelCounter} maxOnScreen:{levelSettings.MaxSaucersOnScreen}");
             yield return new WaitForSeconds(levelSettings.SaucerSpawnTimer);
 
-            //decide saucer type to spawn
-            if (GameCore.Instance.CurrentStage <= levelSettings.LastBigSaucerLevelApperance)
+            //Decide saucer type to spawn. If all of them can spawn on current level - picks random
+            bool canSpawnBigSaucer = GameCore.Instance.CurrentStage <= levelSettings.LastBigSaucerLevelApperance;
+            bool canSpawnSmallSaucer = GameCore.Instance.CurrentStage >= levelSettings.LittleSaucerFirstLevelAppearance;
+            if (canSpawnBigSaucer && canSpawnSmallSaucer)
+            {
+                //If there only 1 saucer left to spawn this stage - chooses to spawn small saucer
+                if (MaxSaucerAmountForCurrentStage - SaucersThisLevelCounter == 1)
+                {
+                    currentSaucers.Add(SpawnSmallSaucer());
+                }  
+                //Otherwise just pick random
+                else if (Random.Range(0, 2) == 0) currentSaucers.Add(SpawnBigSaucer());
+                else currentSaucers.Add(SpawnSmallSaucer());
+            }
+            else if (canSpawnBigSaucer)
             {
                 currentSaucers.Add(SpawnBigSaucer());
             }
-            else if (GameCore.Instance.CurrentStage >= levelSettings.LittleSaucerFirstLevelAppearance)
+            else if (canSpawnSmallSaucer)
             {
                 currentSaucers.Add(SpawnSmallSaucer());
             }
