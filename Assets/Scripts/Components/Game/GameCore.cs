@@ -211,9 +211,8 @@ public sealed class GameCore : MonoBehaviour
 
     public void HandlePlayerDeath()
     {
-        DeathAnimationCreator.CreatePlayerDeathEffect();
         DisablePlayerShip();
-        
+        DeathAnimationCreator.CreatePlayerDeathEffect();
         if (LivesCount == 0)
         {
             //dramatic pause before calling game over ui overlay

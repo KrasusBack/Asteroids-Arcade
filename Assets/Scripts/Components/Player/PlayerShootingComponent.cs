@@ -29,10 +29,14 @@ public sealed class PlayerShootingComponent : ShootingComponentBase
         var bullet = Instantiate(GameCore.Instance.PlayerShipSettings.BulletPrefab, transform.position, transform.rotation);
         //Set behaviour of bullet based on shooter
         SetBulletSettings(bullet);
+        PlayerShoot?.Invoke();
     }
 
     private void OnDisable()
     {
         canShootNow = true;
     }
+
+    public delegate void PlayerShootingHandler ();
+    public event PlayerShootingHandler PlayerShoot;
 }

@@ -63,7 +63,6 @@ public class PointsGiverComponent : MonoBehaviour
     /// </summary>
     private void CheckAndGivePoints(GameObject objCausedDestroying)
     {
-        //Сделать через событие? Так этот класс не будет знать что происходит с этой информацией
         if (objCausedDestroying?.tag != "Player") return;
         GameCore.Instance.AddPointsToScore(_pointsAfterDestroy);
     }
