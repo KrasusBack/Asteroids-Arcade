@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
 public sealed class GameCore : MonoBehaviour
 {
@@ -27,8 +28,10 @@ public sealed class GameCore : MonoBehaviour
     private int _currentScore = 0;
     private int _destroyableObjectInTheScene = 0;
     private bool _gameIsOver = false;
+    private bool _watchForDestroyables = true;
 
-    private int DestroyableObjectsInTheScene
+    private List<GameObject> destroyablesInTheScene = new List<GameObject>();
+    private int DestroyablesInTheSceneCount
     {
         get
         {
@@ -36,6 +39,7 @@ public sealed class GameCore : MonoBehaviour
         }
         set
         {
+            if (!_watchForDestroyables) return;
             if (value < 0) throw new System.ArgumentOutOfRangeException("GameCore: DestroyableObjectInTheScene cant be < 0");
             _destroyableObjectInTheScene = value;
             if (value == 0)
@@ -43,7 +47,6 @@ public sealed class GameCore : MonoBehaviour
                 print("...Calling StageCleared");
                 InitiateNewLevel();
             }
-
         }
     }
 
@@ -128,6 +131,7 @@ public sealed class GameCore : MonoBehaviour
     }
     #endregion
 
+    #region Events 
     public delegate void ScoreUpdateHandler();
     public event ScoreUpdateHandler ScoreUpdated;
 
@@ -155,6 +159,8 @@ public sealed class GameCore : MonoBehaviour
     public delegate void LevelStartedHandler();
     public event LevelStartedHandler LevelStarted; //no use for now
 
+    #endregion
+
     private void Awake()
     {
         SetInstance();
@@ -174,7 +180,7 @@ public sealed class GameCore : MonoBehaviour
         {
             Init();
             Instance = this;
-            print("-------Game Started!-------");
+            print("-------GameCore set-------");
         }
     }
     private void Init()
@@ -182,13 +188,9 @@ public sealed class GameCore : MonoBehaviour
         if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
             HyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
 
-        //StageCleared += InitiateNewLevel;
-        //StageCleared += DisablePlayerShip;
-        //NewLevelInit += EnablePlayerShip;
         LivesCount = PlayerShipSettings.StartingLifesAmount;
 
         playerShipInitialRotation = playerShip.transform.rotation;
-        //DisablePlayerShip();
     }
 
     #region Game Process control
@@ -252,11 +254,13 @@ public sealed class GameCore : MonoBehaviour
         StageCleared?.Invoke();
         DisablePlayerShip();
         CanActivatePlayerShip = false;
+        
         //тут всякие штуки для отмечания зачистки уровня
 
         yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
         if (LivesCount > 0)
         {
+            DestroyAllDestroyableObjects();
             playerShip.transform.position = Vector3.zero;
             CurrentStage++;
             NewLevelInit?.Invoke();
@@ -267,12 +271,21 @@ public sealed class GameCore : MonoBehaviour
 
     private void CheckAndHandleInput()
     {
+        #region For tests
         //Reload scene
         if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
 
         //Kill player
         if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
 
+        //Kill player
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            print("Test: adding life");
+            AddLife();
+        }
+
+        #endregion
         //Respawn player
         if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && CanActivatePlayerShip)
         {
@@ -294,21 +307,6 @@ public sealed class GameCore : MonoBehaviour
     {
         BonusLifeCheckAndHandle(CurrentScore, CurrentScore += points);
     }
-
-    public void IncreaseDestroyableObjectsCounter()
-    {
-        DestroyableObjectsInTheScene++;
-    }
-    public void DecreaseDestroyableObjectsCounter()
-    {
-        DestroyableObjectsInTheScene--;
-    }
-
-    public void TravelToHyperSpace()
-    {
-        HyperSpaceHandler.TravelToHyperSpace();
-    }
-
     private void AddLife()
     {
         print("! Bonus life added !"); //add bonus life event
@@ -318,6 +316,32 @@ public sealed class GameCore : MonoBehaviour
     {
         LivesCount--;
     }
+
+    #region DestroyablesHandle
+    public void AddNewDestroyableObjectToList(GameObject newDestroyable)
+    {
+        destroyablesInTheScene.Add(newDestroyable);
+        DestroyablesInTheSceneCount++;
+    }
+    public void RemoveDestroyableObjectFromList(GameObject destroyable)
+    {
+        if (!_watchForDestroyables) return;
+        //preventing from double destroy call when DestroyAllObjects called
+        destroyablesInTheScene.Remove(destroyable);
+        DestroyablesInTheSceneCount--;
+    }
+    private void DestroyAllDestroyableObjects()
+    {
+        //disable destroyables calls because of manual launch of that
+        _watchForDestroyables = false;
+        foreach (GameObject obj in destroyablesInTheScene)
+            Destroy(obj);
+        DestroyablesInTheSceneCount = 0;
+        _watchForDestroyables = true;
+    }
+    #endregion
+
+    #region PlayeShipHandle
     public void DisablePlayerShip()
     {
         playerShip.SetActive(false);
@@ -328,6 +352,11 @@ public sealed class GameCore : MonoBehaviour
         playerShip.transform.rotation = playerShipInitialRotation;
         playerShip.SetActive(true);
     }
+    public void TravelToHyperSpace()
+    {
+        HyperSpaceHandler.TravelToHyperSpace();
+    }
+    #endregion
 
     private void OnApplicationQuit()
     {

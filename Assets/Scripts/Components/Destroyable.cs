@@ -7,7 +7,8 @@ public class Destroyable : MonoBehaviour
     protected virtual void Start()
     {
         DoInStart();
-        GameCore.Instance.IncreaseDestroyableObjectsCounter();
+       
+        GameCore.Instance.AddNewDestroyableObjectToList(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -35,21 +36,14 @@ public class Destroyable : MonoBehaviour
     protected virtual void DestroyOperation()
     {
         BeforeDestroyOperation();
-        //ShowDestroyEffect();
         Destroy(gameObject);
     }
 
     protected virtual void OnDestroy()
     {
-        GameCore.Instance?.DecreaseDestroyableObjectsCounter();
+        GameCore.Instance?.RemoveDestroyableObjectFromList(gameObject);
     }
-
-    //private void ShowDestroyEffect()
-    //{
-    //    var destroyEffectObj = Instantiate(GameCore.Instance.PrefabReferences.CommonDestroyParticleEffect, transform.position, transform.rotation);
-    //    destroyEffectObj.transform.localScale = transform.localScale;
-    //}
-
+    
     /// <summary> Called in Start after Destroyable initialisation </summary>
     protected virtual void DoInStart() { }
     /// <summary> Called right before destroying gameObject in DestroyOperation </summary>

@@ -11,7 +11,6 @@ public class DestroyAnimationComponent : MonoBehaviour
 
     private void OnDisable()
     {
-        print("DestroyAnimationComponent: disable");
         if (particleEffectObj && !applicationQuiting)
         {
             DeathAnimationCreator.CreateDestroyEffect(transform, particleEffectObj);
