@@ -329,7 +329,6 @@ public sealed class GameCore : MonoBehaviour
         playerShip.SetActive(true);
     }
 
-
     private void OnApplicationQuit()
     {
         Instance = null;
