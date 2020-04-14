@@ -22,7 +22,7 @@ MonoBehaviour:
     bulletSpeed: 1
     bulletTravelDistance: 2
     shootingSpeed: 1.2
-    shootingAccuracy: 0.333
+    shootingAccuracy: 0.12
     spreadAngle: 360
   smallSaucer:
     saucerObjPrefab: {fileID: 6114920307276586691, guid: 2f58cb9b718e6ba4f988cc423d8893a7,
@@ -34,5 +34,5 @@ MonoBehaviour:
     bulletSpeed: 1
     bulletTravelDistance: 2
     shootingSpeed: 1
-    shootingAccuracy: 0.6
+    shootingAccuracy: 0.4
     spreadAngle: 60

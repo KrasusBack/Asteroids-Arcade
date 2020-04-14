@@ -6,6 +6,7 @@ public abstract class DeathAnimationCreator : MonoBehaviour
 {
     public static void CreatePlayerDeathEffect()
     {
+        if (!GameCore.Instance) return;
         Instantiate(GameCore.Instance.PrefabReferences.PlayerDestroyParticleEffect,
                     GameCore.Instance.PlayerShip.transform.position,
                     GameCore.Instance.PlayerShip.transform.rotation);
@@ -14,7 +15,7 @@ public abstract class DeathAnimationCreator : MonoBehaviour
     //call for default effect
     public static void CreateDestroyEffect(Transform objTransform)
     {
-        CreateDestroyEffect(objTransform, GameCore.Instance.PrefabReferences.CommonDestroyParticleEffect);
+        CreateDestroyEffect(objTransform, GameCore.Instance?.PrefabReferences.CommonDestroyParticleEffect);
     }
 
     public static void CreateDestroyEffect(Transform objTransform, GameObject destroyEffectObj)

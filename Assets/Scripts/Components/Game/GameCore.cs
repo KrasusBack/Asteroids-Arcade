@@ -26,6 +26,7 @@ public sealed class GameCore : MonoBehaviour
     private int _livesCount = 3;
     private int _currentScore = 0;
     private int _destroyableObjectInTheScene = 0;
+    private bool _gameIsOver = false;
 
     private int DestroyableObjectsInTheScene
     {
@@ -33,7 +34,6 @@ public sealed class GameCore : MonoBehaviour
         {
             return _destroyableObjectInTheScene;
         }
-
         set
         {
             if (value < 0) throw new System.ArgumentOutOfRangeException("GameCore: DestroyableObjectInTheScene cant be < 0");
@@ -41,7 +41,7 @@ public sealed class GameCore : MonoBehaviour
             if (value == 0)
             {
                 print("...Calling StageCleared");
-                StageCleared?.Invoke();
+                InitiateNewLevel();
             }
 
         }
@@ -181,11 +181,11 @@ public sealed class GameCore : MonoBehaviour
         if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
             HyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
 
-        StageCleared += InitiateNewLevel;
-        StageCleared += DisablePlayerShip;
-        NewLevelInit += EnablePlayerShip;
+        //StageCleared += InitiateNewLevel;
+        //StageCleared += DisablePlayerShip;
+        //NewLevelInit += EnablePlayerShip;
         LivesCount = PlayerShipSettings.StartingLifesAmount;
-        DisablePlayerShip();
+        //DisablePlayerShip();
     }
 
     #region Game Process control
@@ -196,6 +196,7 @@ public sealed class GameCore : MonoBehaviour
     }
     private void ExecuteGameOver()
     {
+        _gameIsOver = true;
         GameIsOver?.Invoke();
     }
     private void InitiateNewLevel()
@@ -210,7 +211,7 @@ public sealed class GameCore : MonoBehaviour
         
         if (LivesCount == 0)
         {
-            //dramatic pause before calling game over overlay
+            //dramatic pause before calling game over ui overlay
             StartCoroutine(WaitBeforeCalling_GameOver()); 
             return;
         }
@@ -245,6 +246,8 @@ public sealed class GameCore : MonoBehaviour
     {
         //wait to satisfy sensation after recent kill
         yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
+        StageCleared?.Invoke();
+        DisablePlayerShip();
         CanActivatePlayerShip = false;
         //тут всякие штуки для отмечания зачистки уровня
 
@@ -254,6 +257,7 @@ public sealed class GameCore : MonoBehaviour
             playerShip.transform.position = Vector3.zero;
             CurrentStage++;
             NewLevelInit?.Invoke();
+            EnablePlayerShip();
             CanActivatePlayerShip = true;
         }    
     }
@@ -279,7 +283,8 @@ public sealed class GameCore : MonoBehaviour
     {
         var pointsNeededForBonusLife = PointsSettings.CostOfAddingBonusLife;
 
-        if ((scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
+        //_gameIsOver check for preventing from recieving live after game over is already called
+        if (!_gameIsOver && (scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
             AddLife();
     }
     public void AddPointsToScore(int points)
@@ -319,6 +324,11 @@ public sealed class GameCore : MonoBehaviour
         playerShip.SetActive(true);
     }
 
+
+    private void OnApplicationQuit()
+    {
+        Instance = null;
+    }
     private void OnDestroy()
     {
         ClearEvents();

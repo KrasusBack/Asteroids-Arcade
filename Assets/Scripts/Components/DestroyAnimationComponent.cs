@@ -7,13 +7,22 @@ public class DestroyAnimationComponent : MonoBehaviour
     [SerializeField]
     private GameObject particleEffectObj;
 
-    private void OnDestroy()
+    private bool applicationQuiting = false;
+
+    private void OnDisable()
     {
-        if (particleEffectObj)
+        print("DestroyAnimationComponent: disable");
+        if (particleEffectObj && !applicationQuiting)
         {
             DeathAnimationCreator.CreateDestroyEffect(transform, particleEffectObj);
             return;
         }
         DeathAnimationCreator.CreateDestroyEffect(transform);
+    }
+
+    private void OnApplicationQuit()
+    {
+        print("DestroyAnimationComponent: quit");
+        applicationQuiting = true;
     }
 }
