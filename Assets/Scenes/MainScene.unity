@@ -1574,6 +1574,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParticleSystem_CommonDestroy
       objectReference: {fileID: 0}
+    - target: {fileID: 8981662061019154973, guid: 7dd4cd0ceaf21a946926772406a8de93,
+        type: 3}
+      propertyPath: ShapeModule.m_Texture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8981662061019154973, guid: 7dd4cd0ceaf21a946926772406a8de93,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8981662061019154973, guid: 7dd4cd0ceaf21a946926772406a8de93,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8981662061019154973, guid: 7dd4cd0ceaf21a946926772406a8de93,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8981662061019154973, guid: 7dd4cd0ceaf21a946926772406a8de93,
+        type: 3}
+      propertyPath: SizeBySpeedModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8981662061019154974, guid: 7dd4cd0ceaf21a946926772406a8de93,
         type: 3}
       propertyPath: m_LocalPosition.x
