@@ -2,29 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class PlayerAudioMovement : AudioComponentBase
+public sealed class PlayerAudioMovement : AudioComponent
 {
     PlayerMovementComponent movementComponent;
-    private bool playingSound = false;
 
     private void Start()
     {
         movementComponent = GetComponent<PlayerMovementComponent>();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (movementComponent.Moving && !playingSound)
-        {
-            StartCoroutine(PlaySound());
-        }
+        audioSource.clip = audioClip;
     }
 
-    private IEnumerator PlaySound()
+    void Update()
     {
-        audioSource.PlayOneShot(audioClip);
-        playingSound = true;
-        yield return new WaitForSeconds(audioClip.length);
-        playingSound = false;
+        if (movementComponent.Moving)
+        {
+            if (!audioSource.isPlaying) audioSource.Play();
+            return;
+        }
+        audioSource.Stop();
     }
 }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAudioShooting : AudioComponentBase
+public class PlayerAudioShooting : AudioComponent
 {
     private void Start()
     {
-        GetComponentInChildren<PlayerShootingComponent>().PlayerShoot += PlayAudio;
+        GetComponentInChildren<ShootingComponent>().Shot += PlayAudio;
     }
     
     private void PlayAudio()

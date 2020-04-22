@@ -7,7 +7,6 @@ public class Destroyable : MonoBehaviour
     protected virtual void Start()
     {
         DoInStart();
-       
         GameCore.Instance.AddNewDestroyableObjectToList(gameObject);
     }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class SaucerShootingComponent : ShootingComponentBase
+public sealed class SaucerShootingComponent : ShootingComponent
 {
     private Saucer _shotingSettings;
 

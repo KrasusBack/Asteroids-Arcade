@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public sealed class PlayerShootingComponent : ShootingComponentBase
+public sealed class PlayerShootingComponent : ShootingComponent
 {
     private bool canShootNow = true;
     void Update()
     {
-        //basic 1 shot per push without cooldown
+        //basic verstion: 1 shot per push without cooldown
         //if (Input.GetKeyDown(GameCore.Instance.InputSettings.FireKey)) Shoot();
 
         //periodic shoot implementation
@@ -29,7 +29,7 @@ public sealed class PlayerShootingComponent : ShootingComponentBase
         var bullet = Instantiate(GameCore.Instance.PlayerShipSettings.BulletPrefab, transform.position, transform.rotation);
         //Set behaviour of bullet based on shooter
         SetBulletSettings(bullet);
-        PlayerShoot?.Invoke();
+        InvokeShotEvent();
     }
 
     private void OnDisable()
@@ -37,6 +37,4 @@ public sealed class PlayerShootingComponent : ShootingComponentBase
         canShootNow = true;
     }
 
-    public delegate void PlayerShootingHandler ();
-    public event PlayerShootingHandler PlayerShoot;
 }

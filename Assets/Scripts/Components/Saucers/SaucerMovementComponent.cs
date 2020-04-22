@@ -2,7 +2,7 @@
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SaucerSettingsComponent))]
-public class SaucerMovementComponent : MovementConponentBase
+public class SaucerMovementComponent : MovementConponent
 {
     private Saucer _saucer;
     private Vector2 direction;

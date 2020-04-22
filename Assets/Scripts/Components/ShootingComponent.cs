@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ShootingComponentBase : MonoBehaviour
+public abstract class ShootingComponent : MonoBehaviour
 {
     /// <summary>
     /// Basic shoot method
@@ -24,4 +24,11 @@ public abstract class ShootingComponentBase : MonoBehaviour
         settings.Shooter = gameObject;
     }
 
+    protected void InvokeShotEvent()
+    {
+        Shot?.Invoke();
+    }
+    
+    public delegate void ShootingHandler();
+    public event ShootingHandler Shot;
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaucerSmallMovementComponent : MovementConponentBase
+public class SaucerSmallMovementComponent : MovementConponent
 {
     private Saucer _saucer;
     private CircleCollider2D _checkCollider;

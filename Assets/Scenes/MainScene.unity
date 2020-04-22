@@ -2056,11 +2056,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2061281630, guid: a4b824c7548eed24c9187fc18ca4000e, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 6751533211648738662, guid: 7798bf2022cdcc844912ae85db53cd11,
+        type: 2}
+    - target: {fileID: 2379056708098190957, guid: a4b824c7548eed24c9187fc18ca4000e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3018017430105362001, guid: a4b824c7548eed24c9187fc18ca4000e,
         type: 3}
-      propertyPath: audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 0bb520f5707f3484dbf47f1f7556384d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4906696759052741539, guid: a4b824c7548eed24c9187fc18ca4000e,
         type: 3}
       propertyPath: m_Name

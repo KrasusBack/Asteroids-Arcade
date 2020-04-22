@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public sealed class BulletMovementComponent : MovementConponentBase
+public sealed class BulletMovementComponent : MovementConponent
 {
     private float Speed { get; set; } = 0;
 
