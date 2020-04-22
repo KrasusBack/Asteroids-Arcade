@@ -147,17 +147,18 @@ public sealed class GameCore : MonoBehaviour
     public delegate void GameStartedHandler();
     public event GameStartedHandler NewLevelInit;
 
+    public delegate void StageClearedHandler();
+    public event StageClearedHandler StageCleared;
+
+    public delegate void LevelStartedHandler();
+    public event LevelStartedHandler LevelStarted; //no use for now
+
     public delegate void PlayerDiedHandler();
     public event PlayerDiedHandler PlayerDied;
 
     public delegate void PlayerRespawnedHandler();
     public event PlayerRespawnedHandler PlayerRespawned;
 
-    public delegate void StageClearedHandler();
-    public event StageClearedHandler StageCleared;
-
-    public delegate void LevelStartedHandler();
-    public event LevelStartedHandler LevelStarted; //no use for now
 
     #endregion
 

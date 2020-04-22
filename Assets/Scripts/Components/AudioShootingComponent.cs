@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAudioShooting : AudioComponent
+public class AudioShootingComponent : AudioComponent
 {
     private void Start()
     {

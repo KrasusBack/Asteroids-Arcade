@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class MovementConponent : MonoBehaviour
+public abstract class MovementComponent : MonoBehaviour
 {
     protected Rigidbody2D ObjectRB { get; private set; }
 

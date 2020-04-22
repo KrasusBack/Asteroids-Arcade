@@ -25,7 +25,8 @@ public class Destroyable : MonoBehaviour
     private void CheckAndHandleCollision(GameObject objCausedDestroying)
     {
         if (objCausedDestroying == null) return; //may cause some troubles in there future
-        if (Time.fixedTime == _hitFrame) return;
+        //preventing multiple calls from child colliders
+        if (Time.fixedTime == _hitFrame) return; 
         _hitFrame = Time.fixedTime;
 
         DestroyableGonnaDestroyObject?.Invoke(objCausedDestroying);
@@ -50,4 +51,5 @@ public class Destroyable : MonoBehaviour
 
     public delegate void DoBeforeDestroyByDestroyableHandler(GameObject objCausedDestroying);
     public event DoBeforeDestroyByDestroyableHandler DestroyableGonnaDestroyObject;
+
 }

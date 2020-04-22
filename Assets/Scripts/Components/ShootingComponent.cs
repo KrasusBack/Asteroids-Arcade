@@ -14,7 +14,8 @@ public abstract class ShootingComponent : MonoBehaviour
     {
         var angle = Vector2.SignedAngle(Vector2.right, direction);
         var rotation = Quaternion.Euler(0, 0, angle);
-
+        
+        Shot?.Invoke();
         return Instantiate(bulletObj, transform.position, rotation);
     }
 

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class PlayerAudioMovement : AudioComponent
+public sealed class AudioMovementComponent : AudioComponent
 {
-    PlayerMovementComponent movementComponent;
+    IMoving movementComponent;
 
     private void Start()
     {
-        movementComponent = GetComponent<PlayerMovementComponent>();
+        movementComponent = GetComponent<IMoving>();
         audioSource.clip = audioClip;
     }
 

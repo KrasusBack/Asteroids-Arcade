@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public sealed class PlayerMovementComponent : MovementConponent
+public sealed class PlayerMovementComponent : MovementComponent, IMoving
 {
     [SerializeField]
     private SpriteRenderer thrustFlameRenderer;

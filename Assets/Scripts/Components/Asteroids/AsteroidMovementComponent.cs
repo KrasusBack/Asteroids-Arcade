@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public sealed class AsteroidMovementComponent : MovementConponent
+public sealed class AsteroidMovementComponent : MovementComponent
 {
     private Vector2 _velocityVector;
     private Asteroid.SizeType _asteroidSize;

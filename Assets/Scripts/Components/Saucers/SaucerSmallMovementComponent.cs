@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaucerSmallMovementComponent : MovementConponent
+public class SaucerSmallMovementComponent : MovementComponent, IMoving
 {
     private Saucer _saucer;
     private CircleCollider2D _checkCollider;
@@ -15,6 +15,8 @@ public class SaucerSmallMovementComponent : MovementConponent
 
     List<Collider2D> collidersNear = new List<Collider2D>();
     ContactFilter2D contactFilter2D = new ContactFilter2D();
+
+    public bool Moving { get; private set; } = true; 
 
     private void Start()
     {
