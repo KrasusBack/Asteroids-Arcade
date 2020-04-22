@@ -657,7 +657,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.425
+  m_Volume: 0.257
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -755,6 +755,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 8bedd08c122814546a3b30a16ea03bd4, type: 3}
   audioSource: {fileID: 2061281630}
+  timeToMaxSound: 1
+  startSoundVolumePart: 0.3
 --- !u!82 &8177622961458788630
 AudioSource:
   m_ObjectHideFlags: 0
@@ -768,7 +770,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.425
+  m_Volume: 0.335
   m_Pitch: 1
   Loop: 0
   Mute: 0

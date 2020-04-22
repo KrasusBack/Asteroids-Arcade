@@ -5,14 +5,20 @@ using UnityEngine;
 
 public sealed class AudioMovementComponent : AudioComponent
 {
-    private const float timeToMaxSound = 1.0f;
-    private const float startSoundVolume = 0.15f;
+    [SerializeField, Min(0)] private float timeToMaxSound = 1.0f;
+    [SerializeField, Range(0, 1), Tooltip("Percent value based on current volume")]
+    private float startSoundVolumePart = 0.3f;
+
+    private float maxSoundVolume;
 
     IMoving movementComponent;
+
+    public float StartSoundVolumePart { get => startSoundVolumePart; set => startSoundVolumePart = value; }
 
     private void Start()
     {
         movementComponent = GetComponent<IMoving>();
+        maxSoundVolume = audioSource.volume;
         audioSource.clip = audioClip;
         audioSource.loop = true;
         audioSource.volume = 0;
@@ -35,19 +41,20 @@ public sealed class AudioMovementComponent : AudioComponent
     private void ResetAudio()
     {
         audioSource.Pause();
-        audioSource.volume = startSoundVolume;
+        audioSource.volume = startSoundVolumePart * maxSoundVolume;
         StopAllCoroutines();
     }
 
     private IEnumerator ChangeVolumeOverTime()
     {
         var endingTime = Time.time + timeToMaxSound;
-        audioSource.volume = startSoundVolume;
+        audioSource.volume = startSoundVolumePart * maxSoundVolume;
         yield return new WaitForEndOfFrame();
 
         while (Time.time < endingTime)
         {
-            audioSource.volume += Time.deltaTime / timeToMaxSound;
+            audioSource.volume += Time.deltaTime / timeToMaxSound * maxSoundVolume;
+            print(audioSource.volume + " left:" + (endingTime - Time.time));
             yield return new WaitForEndOfFrame();
         }
     }
