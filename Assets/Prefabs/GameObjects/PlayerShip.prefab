@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: 2379056708098190957}
   - component: {fileID: 8177622961458788630}
   - component: {fileID: 3018017430105362001}
+  - component: {fileID: 7734215623720380603}
   m_Layer: 10
   m_Name: PlayerShip
   m_TagString: Player
@@ -752,7 +753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364ab886f5b92fc49a9ec0e05f65f9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: d306a9cc634d8ab4fac9f3759dc5635b, type: 3}
+  audioClip: {fileID: 8300000, guid: 8bedd08c122814546a3b30a16ea03bd4, type: 3}
   audioSource: {fileID: 2061281630}
 --- !u!82 &8177622961458788630
 AudioSource:
@@ -865,3 +866,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d2da2b1376bc4e74fa4eb2d902e12434, type: 3}
   audioSource: {fileID: 8177622961458788630}
+--- !u!114 &7734215623720380603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4906696759052741539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133aa1c54ab985d4c9132130917e69f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: db65c8217027b4747b4c3de81c981300, type: 3}
+  audioSource: {fileID: 0}
