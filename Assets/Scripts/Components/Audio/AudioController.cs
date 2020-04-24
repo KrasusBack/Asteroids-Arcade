@@ -7,4 +7,5 @@ public class AudioController : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
     
+    public AudioMixer AudioMixer { get => audioMixer; }
 }

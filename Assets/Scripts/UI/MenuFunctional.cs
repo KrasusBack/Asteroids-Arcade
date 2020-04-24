@@ -8,6 +8,11 @@ public class MenuFunctional : MonoBehaviour
     [SerializeField] GameObject MainMenu;
     [SerializeField] GameObject SettingsMenu;
 
+    private void Start()
+    {
+        CallMainMenu();
+    }
+
     public void QuitGame()
     {
         #if UNITY_EDITOR

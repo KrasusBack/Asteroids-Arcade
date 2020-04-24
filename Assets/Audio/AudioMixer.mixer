@@ -29,7 +29,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -2467863763200617646}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 4
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -48,7 +48,9 @@ AudioMixerController:
   m_SuspendThreshold: -79.2
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 11458d003dad23c499028283185b1349
+    name: MasterVolume
   m_AudioMixerGroupViews:
   - guids:
     - 8b68895ce905bbe4d88ad32b8bb69bc9
@@ -102,7 +104,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: ba94616bd3e962c4e84b0637a769272b
   m_FloatValues:
-    11458d003dad23c499028283185b1349: -1.4450246
+    11458d003dad23c499028283185b1349: 0.11822295
     65fed5141ad082846b2f2af9ae970271: 1301
     b56e5e340da970d4dbbe25a7107eec27: -7.436933
     a81229e46a11e8547844deffce59206e: 1
@@ -125,7 +127,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 7754902876625384146}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 1
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
