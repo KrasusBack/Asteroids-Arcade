@@ -753,10 +753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364ab886f5b92fc49a9ec0e05f65f9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 8bedd08c122814546a3b30a16ea03bd4, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: 8bedd08c122814546a3b30a16ea03bd4, type: 3}
   audioSource: {fileID: 2061281630}
-  timeToMaxSound: 1
-  startSoundVolumePart: 0.3
 --- !u!82 &8177622961458788630
 AudioSource:
   m_ObjectHideFlags: 0
@@ -866,7 +865,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d6d6e7fd15bf843a18c1644535dc57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: d2da2b1376bc4e74fa4eb2d902e12434, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: d2da2b1376bc4e74fa4eb2d902e12434, type: 3}
   audioSource: {fileID: 8177622961458788630}
 --- !u!114 &7734215623720380603
 MonoBehaviour:
@@ -880,5 +880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133aa1c54ab985d4c9132130917e69f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 96414d0d30db880459750a4ee6dbb77d, type: 3}
+  audioClips:
+  - {fileID: 8300000, guid: 96414d0d30db880459750a4ee6dbb77d, type: 3}
   audioSource: {fileID: 0}

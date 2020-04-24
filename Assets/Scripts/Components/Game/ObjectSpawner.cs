@@ -111,7 +111,7 @@ public class ObjectSpawner : MonoBehaviour
 
     private void SpawnAsteroid()
     {
-        Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointOutsideSafeArea(), Quaternion.identity);
+        Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointBetweenColliders(), Quaternion.identity);
     }
 
     private void StopSpawning()
@@ -121,7 +121,7 @@ public class ObjectSpawner : MonoBehaviour
 
     private Vector2 GetRandomPointNearTheBorder()
     {
-        var somePoint = GetRandomPointOutsideSafeArea();
+        var somePoint = GetRandomPointBetweenColliders();
         var sidePicker = Random.Range(0, 2);
         if (sidePicker == 0)
             somePoint.x = outerCollider.bounds.min.x;
@@ -130,7 +130,12 @@ public class ObjectSpawner : MonoBehaviour
         return somePoint;
     }
 
-    private Vector2 GetRandomPointOutsideSafeArea()
+    private Vector2 GetRandomPointBetweenColliders()
+    {
+        return GetRandomPointBetweenColliders(innerCollider, outerCollider);
+    }
+
+    public static Vector2 GetRandomPointBetweenColliders(BoxCollider2D innerCollider, BoxCollider2D outerCollider)
     {
         Vector2 newPoint;
 
@@ -149,12 +154,10 @@ public class ObjectSpawner : MonoBehaviour
 
             if (newPoint.x < innerX.Max && newPoint.x > innerX.Min && newPoint.y < innerY.Max && newPoint.y > innerY.Min)
             {
-                if (testCounter++ > 100) throw new System.Exception("no luck in random I guess (X)");
+                if (testCounter++ > 100) throw new System.Exception($"Object spawner: failed to pick random point ({testCounter} attempts)");
             }
             else break;
         }
-
         return newPoint;
     }
-
 }

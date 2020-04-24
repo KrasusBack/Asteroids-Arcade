@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public sealed class GameCore : MonoBehaviour
 {
     [SerializeField]
+    private bool mainMenuMode = false;
+    [SerializeField]
     private AsteroidsSettings asteroidsSettings;
     [SerializeField]
     private PlayerShipSettings playerShipSettings;
@@ -168,7 +170,14 @@ public sealed class GameCore : MonoBehaviour
     }
     private void Start()
     {
-        StartNewGame();
+        if (!mainMenuMode)
+        {
+            StartNewGame();
+        }
+        else
+        {
+            enabled = false;
+        }
     }
     private void Update()
     {

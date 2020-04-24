@@ -2777,10 +2777,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1715213033, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6096078032379197457, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2,
         type: 3}
       propertyPath: m_Name
@@ -2791,12 +2787,6 @@ PrefabInstance:
       propertyPath: playerShip
       value: 
       objectReference: {fileID: 2061281628}
-    - target: {fileID: 6096078032379197459, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2,
-        type: 3}
-      propertyPath: prefabReferences
-      value: 
-      objectReference: {fileID: 11400000, guid: 8b59b35ae8f73d24bbcac2df3c57f776,
-        type: 2}
     - target: {fileID: 6096078032379197677, guid: 8dbd782a1abaeaf42ad5c7ac430c6dd2,
         type: 3}
       propertyPath: m_LocalPosition.x

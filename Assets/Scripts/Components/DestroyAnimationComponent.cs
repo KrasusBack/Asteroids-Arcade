@@ -18,10 +18,9 @@ public class DestroyAnimationComponent : MonoBehaviour
         }
         DeathAnimationCreator.CreateDestroyEffect(transform);
     }
-
+    
     private void OnApplicationQuit()
     {
-        print("DestroyAnimationComponent: quit");
         applicationQuiting = true;
     }
 }

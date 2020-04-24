@@ -7,11 +7,12 @@ public class AudioDestroyerComponent : AudioComponent
 {
     private void Awake()
     {
-        audioSource = GameObject.Find("AudioDestroyerSource").GetComponent<AudioSource>();
+        //AudioDestroyerSource - object which plays destroy sounds of objects
+        audioSource = GameObject.Find("AudioDestroyerSource")?.GetComponent<AudioSource>();
     }
 
     private void OnDisable()
     {
-        if (Application.isPlaying) audioSource?.PlayOneShot(audioClip);
+        if (Application.isPlaying) audioSource?.PlayOneShot(RandomAudioClip());
     }
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
     type: 3}
   bulletSpeed: 2
   bulletTravelDistance: 2
-  shootingSpeed: 7
+  shootingSpeed: 2
   hyperSpaceCooldown: 0.2
   timeInHyperSpace: 0.2
   chanceToAppearInsideAsteroid: 0

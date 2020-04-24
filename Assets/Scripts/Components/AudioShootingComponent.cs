@@ -11,6 +11,6 @@ public class AudioShootingComponent : AudioComponent
     
     private void PlayAudio()
     {
-        audioSource.PlayOneShot(audioClip);
+        audioSource.PlayOneShot(RandomAudioClip());
     }
 }
