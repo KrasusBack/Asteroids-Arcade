@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 6096078032379197458}
   - component: {fileID: 6096078032379197456}
   - component: {fileID: 6096078032379197459}
+  - component: {fileID: 1217035504943051116}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610ea7cbd2630064eb3e8d1e8cb99c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuMode: 0
   asteroidsSettings: {fileID: 11400000, guid: d0404b18866e8814298709623d1ff015, type: 2}
   playerShipSettings: {fileID: 11400000, guid: 7e60f019367c8e6428bbc8219aa13488, type: 2}
   saucersSettings: {fileID: 11400000, guid: 5d614e54d0c5f8b4b8e170aa50b091d9, type: 2}
@@ -203,4 +205,18 @@ MonoBehaviour:
   inputSettings: {fileID: 11400000, guid: 91e265493c1e0874d933f1d01043f4fe, type: 2}
   levelSettings: {fileID: 11400000, guid: a6f5018a7e12e3a4d91ae3fe698ef9b2, type: 2}
   prefabReferences: {fileID: 11400000, guid: 8b59b35ae8f73d24bbcac2df3c57f776, type: 2}
+  audioController: {fileID: 1217035504943051116}
   playerShip: {fileID: 0}
+--- !u!114 &1217035504943051116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096078032379197457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cff1de1f8801b44686854608a582961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 7798bf2022cdcc844912ae85db53cd11, type: 2}

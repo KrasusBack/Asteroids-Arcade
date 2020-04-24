@@ -72,6 +72,7 @@ public class ObjectSpawnerMenuVersion : MonoBehaviour
     private void SpawnObject(GameObject objectToSpawn)
     {
        var spawnedObject = Instantiate(objectToSpawn, ObjectSpawner.GetRandomPointBetweenColliders(innerCollider, outerCollider), Quaternion.identity);
+       //optional: get rid off spawned objects audio components'
        foreach(var audioComponent in spawnedObject.GetComponents<AudioComponent>())
         {
             Destroy(audioComponent);

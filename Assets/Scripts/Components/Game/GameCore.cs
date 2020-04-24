@@ -21,6 +21,8 @@ public sealed class GameCore : MonoBehaviour
     private LevelSettings levelSettings;
     [SerializeField]
     private PrefabReferences prefabReferences;
+    [SerializeField]
+    private AudioController audioController;
 
     [SerializeField]
     private GameObject playerShip;
@@ -125,6 +127,10 @@ public sealed class GameCore : MonoBehaviour
     public PrefabReferences PrefabReferences
     {
         get => prefabReferences;
+    }
+    public AudioController AudioController
+    {
+        get => audioController;
     }
     
     public GameObject PlayerShip
