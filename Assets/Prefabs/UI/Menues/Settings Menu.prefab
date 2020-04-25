@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 5900996199030939439}
   - component: {fileID: 5900996199030939437}
   - component: {fileID: 5900996199030939436}
+  - component: {fileID: 7269191922182392221}
   m_Layer: 5
   m_Name: Volume Label (TMP)
   m_TagString: Untagged
@@ -432,6 +433,19 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7269191922182392221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5900996199030939438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30832aae5ec764458fd32e82f4bbe8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 5900996199030939436}
 --- !u!1 &5900996199036209291
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +658,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7269191922182392221}
+        m_MethodName: UpdateVolumeText
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 24100000, guid: 7798bf2022cdcc844912ae85db53cd11,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Audio.AudioMixer, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5900996200056816371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,6 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9967573d9ef2842baca3e38c264709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuHandler: {fileID: 0}
 --- !u!1001 &2826362012961995081
 PrefabInstance:
   m_ObjectHideFlags: 0

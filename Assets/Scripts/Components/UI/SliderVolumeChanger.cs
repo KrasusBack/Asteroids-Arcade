@@ -8,7 +8,6 @@ public class SliderVolumeChanger : MonoBehaviour
 {
     private Slider slider;
     private AudioSource audioSource;
-    private string masterVolumeName = "MasterVolume";
 
     private void Awake()
     {
@@ -20,21 +19,22 @@ public class SliderVolumeChanger : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         //set up start value
         float audioMixerValue;
-        if (!GameCore.Instance.AudioController.AudioMixer.GetFloat(masterVolumeName, out audioMixerValue))
-            print($"Can't get starting {masterVolumeName} value");
-        slider.value = Mathf.Pow(10, audioMixerValue / 20);
+        if (!GameCore.Instance.AudioController.AudioMixer.GetFloat(AudioController.masterVolumeName, out audioMixerValue))
+            print($"Can't get starting {AudioController.masterVolumeName} value");
+        slider.value = AudioController.ConvertMixerVolumeToStandartValue(audioMixerValue);
 
     }
 
     public void ChangeMasterVolume()
     {
-        if (GameCore.Instance.AudioController.AudioMixer.SetFloat(masterVolumeName, Mathf.Log10(slider.value) * 20))
+        if (GameCore.Instance.AudioController.AudioMixer.SetFloat(AudioController.masterVolumeName,
+                                                                  AudioController.ConvertStandartVolumeToMixerValue(slider.value)))
         {
             if (!audioSource.isPlaying)
                 audioSource.Play();
             return;
         }
-        print($"Can't change {masterVolumeName} setting");
+        print($"Can't change {AudioController.masterVolumeName} setting");
     }
 
 }

@@ -326,10 +326,45 @@ PrefabInstance:
       propertyPath: menuHandler
       value: 
       objectReference: {fileID: 961900417}
+    - target: {fileID: 5900996198155436652, guid: c80409ca36337314189f0cfd0e9c48c5,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900996198155436652, guid: c80409ca36337314189f0cfd0e9c48c5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900996198155436652, guid: c80409ca36337314189f0cfd0e9c48c5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900996198312036666, guid: c80409ca36337314189f0cfd0e9c48c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900996198577796040, guid: c80409ca36337314189f0cfd0e9c48c5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900996198577796040, guid: c80409ca36337314189f0cfd0e9c48c5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5900996199721092564, guid: c80409ca36337314189f0cfd0e9c48c5,
         type: 3}
       propertyPath: m_Name
       value: Settings Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900996199721092564, guid: c80409ca36337314189f0cfd0e9c48c5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5900996199721092565, guid: c80409ca36337314189f0cfd0e9c48c5,
         type: 3}
