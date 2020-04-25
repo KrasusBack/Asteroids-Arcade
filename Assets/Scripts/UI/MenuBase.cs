@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public abstract class MenuBase : MonoBehaviour
 {
-    [SerializeField] protected GameObject Menu;
-    [SerializeField] protected GameObject SettingsMenu;
+    [SerializeField] public GameObject Menu;
+    [SerializeField] public GameObject SettingsMenu;
 
     public void ShowSettingsMenu()
     {

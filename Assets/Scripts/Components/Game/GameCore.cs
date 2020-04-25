@@ -36,7 +36,7 @@ public sealed class GameCore : MonoBehaviour
     private bool _gameIsOver = false;
     private bool _watchForDestroyables = true;
     private bool inMenu = false;
-    
+
 
     private List<GameObject> destroyablesInTheScene = new List<GameObject>();
     private int DestroyablesInTheSceneCount
@@ -214,6 +214,7 @@ public sealed class GameCore : MonoBehaviour
         LivesCount = PlayerShipSettings.StartingLifesAmount;
 
         playerShipInitialRotation = playerShip.transform.rotation;
+        ResumeGame();
     }
 
     #region Game Process control
@@ -293,58 +294,59 @@ public sealed class GameCore : MonoBehaviour
 
     private void CheckAndHandleInput()
     {
+        if (inMenu) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePauseMenu();
+            PauseGame();
         }
 
-        if (!inMenu)
+        #region Test functional
+        //Reload scene
+        if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
+
+        //Kill player
+        if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
+
+        //Kill player
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            #region Test functional
-            //Reload scene
-            if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
-
-            //Kill player
-            if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
-
-            //Kill player
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                print("Test: adding life");
-                AddLife();
-            }
-
-            #endregion
-
-            //Respawn player
-            if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && CanActivatePlayerShip)
-            {
-                RespawnPlayer();
-            }
+            print("Test: adding life");
+            AddLife();
         }
+
+        #endregion
+
+        //Respawn player
+        if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && CanActivatePlayerShip)
+        {
+            RespawnPlayer();
+        }
+
     }
 
     #endregion
 
-    private void TogglePauseMenu()
-    {
-        if (!inMenu)
-        {
-            inMenu = true;
-            PauseGame();
-        }            
-    }
-
     private void PauseGame()
     {
+        print("GameCore: PauseGame");
+        inMenu = true;
         Time.timeScale = 0;
         GamePaused?.Invoke();
     }
     public void ResumeGame()
     {
-        inMenu = false;
+        print("GameCore: ResumeGame");
+        StartCoroutine(WaitMenuesCallCooldown());
         Time.timeScale = normalTimeScale;
         GameResumed?.Invoke();
+    }
+    
+    //Prevents immediate off/on menu calls 
+    private IEnumerator WaitMenuesCallCooldown ()
+    {
+        yield return new WaitForEndOfFrame();
+        inMenu = false;
     }
 
     private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
