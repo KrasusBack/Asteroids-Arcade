@@ -27,12 +27,16 @@ public sealed class GameCore : MonoBehaviour
     [SerializeField]
     private GameObject playerShip;
 
+    private const float normalTimeScale = 1.0f;
+
     private int _currentStage = 1;
     private int _livesCount = 3;
     private int _currentScore = 0;
     private int _destroyableObjectInTheScene = 0;
     private bool _gameIsOver = false;
     private bool _watchForDestroyables = true;
+    private bool inMenu = false;
+    
 
     private List<GameObject> destroyablesInTheScene = new List<GameObject>();
     private int DestroyablesInTheSceneCount
@@ -132,7 +136,7 @@ public sealed class GameCore : MonoBehaviour
     {
         get => audioController;
     }
-    
+
     public GameObject PlayerShip
     {
         get => playerShip;
@@ -148,6 +152,12 @@ public sealed class GameCore : MonoBehaviour
 
     public delegate void LivesCountUpdateHandler();
     public event LivesCountUpdateHandler LivesCountUpdated;
+
+    public delegate void GamePausedHandler();
+    public event GamePausedHandler GamePaused;
+
+    public delegate void GameResumedHandler();
+    public event GameResumedHandler GameResumed;
 
     public delegate void GameOverHandler();
     public event GameOverHandler GameIsOver;
@@ -166,8 +176,6 @@ public sealed class GameCore : MonoBehaviour
 
     public delegate void PlayerRespawnedHandler();
     public event PlayerRespawnedHandler PlayerRespawned;
-
-
     #endregion
 
     private void Awake()
@@ -179,11 +187,10 @@ public sealed class GameCore : MonoBehaviour
         if (!mainMenuMode)
         {
             StartNewGame();
+            return;
         }
-        else
-        {
-            enabled = false;
-        }
+        //in main menu mode gamecore exist just for references by other objects
+        enabled = false;
     }
     private void Update()
     {
@@ -232,7 +239,7 @@ public sealed class GameCore : MonoBehaviour
         if (LivesCount == 0)
         {
             //dramatic pause before calling game over ui overlay
-            StartCoroutine(WaitBeforeCalling_GameOver()); 
+            StartCoroutine(WaitBeforeCalling_GameOver());
             return;
         }
         PlayerShip.transform.position = Vector3.zero;
@@ -269,7 +276,7 @@ public sealed class GameCore : MonoBehaviour
         StageCleared?.Invoke();
         DisablePlayerShip();
         CanActivatePlayerShip = false;
-        
+
         //тут всякие штуки для отмечания зачистки уровня
 
         yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
@@ -281,34 +288,64 @@ public sealed class GameCore : MonoBehaviour
             NewLevelInit?.Invoke();
             EnablePlayerShip();
             CanActivatePlayerShip = true;
-        }    
+        }
     }
 
     private void CheckAndHandleInput()
     {
-        #region For tests
-        //Reload scene
-        if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
-
-        //Kill player
-        if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
-
-        //Kill player
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            print("Test: adding life");
-            AddLife();
+            TogglePauseMenu();
         }
 
-        #endregion
-        //Respawn player
-        if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && CanActivatePlayerShip)
+        if (!inMenu)
         {
-            RespawnPlayer();
+            #region Test functional
+            //Reload scene
+            if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
+
+            //Kill player
+            if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
+
+            //Kill player
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                print("Test: adding life");
+                AddLife();
+            }
+
+            #endregion
+
+            //Respawn player
+            if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && CanActivatePlayerShip)
+            {
+                RespawnPlayer();
+            }
         }
     }
 
     #endregion
+
+    private void TogglePauseMenu()
+    {
+        if (!inMenu)
+        {
+            inMenu = true;
+            PauseGame();
+        }            
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0;
+        GamePaused?.Invoke();
+    }
+    public void ResumeGame()
+    {
+        inMenu = false;
+        Time.timeScale = normalTimeScale;
+        GameResumed?.Invoke();
+    }
 
     private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
     {
