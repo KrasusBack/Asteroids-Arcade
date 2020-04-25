@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioController : MonoBehaviour
+public sealed class AudioController : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
     
@@ -11,19 +11,20 @@ public class AudioController : MonoBehaviour
 
     public static string masterVolumeName = "MasterVolume";
 
-    /// <summary>
-    /// Convert mixer volume value to standart value (from 0.0 to 1.0)
-    /// </summary>
-    public static float ConvertMixerVolumeToStandartValue(float mixerValue)
+    private void Start()
     {
-        return Mathf.Pow(10, mixerValue / 20);
+        GameCore.Instance.GamePaused += PauseAudio;
+        GameCore.Instance.GameResumed += ResumeAudio;
     }
 
-    /// <summary>
-    /// Convert standart volume value (from 0.0 to 1.0) to mixer value
-    /// </summary>
-    public static float ConvertStandartVolumeToMixerValue(float standartValue)
+    private void PauseAudio()
     {
-        return Mathf.Log10(standartValue) * 20;
+        print("AudioController: PauseAudio");
+        AudioListener.pause = true;
+    }
+    private void ResumeAudio()
+    {
+        print("AudioController: ResumeAudio");
+        AudioListener.pause = false;
     }
 }

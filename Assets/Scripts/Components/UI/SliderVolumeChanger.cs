@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
-public class SliderVolumeChanger : MonoBehaviour
+public sealed class SliderVolumeChanger : MonoBehaviour
 {
     private Slider slider;
     private AudioSource audioSource;
@@ -17,18 +17,19 @@ public class SliderVolumeChanger : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.ignoreListenerPause = true;
         //set up start value
         float audioMixerValue;
         if (!GameCore.Instance.AudioController.AudioMixer.GetFloat(AudioController.masterVolumeName, out audioMixerValue))
             print($"Can't get starting {AudioController.masterVolumeName} value");
-        slider.value = AudioController.ConvertMixerVolumeToStandartValue(audioMixerValue);
+        slider.value = ValuesConverter.ConvertMixerVolumeToStandartValue(audioMixerValue);
 
     }
 
     public void ChangeMasterVolume()
     {
         if (GameCore.Instance.AudioController.AudioMixer.SetFloat(AudioController.masterVolumeName,
-                                                                  AudioController.ConvertStandartVolumeToMixerValue(slider.value)))
+                                                                  ValuesConverter.ConvertStandartVolumeToMixerValue(slider.value)))
         {
             if (!audioSource.isPlaying)
                 audioSource.Play();

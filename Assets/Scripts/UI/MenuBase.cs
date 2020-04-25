@@ -10,21 +10,18 @@ public abstract class MenuBase : MonoBehaviour
 
     public void ShowSettingsMenu()
     {
-        print("MenuBase: ShowSettingsMenu");
         Menu.SetActive(false);
         SettingsMenu.SetActive(true);
     }
 
     public void ShowMenu()
     {
-        print("MenuBase: ShowMenu");
         Menu.SetActive(true);
         SettingsMenu.SetActive(false);
     }
 
     public void HideMenues()
     {
-        print("MenuBase: HideMenues");
         Menu.SetActive(false);
         SettingsMenu.SetActive(false);
     }

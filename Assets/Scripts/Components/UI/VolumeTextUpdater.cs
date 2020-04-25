@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class VolumeTextUpdater : MonoBehaviour
+public sealed class VolumeTextUpdater : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textMeshPro;
 
@@ -12,7 +12,7 @@ public class VolumeTextUpdater : MonoBehaviour
         float newValue;
         if (audioMixer.GetFloat(AudioController.masterVolumeName, out newValue))
         {
-            textMeshPro.text = $"Volume: {(int)(AudioController.ConvertMixerVolumeToStandartValue(newValue) * 100)}%";
+            textMeshPro.text = $"Volume: {(int)(ValuesConverter.ConvertMixerVolumeToStandartValue(newValue) * 100)}%";
         }
         else print($"VolumeTextUpdater: can't get {AudioController.masterVolumeName} value to update text");
     }
