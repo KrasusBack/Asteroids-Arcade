@@ -17,4 +17,4 @@ MonoBehaviour:
   smallAsteroidPoints: 100
   bigSaucerPoints: 200
   smallSaucerPoints: 1000
-  costOfAddingBonusLife: 2500
+  costOfAddingBonusLife: 3000

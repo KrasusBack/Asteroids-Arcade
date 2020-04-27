@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBeforeNextLevel: 2
   delayBeforeRespawn: 1
-  baseAsteroidAmount: 1
+  baseAsteroidAmount: 5
   asteroidsMaxAmount: 10
   additionalAsteroidsEachStage: 1
   saucerSpawnTimer: 5
   delayUntilSpawnNewSaucer: 15
-  littleSaucerFirstLevelAppearance: 2
-  lastBigSaucerLevelApperance: 1
+  littleSaucerFirstLevelAppearance: 3
+  lastBigSaucerLevelApperance: 4
   maxSaucersForLevel: 3
   maxSaucersOnScreen: 1
-  increaseMaxSaucerOnScreenEachLevels: 3
+  increaseMaxSaucerOnScreenEachLevels: 2
