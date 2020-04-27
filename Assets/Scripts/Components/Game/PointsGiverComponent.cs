@@ -58,9 +58,7 @@ public class PointsGiverComponent : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks if player caused destroying of an object and increased score for it
-    /// </summary>
+    /// <summary> Checks if player caused destroying of an object and increased score for it </summary>
     private void CheckAndGivePoints(GameObject objCausedDestroying)
     {
         if (objCausedDestroying?.tag != "Player") return;

@@ -48,9 +48,7 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
         transform.localScale = FetchAsteroidSettings(AsteroidSize).sizeScale * Vector3.one;
     }
 
-    /// <summary>
-    /// Picks asteroid prefab with colliders and sprite based on variation and add it to object
-    /// </summary>
+    /// <summary> Picks asteroid prefab with colliders and sprite, based on variation, and add it to object </summary>
     private void SetAsteroidAppearence()
     {
         var asterodAppearence = Instantiate(ChooseAppearance(), transform.position, Quaternion.identity);
@@ -67,7 +65,7 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
         */
         #endregion
 
-        //More robust approach: just attach Appearance object
+        //More robust approach: just attaching Appearance object
         asterodAppearence.transform.SetParent(transform);
         //Destroy dummy default sprite
         Destroy(GetComponent<SpriteRenderer>());

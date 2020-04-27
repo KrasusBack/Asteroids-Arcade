@@ -23,7 +23,6 @@ public sealed class SliderVolumeChanger : MonoBehaviour
         if (!GameCore.Instance.AudioController.AudioMixer.GetFloat(AudioController.masterVolumeName, out audioMixerValue))
             print($"Can't get starting {AudioController.masterVolumeName} value");
         slider.value = ValuesConverter.ConvertMixerVolumeToStandartValue(audioMixerValue);
-
     }
 
     public void ChangeMasterVolume()

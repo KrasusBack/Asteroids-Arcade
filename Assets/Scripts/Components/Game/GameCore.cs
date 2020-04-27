@@ -23,7 +23,6 @@ public sealed class GameCore : MonoBehaviour
     private PrefabReferences prefabReferences;
     [SerializeField]
     private AudioController audioController;
-
     [SerializeField]
     private GameObject playerShip;
 
@@ -33,10 +32,10 @@ public sealed class GameCore : MonoBehaviour
     private int _livesCount = 3;
     private int _currentScore = 0;
     private int _destroyableObjectInTheScene = 0;
-    private bool _gameIsOver = false;
-    private bool _watchForDestroyables = true;
-    private bool inMenu = false;
 
+    private bool gameIsOver = false;
+    private bool watchForDestroyables = true;
+    private bool inMenu = false;
 
     private List<GameObject> destroyablesInTheScene = new List<GameObject>();
     private int DestroyablesInTheSceneCount
@@ -47,7 +46,7 @@ public sealed class GameCore : MonoBehaviour
         }
         set
         {
-            if (!_watchForDestroyables) return;
+            if (!watchForDestroyables) return;
             if (value < 0) throw new System.ArgumentOutOfRangeException("GameCore: DestroyableObjectInTheScene cant be < 0");
             _destroyableObjectInTheScene = value;
             if (value == 0)
@@ -189,9 +188,10 @@ public sealed class GameCore : MonoBehaviour
             StartNewGame();
             return;
         }
-        //in main menu mode gamecore exist just for references by other objects
+        //in main menu mode gamecore component exist just for references by other objects
         enabled = false;
     }
+
     private void Update()
     {
         CheckAndHandleInput();
@@ -225,7 +225,7 @@ public sealed class GameCore : MonoBehaviour
     }
     private void ExecuteGameOver()
     {
-        _gameIsOver = true;
+        gameIsOver = true;
         GameIsOver?.Invoke();
     }
     private void InitiateNewLevel()
@@ -272,13 +272,12 @@ public sealed class GameCore : MonoBehaviour
     }
     private IEnumerator WaitAndStartNewLevel()
     {
-        //wait to satisfy sensation after recent kill
         yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
         StageCleared?.Invoke();
         DisablePlayerShip();
         CanActivatePlayerShip = false;
 
-        //тут всякие штуки для отмечания зачистки уровня
+        //{ Stuff to celebrate stage clear }
 
         yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
         if (LivesCount > 0)
@@ -302,19 +301,20 @@ public sealed class GameCore : MonoBehaviour
         }
 
         #region Test functional
-        //Reload scene
-        if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
+        #if UNITY_EDITOR
+            //Reload scene
+            if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
 
-        //Kill player
-        if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
+            //Kill player
+            if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
 
-        //Kill player
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            print("Test: adding life");
-            AddLife();
-        }
-
+            //Kill player
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                print("Test: adding life");
+                AddLife();
+            }
+        #endif
         #endregion
 
         //Respawn player
@@ -322,7 +322,6 @@ public sealed class GameCore : MonoBehaviour
         {
             RespawnPlayer();
         }
-
     }
 
     #endregion
@@ -353,8 +352,8 @@ public sealed class GameCore : MonoBehaviour
     {
         var pointsNeededForBonusLife = PointsSettings.CostOfAddingBonusLife;
 
-        //_gameIsOver check for preventing from recieving live after game over is already called
-        if (!_gameIsOver && (scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
+        //_gameIsOver check for preventing from recieving live after "game over" has been called
+        if (!gameIsOver && (scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))
             AddLife();
     }
     public void AddPointsToScore(int points)
@@ -379,7 +378,7 @@ public sealed class GameCore : MonoBehaviour
     }
     public void RemoveDestroyableObjectFromList(GameObject destroyable)
     {
-        if (!_watchForDestroyables) return;
+        if (!watchForDestroyables) return;
         //preventing from double destroy call when DestroyAllObjects called
         destroyablesInTheScene.Remove(destroyable);
         DestroyablesInTheSceneCount--;
@@ -387,11 +386,11 @@ public sealed class GameCore : MonoBehaviour
     private void DestroyAllDestroyableObjects()
     {
         //disable destroyables calls because of manual launch of that
-        _watchForDestroyables = false;
+        watchForDestroyables = false;
         foreach (GameObject obj in destroyablesInTheScene)
             Destroy(obj);
         DestroyablesInTheSceneCount = 0;
-        _watchForDestroyables = true;
+        watchForDestroyables = true;
     }
     #endregion
 
@@ -402,7 +401,7 @@ public sealed class GameCore : MonoBehaviour
     }
     public void EnablePlayerShip()
     {
-        //because this method suppose to "respawn player" there will be rotation update to init state
+        //because this method suppose to "respawn player" there is rotation update to init state
         playerShip.transform.rotation = playerShipInitialRotation;
         playerShip.SetActive(true);
     }

@@ -9,7 +9,12 @@ public class DestroyAnimationComponent : MonoBehaviour
 
     private bool applicationQuiting = false;
 
-    private void OnDisable()
+    private void Start()
+    {
+        GetComponent<Destroyable>().DestroyableGonnaDestroyObject += CreateDestroyEffect;
+    }
+
+    private void CreateDestroyEffect(GameObject obj)
     {
         if (particleEffectObj && !applicationQuiting)
         {

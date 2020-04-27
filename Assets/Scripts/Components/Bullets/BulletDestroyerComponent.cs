@@ -4,7 +4,6 @@ using UnityEngine;
 
 public sealed class BulletDestroyerComponent : Destroyable
 {
-    // Start is called before the first frame update
     protected override void Start()
     {
         var bulletSettings = GetComponent<BulletSettingsComponent>();

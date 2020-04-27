@@ -24,7 +24,7 @@ public class Destroyable : MonoBehaviour
     /// Can be only called once per Time.fixedTime </summary>
     private void CheckAndHandleCollision(GameObject objCausedDestroying)
     {
-        if (objCausedDestroying == null) return; //may cause some troubles in there future
+        if (objCausedDestroying == null) return;
         //preventing multiple calls from child colliders
         if (Time.fixedTime == _hitFrame) return; 
         _hitFrame = Time.fixedTime;
