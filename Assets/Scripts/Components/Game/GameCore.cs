@@ -189,7 +189,7 @@ public sealed class GameCore : MonoBehaviour
             return;
         }
         //in main menu mode gamecore component exist just for references by other objects
-        enabled = false;
+        ExecuteMenuMode();
     }
 
     private void Update()
@@ -215,6 +215,12 @@ public sealed class GameCore : MonoBehaviour
 
         playerShipInitialRotation = playerShip.transform.rotation;
         ResumeGame();
+    }
+
+    private void ExecuteMenuMode()
+    {
+        enabled = false;
+        GameResumed?.Invoke();
     }
 
     #region Game Process control
