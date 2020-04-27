@@ -945,17 +945,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 961900417}
-    - target: {fileID: 8565228022888886854, guid: 3fc5014ca1cff7f4bb4de41d0e732825,
+    - target: {fileID: 4911898419660820452, guid: 3fc5014ca1cff7f4bb4de41d0e732825,
         type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
-        type: 2}
-    - target: {fileID: 8565228022888886854, guid: 3fc5014ca1cff7f4bb4de41d0e732825,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      propertyPath: m_Name
+      value: Background
+      objectReference: {fileID: 0}
     - target: {fileID: 8565228023555451812, guid: 3fc5014ca1cff7f4bb4de41d0e732825,
         type: 3}
       propertyPath: m_Name
@@ -1071,5 +1065,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 961900417}
+    - target: {fileID: 8896690565866503808, guid: 3fc5014ca1cff7f4bb4de41d0e732825,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.27450982
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fc5014ca1cff7f4bb4de41d0e732825, type: 3}
