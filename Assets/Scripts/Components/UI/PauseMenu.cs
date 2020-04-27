@@ -15,7 +15,7 @@ public sealed class PauseMenu : MenuBase
     public void ResumeGame()
     {
         GameCore.Instance.ResumeGame();
-        Menu.SetActive(false);
+        HideMenues();
     }
 
     public void ToMainMenu()
