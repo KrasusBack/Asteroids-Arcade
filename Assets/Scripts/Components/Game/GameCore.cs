@@ -7,22 +7,9 @@ public sealed class GameCore : MonoBehaviour
 {
     [SerializeField]
     private bool mainMenuMode = false;
+
     [SerializeField]
-    private AsteroidsSettings asteroidsSettings;
-    [SerializeField]
-    private PlayerShipSettings playerShipSettings;
-    [SerializeField]
-    private SaucersSettings saucersSettings;
-    [SerializeField]
-    private PointsSettings pointsSettings;
-    [SerializeField]
-    private InputSettings inputSettings;
-    [SerializeField]
-    private LevelSettings levelSettings;
-    [SerializeField]
-    private PrefabReferences prefabReferences;
-    [SerializeField]
-    private AudioController audioController;
+    private References references;
     [SerializeField]
     private GameObject playerShip;
 
@@ -61,6 +48,8 @@ public sealed class GameCore : MonoBehaviour
     //for preventing from spawn in transitions (between level, time after death, etc)
     private bool CanActivatePlayerShip { get; set; } = true;
     private Quaternion playerShipInitialRotation;
+
+    private AudioController audioController;
 
     public static GameCore Instance { get; private set; } = null;
 
@@ -103,46 +92,12 @@ public sealed class GameCore : MonoBehaviour
     }
 
     #region Public Getters
-    public AsteroidsSettings AsteroidsSettings
-    {
-        get => asteroidsSettings;
-    }
-    public PlayerShipSettings PlayerShipSettings
-    {
-        get => playerShipSettings;
-    }
-    public SaucersSettings SaucersSettings
-    {
-        get => saucersSettings;
-    }
-    public PointsSettings PointsSettings
-    {
-        get => pointsSettings;
-    }
-    public InputSettings InputSettings
-    {
-        get => inputSettings;
-    }
-    public LevelSettings LevelSettings
-    {
-        get => levelSettings;
-    }
-    public PrefabReferences PrefabReferences
-    {
-        get => prefabReferences;
-    }
-    public AudioController AudioController
-    {
-        get => audioController;
-    }
-
-    public GameObject PlayerShip
-    {
-        get => playerShip;
-    }
+    public References References => references;
+    public GameObject PlayerShip => playerShip;
+    public AudioController AudioController => audioController;
     #endregion
 
-    #region Events 
+    #region Events, delegates
     public delegate void ScoreUpdateHandler();
     public event ScoreUpdateHandler ScoreUpdated;
 
@@ -189,7 +144,7 @@ public sealed class GameCore : MonoBehaviour
             return;
         }
         //in main menu mode gamecore component exist just for references by other objects
-        ExecuteMenuMode();
+        SwitchToMenuMode();
     }
 
     private void Update()
@@ -211,13 +166,14 @@ public sealed class GameCore : MonoBehaviour
         if (PlayerShip.GetComponent<PlayerHyperSpaceComponent>() != null)
             HyperSpaceHandler = gameObject.AddComponent<HyperSpaceHandler>();
 
-        LivesCount = PlayerShipSettings.StartingLifesAmount;
+        LivesCount = References.PlayerShipSettings.StartingLifesAmount;
 
         playerShipInitialRotation = playerShip.transform.rotation;
+        audioController = GetComponent<AudioController>();
         ResumeGame();
     }
 
-    private void ExecuteMenuMode()
+    private void SwitchToMenuMode()
     {
         enabled = false;
         GameResumed?.Invoke();
@@ -249,7 +205,7 @@ public sealed class GameCore : MonoBehaviour
             StartCoroutine(WaitBeforeCalling_GameOver());
             return;
         }
-        PlayerShip.transform.position = Vector3.zero;
+        PlayerShip.transform.position = (Vector2)Camera.main.transform.position;
         StartCoroutine(WaitBeforeCalling_Respawn());
     }
     private void RespawnPlayer()
@@ -261,31 +217,31 @@ public sealed class GameCore : MonoBehaviour
 
     private IEnumerable CallStageTitleCardAndWait()
     {
-        yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
+        yield return new WaitForSeconds(References.LevelSettings.DelayBeforeNextLevel);
     }
     private IEnumerator WaitBeforeCalling_GameOver()
     {
-        yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
+        yield return new WaitForSeconds(References.LevelSettings.DelayBeforeRespawn);
         ExecuteGameOver();
     }
     private IEnumerator WaitBeforeCalling_Respawn()
     {
         CanActivatePlayerShip = false;
-        yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
+        yield return new WaitForSeconds(References.LevelSettings.DelayBeforeRespawn);
         PlayerDied?.Invoke(); //mainly used by overlay ui
         //check preventing end of the level (stage cleared) transition to the next level 
         CanActivatePlayerShip = true;
     }
     private IEnumerator WaitAndStartNewLevel()
     {
-        yield return new WaitForSeconds(LevelSettings.DelayBeforeRespawn);
+        yield return new WaitForSeconds(References.LevelSettings.DelayBeforeRespawn);
         StageCleared?.Invoke();
         DisablePlayerShip();
         CanActivatePlayerShip = false;
 
         //{ Stuff to celebrate stage clear }
 
-        yield return new WaitForSeconds(LevelSettings.DelayBeforeNextLevel);
+        yield return new WaitForSeconds(References.LevelSettings.DelayBeforeNextLevel);
         if (LivesCount > 0)
         {
             DestroyAllDestroyableObjects();
@@ -324,7 +280,7 @@ public sealed class GameCore : MonoBehaviour
         #endregion
 
         //Respawn player
-        if (!PlayerShip.activeSelf && Input.GetKeyDown(InputSettings.FireKey) && CanActivatePlayerShip)
+        if (!PlayerShip.activeSelf && Input.GetKeyDown(References.InputSettings.FireKey) && CanActivatePlayerShip)
         {
             RespawnPlayer();
         }
@@ -356,7 +312,7 @@ public sealed class GameCore : MonoBehaviour
 
     private void BonusLifeCheckAndHandle(int scoreBeforeAddingNewPoints, int newScore)
     {
-        var pointsNeededForBonusLife = PointsSettings.CostOfAddingBonusLife;
+        var pointsNeededForBonusLife = References.PointsSettings.CostOfAddingBonusLife;
 
         //_gameIsOver check for preventing from recieving live after "game over" has been called
         if (!gameIsOver && (scoreBeforeAddingNewPoints / pointsNeededForBonusLife) < (newScore / pointsNeededForBonusLife))

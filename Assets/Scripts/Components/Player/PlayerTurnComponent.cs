@@ -13,10 +13,10 @@ public sealed class PlayerTurnComponent : MonoBehaviour
     {
         var horizontalAxisInput = Input.GetAxisRaw("Horizontal");
         if (horizontalAxisInput == 0) return;
-        _rb.rotation += GameCore.Instance.PlayerShipSettings.RotationSpeed * -horizontalAxisInput;
+        _rb.rotation += GameCore.Instance.References.PlayerShipSettings.RotationSpeed * -horizontalAxisInput;
     }
     void Turn(float axisInput)
     {
-        _rb.AddRelativeForce(Vector2.right * GameCore.Instance.PlayerShipSettings.MoveSpeed);
+        _rb.AddRelativeForce(Vector2.right * GameCore.Instance.References.PlayerShipSettings.MoveSpeed);
     }
 }

@@ -17,7 +17,7 @@ public class BulletSettingsComponent : MonoBehaviour
             switch (gameObject.tag)
             {
                 case "Player":
-                    BulletStats = GameCore.Instance.PlayerShipSettings;
+                    BulletStats = GameCore.Instance.References.PlayerShipSettings;
                     break;
                 case "Enemies":
                     BulletStats = Shooter.GetComponent<SaucerSettingsComponent>().GetSettings();

@@ -11,7 +11,7 @@ public sealed class PlayerMovementComponent : MovementComponent, IMoving
     {
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            MoveDynamicRB(GameCore.Instance.PlayerShipSettings.MoveSpeed, Vector2.right);
+            MoveDynamicRB(GameCore.Instance.References.PlayerShipSettings.MoveSpeed, Vector2.right);
             Moving = true;
             thrustFlameRenderer.enabled = true;
             return;

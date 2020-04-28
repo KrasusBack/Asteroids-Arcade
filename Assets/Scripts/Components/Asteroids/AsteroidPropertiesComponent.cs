@@ -14,7 +14,7 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
         get => variation;
         set
         {
-            var asteroidPrefabsCount = GameCore.Instance.AsteroidsSettings.AsteroidPrefabsCount;
+            var asteroidPrefabsCount = GameCore.Instance.References.AsteroidsSettings.AsteroidPrefabsCount;
             if (variation > asteroidPrefabsCount)
             {
                 variation = asteroidPrefabsCount;
@@ -73,7 +73,7 @@ public sealed class AsteroidPropertiesComponent : MonoBehaviour
 
     private GameObject ChooseAppearance()
     {
-        if (Variation == -1) return GameCore.Instance.AsteroidsSettings.RandomAsteroid;
-        return GameCore.Instance.AsteroidsSettings.GetCertainAsteroidPrefab(Variation);
+        if (Variation == -1) return GameCore.Instance.References.AsteroidsSettings.RandomAsteroid;
+        return GameCore.Instance.References.AsteroidsSettings.GetCertainAsteroidPrefab(Variation);
     }
 }

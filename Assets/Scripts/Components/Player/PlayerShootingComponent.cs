@@ -10,7 +10,7 @@ public sealed class PlayerShootingComponent : ShootingComponent
         //if (Input.GetKeyDown(GameCore.Instance.InputSettings.FireKey)) Shoot();
 
         //periodic shoot implementation
-        if (Input.GetKey(GameCore.Instance.InputSettings.FireKey) && canShootNow)
+        if (Input.GetKey(GameCore.Instance.References.InputSettings.FireKey) && canShootNow)
         {
             Shoot();
             StartCoroutine(WaitForNextShot());
@@ -20,13 +20,13 @@ public sealed class PlayerShootingComponent : ShootingComponent
     private IEnumerator WaitForNextShot()
     {
         canShootNow = false;
-        yield return new WaitForSeconds(1 / GameCore.Instance.PlayerShipSettings.ShootingSpeed);
+        yield return new WaitForSeconds(1 / GameCore.Instance.References.PlayerShipSettings.ShootingSpeed);
         canShootNow = true;
     }
 
     void Shoot()
     {
-        var bullet = Instantiate(GameCore.Instance.PlayerShipSettings.BulletPrefab, transform.position, transform.rotation);
+        var bullet = Instantiate(GameCore.Instance.References.PlayerShipSettings.BulletPrefab, transform.position, transform.rotation);
         //Set behaviour of bullet based on shooter
         SetBulletSettings(bullet);
         InvokeShotEvent();

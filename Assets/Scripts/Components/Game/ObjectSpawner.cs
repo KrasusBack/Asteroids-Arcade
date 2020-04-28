@@ -23,7 +23,7 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Start()
     {
-        levelSettings = GameCore.Instance.LevelSettings;
+        levelSettings = GameCore.Instance.References.LevelSettings;
 
         GameCore.Instance.NewLevelInit += SpawnLevelObjects;
         GameCore.Instance.StageCleared += StopSpawning;
@@ -101,17 +101,17 @@ public class ObjectSpawner : MonoBehaviour
 
     private GameObject SpawnSmallSaucer()
     {
-        return Instantiate(GameCore.Instance.SaucersSettings.SmallSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
+        return Instantiate(GameCore.Instance.References.SaucersSettings.SmallSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
     }
 
     private GameObject SpawnBigSaucer()
     {
-        return Instantiate(GameCore.Instance.SaucersSettings.BigSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
+        return Instantiate(GameCore.Instance.References.SaucersSettings.BigSaucer.SaucerObjPrefab, GetRandomPointNearTheBorder(), Quaternion.identity);
     }
 
     private void SpawnAsteroid()
     {
-        Instantiate(GameCore.Instance.AsteroidsSettings.AsteroidBaseObject, GetRandomPointBetweenColliders(), Quaternion.identity);
+        Instantiate(GameCore.Instance.References.AsteroidsSettings.AsteroidBaseObject, GetRandomPointBetweenColliders(), Quaternion.identity);
     }
 
     private void StopSpawning()

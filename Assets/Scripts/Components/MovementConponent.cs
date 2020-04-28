@@ -13,7 +13,7 @@ public abstract class MovementComponent : MonoBehaviour
 
     protected void MoveDynamicRB(float speed, Vector2 direction)
     {
-        ObjectRB.AddRelativeForce(direction * GameCore.Instance.PlayerShipSettings.MoveSpeed);
+        ObjectRB.AddRelativeForce(direction * GameCore.Instance.References.PlayerShipSettings.MoveSpeed);
     }
 
     protected void MoveKinematicRB(float speed, Vector2 direction)

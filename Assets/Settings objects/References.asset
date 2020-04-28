@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da24c1a15c382b24e8243cf95d095c07, type: 3}
+  m_Name: References
+  m_EditorClassIdentifier: 
+  asteroidsSettings: {fileID: 11400000, guid: d0404b18866e8814298709623d1ff015, type: 2}
+  playerShipSettings: {fileID: 11400000, guid: 7e60f019367c8e6428bbc8219aa13488, type: 2}
+  saucersSettings: {fileID: 11400000, guid: 5d614e54d0c5f8b4b8e170aa50b091d9, type: 2}
+  pointsSettings: {fileID: 11400000, guid: 370fe30aec0c4ce4997bf16500a76a39, type: 2}
+  inputSettings: {fileID: 11400000, guid: 91e265493c1e0874d933f1d01043f4fe, type: 2}
+  levelSettings: {fileID: 11400000, guid: a6f5018a7e12e3a4d91ae3fe698ef9b2, type: 2}
+  prefabReferences: {fileID: 11400000, guid: 8b59b35ae8f73d24bbcac2df3c57f776, type: 2}

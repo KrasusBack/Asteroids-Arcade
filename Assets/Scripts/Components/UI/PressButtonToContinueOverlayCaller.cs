@@ -18,7 +18,7 @@ public sealed class PressButtonToContinueOverlayCaller : MonoBehaviour
     private void ShowOverlay()
     {
         var component = GetComponent<TextMeshProUGUI>();
-        component.text = "press [" + GameCore.Instance.InputSettings.FireKey.ToString() + "] button to respawn";
+        component.text = "press [" + GameCore.Instance.References.InputSettings.FireKey.ToString() + "] button to respawn";
         component.enabled = true;
     }
 

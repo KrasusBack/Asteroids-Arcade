@@ -6,7 +6,7 @@ public sealed class PlayerHyperSpaceComponent : MonoBehaviour
 {
     private void Update()
     {
-        if (Input.GetKeyDown(GameCore.Instance.InputSettings.HyperSpaceKey))
+        if (Input.GetKeyDown(GameCore.Instance.References.InputSettings.HyperSpaceKey))
         {
             GameCore.Instance.TravelToHyperSpace();
         }

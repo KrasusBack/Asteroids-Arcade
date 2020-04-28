@@ -14,7 +14,7 @@ public sealed class BulletMovementComponent : MovementComponent
         switch(gameObject.tag)
         {
             case "Player":
-                Speed = GameCore.Instance.PlayerShipSettings.BulletSpeed;
+                Speed = GameCore.Instance.References.PlayerShipSettings.BulletSpeed;
                 break;
             case "Enemies":
                 Speed = GetComponent<BulletSettingsComponent>().BulletStats.BulletSpeed;

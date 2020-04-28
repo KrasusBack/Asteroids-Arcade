@@ -26,11 +26,11 @@ public sealed class HyperSpaceHandler : MonoBehaviour
         _readyToGoIntoHyperSpace = false;
         var shipTransform = GameCore.Instance.PlayerShip.GetComponent<Transform>();
         GameCore.Instance.DisablePlayerShip();
-        yield return new WaitForSeconds(GameCore.Instance.PlayerShipSettings.TimeInHyperSpace);
+        yield return new WaitForSeconds(GameCore.Instance.References.PlayerShipSettings.TimeInHyperSpace);
 
         SetExitPositionFromHyperSpace(shipTransform);
         GameCore.Instance.EnablePlayerShip();
-        yield return new WaitForSeconds(GameCore.Instance.PlayerShipSettings.HyperSpaceCooldown);
+        yield return new WaitForSeconds(GameCore.Instance.References.PlayerShipSettings.HyperSpaceCooldown);
         _readyToGoIntoHyperSpace = true;
     }
 
@@ -38,7 +38,7 @@ public sealed class HyperSpaceHandler : MonoBehaviour
     {
         Vector3 newPos;
 
-        if (Random.value > GameCore.Instance.PlayerShipSettings.ChanceToAppearInsideAsteroid)
+        if (Random.value > GameCore.Instance.References.PlayerShipSettings.ChanceToAppearInsideAsteroid)
         {
             int attempts = 0;
             newPos = ScreenToWorld.GetRandomPositionOnScreen(objTransform.position.z);

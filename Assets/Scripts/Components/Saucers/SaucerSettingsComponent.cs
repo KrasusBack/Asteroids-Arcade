@@ -22,9 +22,9 @@ public class SaucerSettingsComponent : MonoBehaviour
         switch (Type)
         {
             case SaucerType.Big:
-                return GameCore.Instance.SaucersSettings.BigSaucer;
+                return GameCore.Instance.References.SaucersSettings.BigSaucer;
             case SaucerType.Small:
-                return GameCore.Instance.SaucersSettings.SmallSaucer;
+                return GameCore.Instance.References.SaucersSettings.SmallSaucer;
             default:
                 throw new System.Exception("There is no SaucerSettings for " + Type);
         }

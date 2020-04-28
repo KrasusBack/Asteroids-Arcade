@@ -8,6 +8,6 @@ public class BigSaucerPointsTextSetter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<TextMeshProUGUI>().text = "- " + GameCore.Instance.PointsSettings.BigSaucerPoints.ToString();
+        GetComponent<TextMeshProUGUI>().text = "- " + GameCore.Instance.References.PointsSettings.BigSaucerPoints.ToString();
     }
 }

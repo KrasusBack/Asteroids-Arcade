@@ -34,6 +34,7 @@ public class ScreenWrapper : MonoBehaviour
         var newPos = new Vector2(rb.position.x, rb.position.y);
         Vector2 cameraPos = Camera.main.transform.position;
 
+        //Screen wrap - obj will appear from other side of the screen if is goes beyond viewport space 
         if (rb.position.x < cameraPos.x - screenBounds.x || rb.position.x >= cameraPos.x + screenBounds.x)
         {
             newPos.x = -newPos.x;
@@ -43,8 +44,29 @@ public class ScreenWrapper : MonoBehaviour
             newPos.y = -newPos.y;
         }
 
+        //Check if pos has changed
         if (newPos.x != rb.position.x || newPos.y != rb.position.y)
         {
+            var offset = 0.001f;
+
+            //Return object from outside of the screen if it stuck/flew away somehow
+            if (newPos.x < cameraPos.x - screenBounds.x)
+            {
+                newPos.x = cameraPos.x - screenBounds.x + offset;
+            }
+            else if (newPos.x >= cameraPos.x + screenBounds.x)
+            {
+                newPos.x = cameraPos.x + screenBounds.x - offset;
+            }
+
+            if (newPos.y < cameraPos.y - screenBounds.y)
+            {
+                newPos.y = cameraPos.y - screenBounds.y + offset;
+            } else if (newPos.y >= cameraPos.y + screenBounds.y)
+            {
+                newPos.y = cameraPos.y + screenBounds.y - offset;
+            }
+
             rb.position = newPos;
         }
     }

@@ -27,10 +27,10 @@ public class PointsGiverComponent : MonoBehaviour
                 switch(saucerType)
                 {
                     case Small:
-                        _pointsAfterDestroy = GameCore.Instance.PointsSettings.SmallSaucerPoints;
+                        _pointsAfterDestroy = GameCore.Instance.References.PointsSettings.SmallSaucerPoints;
                         break;
                     case Big:
-                        _pointsAfterDestroy = GameCore.Instance.PointsSettings.BigSaucerPoints;
+                        _pointsAfterDestroy = GameCore.Instance.References.PointsSettings.BigSaucerPoints;
                         break;
                     default:
                         throw new System.IndexOutOfRangeException($"There is no Saucer type such as {saucerType}");
@@ -50,11 +50,11 @@ public class PointsGiverComponent : MonoBehaviour
         switch (size)
         {
             case Asteroid.SizeType.Large:
-                return GameCore.Instance.PointsSettings.LargeAsteroidPoints;
+                return GameCore.Instance.References.PointsSettings.LargeAsteroidPoints;
             case Asteroid.SizeType.Medium:
-                return GameCore.Instance.PointsSettings.MediumAsteroidPoints;
+                return GameCore.Instance.References.PointsSettings.MediumAsteroidPoints;
             default:
-                return GameCore.Instance.PointsSettings.SmallAsteroidPoints;
+                return GameCore.Instance.References.PointsSettings.SmallAsteroidPoints;
         }
     }
 
