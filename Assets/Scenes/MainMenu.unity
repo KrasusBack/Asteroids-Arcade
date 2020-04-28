@@ -455,40 +455,10 @@ PrefabInstance:
       propertyPath: menuHandler
       value: 
       objectReference: {fileID: 961900417}
-    - target: {fileID: 5900996198155436652, guid: c80409ca36337314189f0cfd0e9c48c5,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5900996198155436652, guid: c80409ca36337314189f0cfd0e9c48c5,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5900996198155436652, guid: c80409ca36337314189f0cfd0e9c48c5,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5900996198577796040, guid: c80409ca36337314189f0cfd0e9c48c5,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5900996198577796040, guid: c80409ca36337314189f0cfd0e9c48c5,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5900996199721092564, guid: c80409ca36337314189f0cfd0e9c48c5,
         type: 3}
       propertyPath: m_Name
       value: Settings Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 5900996199721092564, guid: c80409ca36337314189f0cfd0e9c48c5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5900996199721092565, guid: c80409ca36337314189f0cfd0e9c48c5,
         type: 3}
@@ -598,7 +568,7 @@ PrefabInstance:
     - target: {fileID: 5993237856355052370, guid: c80409ca36337314189f0cfd0e9c48c5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -9.200012
+      value: -9.200073
       objectReference: {fileID: 0}
     - target: {fileID: 8881340522489928019, guid: c80409ca36337314189f0cfd0e9c48c5,
         type: 3}
@@ -859,14 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuMode: 1
-  asteroidsSettings: {fileID: 11400000, guid: d0404b18866e8814298709623d1ff015, type: 2}
-  playerShipSettings: {fileID: 11400000, guid: 7e60f019367c8e6428bbc8219aa13488, type: 2}
-  saucersSettings: {fileID: 11400000, guid: 5d614e54d0c5f8b4b8e170aa50b091d9, type: 2}
-  pointsSettings: {fileID: 11400000, guid: 370fe30aec0c4ce4997bf16500a76a39, type: 2}
-  inputSettings: {fileID: 11400000, guid: 91e265493c1e0874d933f1d01043f4fe, type: 2}
-  levelSettings: {fileID: 11400000, guid: a6f5018a7e12e3a4d91ae3fe698ef9b2, type: 2}
-  prefabReferences: {fileID: 11400000, guid: 8b59b35ae8f73d24bbcac2df3c57f776, type: 2}
-  audioController: {fileID: 6096078032380651893}
+  references: {fileID: 0}
   playerShip: {fileID: 1722397226}
 --- !u!114 &6096078032380651893
 MonoBehaviour:

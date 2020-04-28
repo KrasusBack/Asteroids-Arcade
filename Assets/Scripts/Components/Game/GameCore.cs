@@ -49,7 +49,7 @@ public sealed class GameCore : MonoBehaviour
     private bool CanActivatePlayerShip { get; set; } = true;
     private Quaternion playerShipInitialRotation;
 
-    private AudioController audioController;
+    public AudioController AudioController { get; private set; }
 
     public static GameCore Instance { get; private set; } = null;
 
@@ -94,10 +94,9 @@ public sealed class GameCore : MonoBehaviour
     #region Public Getters
     public References References => references;
     public GameObject PlayerShip => playerShip;
-    public AudioController AudioController => audioController;
     #endregion
 
-    #region Events, delegates
+    #region GameEvents / delegates
     public delegate void ScoreUpdateHandler();
     public event ScoreUpdateHandler ScoreUpdated;
 
@@ -130,27 +129,8 @@ public sealed class GameCore : MonoBehaviour
 
     public delegate void PlayerRespawnedHandler();
     public event PlayerRespawnedHandler PlayerRespawned;
+
     #endregion
-
-    private void Awake()
-    {
-        SetInstance();
-    }
-    private void Start()
-    {
-        if (!mainMenuMode)
-        {
-            StartNewGame();
-            return;
-        }
-        //in main menu mode gamecore component exist just for references by other objects
-        SwitchToMenuMode();
-    }
-
-    private void Update()
-    {
-        CheckAndHandleInput();
-    }
 
     private void SetInstance()
     {
@@ -169,8 +149,27 @@ public sealed class GameCore : MonoBehaviour
         LivesCount = References.PlayerShipSettings.StartingLifesAmount;
 
         playerShipInitialRotation = playerShip.transform.rotation;
-        audioController = GetComponent<AudioController>();
+        AudioController = GetComponent<AudioController>();
         ResumeGame();
+    }
+
+    private void Awake()
+    {
+        SetInstance();
+    }
+    private void Start()
+    {
+        if (!mainMenuMode)
+        {
+            StartNewGame();
+            return;
+        }
+        //in main menu mode gamecore component exist just for references by other objects
+        SwitchToMenuMode();
+    }
+    private void Update()
+    {
+        CheckAndHandleInput();
     }
 
     private void SwitchToMenuMode()
@@ -263,20 +262,20 @@ public sealed class GameCore : MonoBehaviour
         }
 
         #region Test functional
-        #if UNITY_EDITOR
-            //Reload scene
-            if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
+#if UNITY_EDITOR
+        //Reload scene
+        if (Input.GetKeyDown(KeyCode.C)) ReloadScene();
 
-            //Kill player
-            if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
+        //Kill player
+        if (Input.GetKeyDown(KeyCode.K)) HandlePlayerDeath();
 
-            //Kill player
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                print("Test: adding life");
-                AddLife();
-            }
-        #endif
+        //Kill player
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            print("Test: adding life");
+            AddLife();
+        }
+#endif
         #endregion
 
         //Respawn player
@@ -302,9 +301,9 @@ public sealed class GameCore : MonoBehaviour
         Time.timeScale = normalTimeScale;
         GameResumed?.Invoke();
     }
-    
+
     //Prevents immediate off/on menu calls 
-    private IEnumerator WaitMenuesCallCooldown ()
+    private IEnumerator WaitMenuesCallCooldown()
     {
         yield return new WaitForEndOfFrame();
         inMenu = false;

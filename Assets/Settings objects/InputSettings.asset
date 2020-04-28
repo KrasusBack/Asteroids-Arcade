@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 264be63dafa8180468d14eb15ccfff1f, type: 3}
   m_Name: InputSettings
   m_EditorClassIdentifier: 
-  fireKey: 109
+  fireKey: 32
   hyperSpaceKey: 304
