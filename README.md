@@ -3,6 +3,9 @@
 https://en.wikipedia.org/wiki/Asteroids_(video_game)
 
 ### Демонстрация геймплея
+Играть в браузере (с компьютера):  https://vareera.itch.io/asteroids-test  
+Пароль для доступа: TestGame
+
 ![](Demo.gif)
 
 ## Реализованный функционал
